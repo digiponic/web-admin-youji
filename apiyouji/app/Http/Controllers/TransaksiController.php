@@ -39,11 +39,32 @@ class TransaksiController extends Controller
         for ($i=0; $i < $count; $i++) { 
             $penjualan_detil[$i]['id_penjualan'] = $transaksi;
             $penjualan_detil[$i]['kode_penjualan'] = $kode;
+            $penjualan_detil[$i]['satuan'] = DB::table('tb_general')->where('keterangan',$penjualan_detil[$i]['satuan'])->value('id');
             $penjualan_detil[$i]['subtotal'] = $penjualan_detil[$i]['kuantitas'] * $penjualan_detil[$i]['harga'];
             $penjualan_detil[$i]['grand_total'] = $penjualan_detil[$i]['subtotal'] - $penjualan_detil[$i]['diskon'];
         }
 
         $transaksi_detail = DB::table('tb_penjualan_detail')->insert($penjualan_detil);
+
+        foreach($penjualan_detil as $pd) {
+            $array = array(
+                'kode_penjualan'	=> $kode,
+                'kode_produk'		=> $pd['kode_produk'],
+                'nama_produk'		=> $pd['nama_produk'],
+                'satuan'			=> $pd['satuan']
+            );
+            $produk_stok = array(
+                'tanggal'		=> $penjualan['created_at'],
+                'kode_produk'	=> $pd['id_produk'],
+                'stok_masuk'	=> 0,
+                'stok_keluar'	=> $pd['kuantitas'],
+                'keterangan'	=> 'Pengurangan stok dari penjualan '.$kode
+            );
+            $stok = DB::table('tb_produk')->where('id',$pd['id_produk'])->value('stok');
+
+            DB::table('tb_produk_stok')->insert($produk_stok);
+            DB::table('tb_produk')->where('id',$pd['id_produk'])->update(['stok'=> abs($stok - $pd['kuantitas'])]);
+        }
 
         if($transaksi_detail){
             $msg = array(
