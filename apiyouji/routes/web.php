@@ -38,12 +38,19 @@ $router->group(['prefix' => 'tipe'], function () use ($router) {
 $router->group(['prefix' => 'produk'], function () use ($router) {
     $router->get('/', 'ProdukController@data');
     $router->get('/filter', 'ProdukController@filter');
-   
+});
+
+$router->group(['prefix' => 'pelanggan'], function () use ($router) {
+    $router->post('/', 'PelangganController@simpan');
 });
 
 $router->group(['prefix' => 'area'], function () use ($router) {
     $router->get('/', 'AreaController@data');
-   
+});
+
+$router->group(['prefix' => 'transaksi'], function () use ($router) {
+    $router->get('/', 'TransaksiController@data');
+    $router->post('/', 'TransaksiController@simpan');
 });
 
 //routing customeraddress

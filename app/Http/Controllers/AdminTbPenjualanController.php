@@ -12,7 +12,7 @@
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
 			$this->title_field = "id";
 			$this->limit = "20";
-			$this->orderby = "id,asc";
+			$this->orderby = "kode,desc";
 			$this->global_privilege = false;
 			$this->button_table_action = true;
 			$this->button_bulk_action = true;
@@ -33,21 +33,22 @@
 			$this->col[] = ["label"=>"Kode","name"=>"kode"];
 			$this->col[] = ["label"=>"Tanggal","name"=>"tanggal"];
 			$this->col[] = ["label"=>"Subtotal","name"=>"subtotal","callback_php"=>'number_format($row->subtotal)'];
-			$this->col[] = ["label"=>"Pelanggan","name"=>"customer_id", "join"=>"tb_customer,name"];
+			$this->col[] = ["label"=>"Pelanggan","name"=>"customer_id","join"=>"tb_customer,name"];
 			$this->col[] = ["label"=>"Grand Total","name"=>"grand_total","callback_php"=>'number_format($row->grand_total)'];
+			$this->col[] = ["label"=>"Status","name"=>"status","join"=>"tb_general,keterangan"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
-			$kode = DB::table('tb_pembelian')->max('id') + 1;
+			$kode = DB::table('tb_penjualan')->max('id') + 1;
 			$kode = 'PNJ/'.date('dmy').'/'.str_pad($kode, 5, 0, STR_PAD_LEFT);
 
 			$tanggal = date('Y-m-d H:i:s');
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Kode','name'=>'kode','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10','readonly'=>'true','value'=>$kode];
-			$this->form[] = ['label'=>'Tanggal','name'=>'tanggal','type'=>'datetime','validation'=>'required|date_format:Y-m-d H:i:s','width'=>'col-sm-10','value'=>$tanggal];
+			$this->form[] = ['label'=>'Kode','name'=>'kode','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10','readonly'=>'true'];
+			$this->form[] = ['label'=>'Tanggal','name'=>'tanggal','type'=>'datetime','validation'=>'required|date_format:Y-m-d H:i:s','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Pelanggan','name'=>'customer_id','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_customer,name'];
-
+			
 			$columns[] = ['label'=>'Produk','name'=>'id_produk','required'=>true,'type'=>'datamodal','datamodal_table'=>'tb_produk','datamodal_columns'=>'keterangan,harga','datamodal_select_to'=>'harga:harga','datamodal_where'=>'','datamodal_size'=>'large'];
 			$columns[] = ['label'=>'Harga','name'=>'harga','type'=>'number','required'=>true, 'readonly'=>true];
 			$columns[] = ['label'=>'Kuantitas','name'=>'kuantitas','type'=>'number','required'=>true];
@@ -56,10 +57,10 @@
 			$columns[] = ['label'=>'Sub Total','name'=>'subtotal','type'=>'number','formula'=>"[kuantitas] * [harga]","readonly"=>true];
 			$columns[] = ['label'=>'Grand Total','name'=>'grand_total','type'=>'number',"readonly"=>true];
 			$this->form[] = ['label'=>'Detil Penjualan','name'=>'penjualan_detail','type'=>'child','columns'=>$columns,'table'=>'tb_penjualan_detail','foreign_key'=>'id_penjualan'];
-
-			$this->form[] = ['label'=>'Subtotal','name'=>'subtotal','type'=>'money', 'validation'=>'required|integer|min:0','width'=>'col-sm-10','readonly'=>'true'];
-			$this->form[] = ['label'=>'Pajak (%)','name'=>'pajak','type'=>'number','width'=>'col-sm-10','value'=>'0'];
-			$this->form[] = ['label'=>'Tipe Diskon','name'=>'diskon_tipe','type'=>'radio','dataenum'=>'Nominal;Persen', 'value'=>'Nominal'];
+			
+			$this->form[] = ['label'=>'Subtotal','name'=>'subtotal','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','readonly'=>'true'];
+			$this->form[] = ['label'=>'Pajak (%)','name'=>'pajak','type'=>'number','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Tipe Diskon','name'=>'diskon_tipe','type'=>'radio','width'=>'col-sm-10','dataenum'=>'Nominal;Persen'];
 			$this->form[] = ['label'=>'Diskon','name'=>'diskon','type'=>'number','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Grand Total','name'=>'grand_total','type'=>'money','validation'=>'integer|min:0','width'=>'col-sm-10','readonly'=>'true'];
 			$this->form[] = ['label'=>'Keterangan','name'=>'keterangan','type'=>'text','width'=>'col-sm-10'];
@@ -67,15 +68,25 @@
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ["label"=>"Kode","name"=>"kode","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
-			//$this->form[] = ["label"=>"Keterangan","name"=>"keterangan","type"=>"textarea","required"=>TRUE,"validation"=>"required|string|min:5|max:5000"];
-			//$this->form[] = ["label"=>"Tanggal","name"=>"tanggal","type"=>"datetime","required"=>TRUE,"validation"=>"required|date_format:Y-m-d H:i:s"];
-			//$this->form[] = ["label"=>"Subtotal","name"=>"subtotal","type"=>"money","required"=>TRUE,"validation"=>"required|integer|min:0"];
-			//$this->form[] = ["label"=>"Pajak","name"=>"pajak","type"=>"money","required"=>TRUE,"validation"=>"required|integer|min:0"];
-			//$this->form[] = ["label"=>"Diskon Tipe","name"=>"diskon_tipe","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
-			//$this->form[] = ["label"=>"Diskon","name"=>"diskon","type"=>"money","required"=>TRUE,"validation"=>"required|integer|min:0"];
-			//$this->form[] = ["label"=>"Grand Total","name"=>"grand_total","type"=>"money","required"=>TRUE,"validation"=>"required|integer|min:0"];
-			//$this->form[] = ["label"=>"Users Id","name"=>"users_id","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"users,id"];
+			//$this->form[] = ['label'=>'Kode','name'=>'kode','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10','readonly'=>'true','value'=>$kode];
+			//$this->form[] = ['label'=>'Tanggal','name'=>'tanggal','type'=>'datetime','validation'=>'required|date_format:Y-m-d H:i:s','width'=>'col-sm-10','value'=>$tanggal];
+			//$this->form[] = ['label'=>'Pelanggan','name'=>'customer_id','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_customer,name'];
+			//
+			//$columns[] = ['label'=>'Produk','name'=>'id_produk','required'=>true,'type'=>'datamodal','datamodal_table'=>'tb_produk','datamodal_columns'=>'keterangan,harga','datamodal_select_to'=>'harga:harga','datamodal_where'=>'','datamodal_size'=>'large'];
+			//$columns[] = ['label'=>'Harga','name'=>'harga','type'=>'number','required'=>true, 'readonly'=>true];
+			//$columns[] = ['label'=>'Kuantitas','name'=>'kuantitas','type'=>'number','required'=>true];
+			//$columns[] = ['label'=>'Tipe Diskon','name'=>'diskon_tipe','type'=>'radio','dataenum'=>'Nominal;Persen', 'value'=>'Nominal'];
+			//$columns[] = ['label'=>'Diskon','name'=>'diskon','type'=>'number'];
+			//$columns[] = ['label'=>'Sub Total','name'=>'subtotal','type'=>'number','formula'=>"[kuantitas] * [harga]","readonly"=>true];
+			//$columns[] = ['label'=>'Grand Total','name'=>'grand_total','type'=>'number',"readonly"=>true];
+			//$this->form[] = ['label'=>'Detil Penjualan','name'=>'penjualan_detail','type'=>'child','columns'=>$columns,'table'=>'tb_penjualan_detail','foreign_key'=>'id_penjualan'];
+			//
+			//$this->form[] = ['label'=>'Subtotal','name'=>'subtotal','type'=>'money', 'validation'=>'required|integer|min:0','width'=>'col-sm-10','readonly'=>'true'];
+			//$this->form[] = ['label'=>'Pajak (%)','name'=>'pajak','type'=>'number','width'=>'col-sm-10','value'=>'0'];
+			//$this->form[] = ['label'=>'Tipe Diskon','name'=>'diskon_tipe','type'=>'radio','dataenum'=>'Nominal;Persen', 'value'=>'Nominal'];
+			//$this->form[] = ['label'=>'Diskon','name'=>'diskon','type'=>'number','width'=>'col-sm-10'];
+			//$this->form[] = ['label'=>'Grand Total','name'=>'grand_total','type'=>'money','validation'=>'integer|min:0','width'=>'col-sm-10','readonly'=>'true'];
+			//$this->form[] = ['label'=>'Keterangan','name'=>'keterangan','type'=>'text','width'=>'col-sm-10'];
 			# OLD END FORM
 
 			/*
