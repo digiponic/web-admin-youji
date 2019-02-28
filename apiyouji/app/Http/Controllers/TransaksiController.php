@@ -9,10 +9,28 @@ use DB;
 
 class TransaksiController extends Controller
 {
-    public function data()
+    public function data(Request $request)
     {
-        $data = DB::table('tb_penjualan')->get();
+        $param = $request->json()->all();
+        
+        $data = DB::table('tb_penjualan as pj')
+                    ->join('tb_general as st', 'pj.status','=','st.id')
+                    ->select('pj.*','st.keterangan as status')
+                    ->where('pj.customer_id', $param['customer_id'])->get();
         return $data;
+    }
+
+    public function detil(Request $request)
+    {
+        $param = $request->json()->all();
+        
+        $data = DB::table('tb_penjualan_detail as pd')
+                    ->join('tb_general as st', 'pd.satuan','=','st.id')
+                    ->select('pd.*','st.keterangan as satuan')
+                    // ->where('pd.id_penjualan', $param['id'])
+                    ->where('pd.kode_penjualan',$param['kode'])
+                    ->get();
+        return $data;        
     }
 
     public function simpan(Request $request)
