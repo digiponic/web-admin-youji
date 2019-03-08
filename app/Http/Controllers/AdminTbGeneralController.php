@@ -30,6 +30,7 @@
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
+			$this->col[] = ["label"=>"Gambar","name"=>"gambar",'image'=>true];
 			$this->col[] = ["label"=>"Kode","name"=>"kode"];
 			// $this->col[] = ["label"=>"Tipe","name"=>"kode_tipe","join"=>"tb_tipe,keterangan"];
 			$this->col[] = ["label"=>"Keterangan","name"=>"keterangan"];
@@ -44,6 +45,7 @@
 			// $this->form[] = ['label'=>'Tipe','name'=>'kode_tipe','type'=>'select','validation'=>'required|min:1|max:255','width'=>'col-sm-10','datatable'=>'tb_tipe,keterangan'];
 			$this->form[] = ['label'=>'Tipe','name'=>'kode_tipe','type'=>'hidden',];
 			$this->form[] = ['label'=>'Keterangan','name'=>'keterangan','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Gambar','name'=>'gambar','type'=>'upload','validation'=>'image','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM

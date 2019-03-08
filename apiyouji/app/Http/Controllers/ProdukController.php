@@ -56,6 +56,7 @@ class ProdukController extends Controller
                     ->where($filter_)
                     ->whereNull('pd.deleted_at')
                     ->get();
+        
 
         $count = count($data);
         for ($i=0; $i < $count; $i++) { 

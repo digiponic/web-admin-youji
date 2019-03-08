@@ -17,6 +17,7 @@ class TipeController extends Controller
 
     public function detil($keterangan)
     {
+
         $tipe = DB::table('tb_tipe')
                     ->where('keterangan', $keterangan)
                     ->whereNull('deleted_at')
@@ -26,6 +27,11 @@ class TipeController extends Controller
                 ->where('kode_tipe', $tipe->id)
                 ->whereNull('deleted_at')
                 ->get();
+        
+        $count = count($data);
+        for ($i=0; $i < $count; $i++) { 
+            $data[$i]->gambar = "http://app.digiponic.co.id/youji/storage/app/".$data[$i]->gambar;
+        }
         
         return $data;
     }
