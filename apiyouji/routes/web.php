@@ -42,6 +42,7 @@ $router->group(['prefix' => 'produk'], function () use ($router) {
 
 $router->group(['prefix' => 'pelanggan'], function () use ($router) {
     $router->post('/', 'PelangganController@simpan');
+    $router->post('/perbarui', 'PelangganController@perbarui');
 });
 
 $router->group(['prefix' => 'area'], function () use ($router) {
@@ -52,6 +53,14 @@ $router->group(['prefix' => 'transaksi'], function () use ($router) {
     $router->post('/', 'TransaksiController@simpan');
     $router->post('/data', 'TransaksiController@data');
     $router->post('/data/detil', 'TransaksiController@detil');
+});
+
+$router->group(['prefix'=>'pesan'],function()use($router){
+    $router->get('/', 'PesanController@all');
+    $router->get('/show/{id}', 'PesanController@show');
+    $router->post('/store', 'PesanController@store');
+    $router->put('/update/{id}', 'PesanController@update');
+    $router->delete('/delete/{id}', 'PesanController@delete');
 });
 
 //routing customeraddress

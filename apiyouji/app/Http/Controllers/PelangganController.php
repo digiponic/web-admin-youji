@@ -26,4 +26,22 @@ class PelangganController extends Controller
         
         return $data;
     }
+
+    public function perbarui(Request $request)
+    {
+        $data = $request->json()->all();
+        $email = $data['email'];
+        unset($data['email']);
+        $data['updated_at'] = date('Y-m-d H:i:s');
+
+        $data = DB::table('tb_customer')
+                ->where('email', $email)
+                ->update($data);
+
+        $msg = array(
+            'status' => $data,
+            'message' => ($data) ? 'Berhasil' : 'Gagal'
+        );
+        return $msg;           
+    }
 }

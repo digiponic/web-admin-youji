@@ -22,9 +22,13 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $data = Users::FirstOrCreate([
-            "email"         => $request->json()->get('email'),
-            "password"      => $request->json()->get('password'),
-            "name"          => $request->json()->get('name'),
+            "email"                 => $request->json()->get('email'),
+            "password"              => Hash::make($request->json()->get('password')),
+            "name"                  => $request->json()->get('name'),
+            "nama_lengkap"          => $request->json()->get('nama_lengkap'),
+            "photo"                 => $request->json()->get('photo'),
+            "telp"                  => $request->json()->get('telp'),
+            "alamat"                => $request->json()->get('alamat'),
             "created_user"  => null,
             "updated_user"  => null,
             "deleted_user"  => null, 
@@ -39,9 +43,13 @@ class UsersController extends Controller
     public function update(Request $request, Response $response, $id)
     {
         $data = Users::FindOrFail($id)->update([
-            "email"         => $request->json()->get('email'),
-            "password"      => $request->json()->get('password'),
-            "name"          => $request->json()->get('name'),
+            "email"                 => $request->json()->get('email'),
+            "password"              => Hash::make($request->json()->get('password')),
+            "name"                  => $request->json()->get('name'),
+            "nama_lengkap"          => $request->json()->get('nama_lengkap'),
+            "photo"                 => $request->json()->get('photo'),
+            "telp"                  => $request->json()->get('telp'),
+            "alamat"                => $request->json()->get('alamat'),
             "created_user"  => null,
             "updated_user"  => null,
             "deleted_user"  => null, 
