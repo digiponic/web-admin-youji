@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5618b573acff79a006020d81553e3bf6",
+    "content-hash": "f1cb7174757b4b94779a4efaa0f70fe0",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1538,16 +1538,16 @@
         },
         {
             "name": "mike42/escpos-php",
-            "version": "v2.0.1",
+            "version": "v2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mike42/escpos-php.git",
-                "reference": "71e99104e39982cfd76de31256df466bd9156f61"
+                "reference": "5e904fed73704dcf22c4c4db2f31b329fb7a0b5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mike42/escpos-php/zipball/71e99104e39982cfd76de31256df466bd9156f61",
-                "reference": "71e99104e39982cfd76de31256df466bd9156f61",
+                "url": "https://api.github.com/repos/mike42/escpos-php/zipball/5e904fed73704dcf22c4c4db2f31b329fb7a0b5f",
+                "reference": "5e904fed73704dcf22c4c4db2f31b329fb7a0b5f",
                 "shasum": ""
             },
             "require": {
@@ -1589,7 +1589,7 @@
                 "print",
                 "receipt"
             ],
-            "time": "2018-03-17T04:29:19+00:00"
+            "time": "2019-02-17T05:27:07+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -4208,6 +4208,7 @@
                 "mock",
                 "xunit"
             ],
+            "abandoned": true,
             "time": "2017-06-30T09:13:00+00:00"
         },
         {

@@ -31,7 +31,8 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Name","name"=>"name"];
+			$this->col[] = ["label"=>"Foto","name"=>"photo",'image'=>true];
+			$this->col[] = ["label"=>"Nama","name"=>"name"];
 			$this->col[] = ["label"=>"Privilege","name"=>"id_cms_privileges","join"=>"cms_privileges,name"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
@@ -40,7 +41,8 @@ class AdminCmsUsersController extends \crocodicstudio\crudbooster\controllers\CB
 			$this->form[] = ['label'=>'Nama','name'=>'name','type'=>'text','validation'=>'required|alpha_spaces|min:3','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Username','name'=>'email','type'=>'text','validation'=>'required','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Privilege','name'=>'id_cms_privileges','type'=>'select','width'=>'col-sm-10','datatable'=>'cms_privileges,name'];
-			$this->form[] = ['label'=>'Password','name'=>'password','type'=>'password','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Password','name'=>'password','type'=>'password','width'=>'col-sm-10','help'=>'Jika anda tidak ingin mengganti password, tidak perlu di isi'];
+			$this->form[] = ['label'=>'Foto','name'=>'photo','type'=>'upload','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM

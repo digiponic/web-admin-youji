@@ -12,7 +12,7 @@
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
 			$this->title_field = "id";
 			$this->limit = "20";
-			$this->orderby = "id,asc";
+			$this->orderby = "id,desc";
 			$this->global_privilege = false;
 			$this->button_table_action = true;
 			$this->button_bulk_action = true;
@@ -311,7 +311,10 @@
 	    */
 	    public function hook_query_index(&$query) {
 	        //Your code here
-
+					if(!CRUDBooster::isSuperAdmin()){
+						$query->where('id_cabang',CRUDBooster::myCabang());
+						$query->where('users_id',CRUDBooster::myId());				
+					}
 	    }
 
 	    /*
@@ -332,8 +335,9 @@
 	    |
 	    */
 	    public function hook_before_add(&$postdata) {
-			//Your code here
-			
+				//Your code here
+				$postdata['id_cabang'] = CRUDBooster::myCabang();
+				$postdata['users_id'] = CRUDBooster::myId();			
 	    }
 
 	    /*

@@ -49,11 +49,12 @@
 			$this->form[] = ['label'=>'Kode','name'=>'kode','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10','readonly'=>'1','value'=>$kode];
 			$this->form[] = ['label'=>'Cabang','name'=>'cabang','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 2'];
 			$this->form[] = ['label'=>'Nama Produk','name'=>'keterangan','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Jenis','name'=>'jenis','type'=>'select','validation'=>'integer|required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 4'];
-			$this->form[] = ['label'=>'Kategori','name'=>'kategori','type'=>'select','validation'=>'integer','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 3'];
-			$this->form[] = ['label'=>'Satuan','name'=>'satuan','type'=>'select','validation'=>'integer','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 5'];
+			$this->form[] = ['label'=>'Jenis','name'=>'jenis','type'=>'select2','validation'=>'integer|required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 4'];
+			$this->form[] = ['label'=>'Kategori','name'=>'kategori','type'=>'select2','validation'=>'integer','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 3'];
+			$this->form[] = ['label'=>'Satuan','name'=>'satuan','type'=>'select2','validation'=>'integer','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 5'];
 			$this->form[] = ['label'=>'Harga','name'=>'harga','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Gambar','name'=>'gambar','type'=>'upload','width'=>'col-sm-10','validation'=>'image','upload_encrypt'=>false];
+			$this->form[] = ['label'=>'Deskripsi','name'=>'deskripsi','type'=>'wysiwyg','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
@@ -256,7 +257,9 @@
 	    */
 	    public function hook_query_index(&$query) {
 	        //Your code here
-
+			if(!CRUDBooster::isSuperAdmin()){
+				$query->where('cabang',CRUDBooster::myCabang());			
+			}
 	    }
 
 	    /*
@@ -279,6 +282,7 @@
 	    public function hook_before_add(&$postdata) {
 	        //Your code here
 			$postdata['stok'] = 0;
+			$postdata['satuan_keterangan'] = DB::table('tb_general')->where('id',$postdata['satuan'])->value('keterangan');
 	    }
 
 	    /*
@@ -311,7 +315,7 @@
 	    */
 	    public function hook_before_edit(&$postdata,$id) {
 	        //Your code here
-			// dd($postdata);
+			$postdata['satuan_keterangan'] = DB::table('tb_general')->where('id',$postdata['satuan'])->value('keterangan');
 	    }
 
 	    /*

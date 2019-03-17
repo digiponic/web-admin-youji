@@ -5,6 +5,10 @@
 	use DB;
 	use CRUDBooster;
 
+	use Mike42\Escpos\Printer;
+	use Mike42\Escpos\EscposImage;
+	use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+
 	class AdminTbPenjualanController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
@@ -12,7 +16,7 @@
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
 			$this->title_field = "id";
 			$this->limit = "20";
-			$this->orderby = "kode,desc";
+			$this->orderby = "id,desc";
 			$this->global_privilege = false;
 			$this->button_table_action = true;
 			$this->button_bulk_action = true;
@@ -31,10 +35,11 @@
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
 			$this->col[] = ["label"=>"Kode","name"=>"kode"];
-			$this->col[] = ["label"=>"Tanggal","name"=>"tanggal"];
-			$this->col[] = ["label"=>"Subtotal","name"=>"subtotal","callback_php"=>'number_format($row->subtotal)'];
+			$this->col[] = ["label"=>"Tanggal","name"=>"created_at","callback_php"=>'date("d-m-Y | H:i", strtotime($row->created_at))'];
+			$this->col[] = ["label"=>"Pengiriman","name"=>"tanggal","callback_php"=>'date("d-m-Y | H:i", strtotime($row->tanggal))'];
+			$this->col[] = ["label"=>"Subtotal","name"=>"subtotal","callback_php"=>'"Rp ".number_format($row->subtotal)'];
 			$this->col[] = ["label"=>"Pelanggan","name"=>"customer_id","join"=>"tb_customer,name"];
-			$this->col[] = ["label"=>"Grand Total","name"=>"grand_total","callback_php"=>'number_format($row->grand_total)'];
+			$this->col[] = ["label"=>"Grand Total","name"=>"grand_total","callback_php"=>'"Rp ".number_format($row->grand_total)'];
 			$this->col[] = ["label"=>"Status","name"=>"status","join"=>"tb_general,keterangan"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
@@ -45,12 +50,13 @@
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Kode','name'=>'kode','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10','readonly'=>'true'];
-			$this->form[] = ['label'=>'Tanggal','name'=>'tanggal','type'=>'datetime','validation'=>'required|date_format:Y-m-d H:i:s','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Kode','name'=>'kode','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10','readonly'=>'true','value'=>$kode];
+			$this->form[] = ['label'=>'Tanggal','name'=>'tanggal','type'=>'datetime','validation'=>'required|date_format:Y-m-d H:i:s','width'=>'col-sm-10','value'=>$tanggal];
 			$this->form[] = ['label'=>'Pelanggan','name'=>'customer_id','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_customer,name'];
 			
-			$columns[] = ['label'=>'Produk','name'=>'id_produk','required'=>true,'type'=>'datamodal','datamodal_table'=>'tb_produk','datamodal_columns'=>'keterangan,harga','datamodal_select_to'=>'harga:harga','datamodal_where'=>'','datamodal_size'=>'large'];
+			$columns[] = ['label'=>'Produk','name'=>'id_produk','required'=>true,'type'=>'datamodal','datamodal_table'=>'tb_produk','datamodal_columns'=>'keterangan,harga,stok,satuan_keterangan','datamodal_columns_alias'=>'Produk,Harga,Stok,Satuan','datamodal_select_to'=>'harga:harga,satuan_keterangan:satuan_keterangan','datamodal_where'=>'stok != 0','datamodal_size'=>'large'];
 			$columns[] = ['label'=>'Harga','name'=>'harga','type'=>'number','required'=>true, 'readonly'=>true];
+			$columns[] = ['label'=>'Satuan','name'=>'satuan_keterangan','type'=>'text','readonly'=>true];
 			$columns[] = ['label'=>'Kuantitas','name'=>'kuantitas','type'=>'number','required'=>true];
 			$columns[] = ['label'=>'Tipe Diskon','name'=>'diskon_tipe','type'=>'radio','dataenum'=>'Nominal;Persen', 'value'=>'Nominal'];
 			$columns[] = ['label'=>'Diskon','name'=>'diskon','type'=>'number'];
@@ -59,9 +65,10 @@
 			$this->form[] = ['label'=>'Detil Penjualan','name'=>'penjualan_detail','type'=>'child','columns'=>$columns,'table'=>'tb_penjualan_detail','foreign_key'=>'id_penjualan'];
 			
 			$this->form[] = ['label'=>'Subtotal','name'=>'subtotal','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','readonly'=>'true'];
-			$this->form[] = ['label'=>'Pajak (%)','name'=>'pajak','type'=>'number','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Tipe Diskon','name'=>'diskon_tipe','type'=>'radio','width'=>'col-sm-10','dataenum'=>'Nominal;Persen'];
-			$this->form[] = ['label'=>'Diskon','name'=>'diskon','type'=>'number','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Pajak (%)','name'=>'pajak','type'=>'number','width'=>'col-sm-10','value'=>0];
+			$this->form[] = ['label'=>'Tipe Diskon','name'=>'diskon_tipe','type'=>'radio','width'=>'col-sm-10','dataenum'=>'Nominal;Persen','value'=>'Nominal'];
+			$this->form[] = ['label'=>'Diskon','name'=>'diskon','type'=>'number','width'=>'col-sm-10','value'=>0];
+			$this->form[] = ['label'=>'Metode Bayar','name'=>'metode_pembayaran','type'=>'radio','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 7','value'=>'33'];
 			$this->form[] = ['label'=>'Grand Total','name'=>'grand_total','type'=>'money','validation'=>'integer|min:0','width'=>'col-sm-10','readonly'=>'true'];
 			$this->form[] = ['label'=>'Keterangan','name'=>'keterangan','type'=>'text','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
@@ -118,7 +125,11 @@
 	        | @showIf 	   = If condition when action show. Use field alias. e.g : [id] == 1
 	        |
 	        */
-	        $this->addaction = array();
+			$this->addaction = array();
+			$this->addaction[] = ['label'=>'','icon'=>'fa fa-refresh','color'=>'info','url'=>CRUDBooster::mainpath('set-proses').'/[id]','showIf'=>'[status] == 25'];
+			$this->addaction[] = ['label'=>'','icon'=>'fa fa-truck','color'=>'danger','url'=>CRUDBooster::mainpath('set-kirim').'/[id]','showIf'=>'[status] == 26'];
+			$this->addaction[] = ['label'=>'','icon'=>'fa fa-check','color'=>'success','url'=>CRUDBooster::mainpath('set-terima').'/[id]','showIf'=>'[status] == 27'];
+			$this->addaction[] = ['label'=>'','icon'=>'fa fa-print','color'=>'warning','url'=>CRUDBooster::mainpath('set-print').'/[id]','showIf'=>'[status] != 25'];
 
 
 	        /*
@@ -194,12 +205,12 @@
 
 					setInterval(function() {
 						var harga = $('#detilpenjualanharga').val();
-						var diskon_tipe = $('input[name=diskon_tipe]:checked').val();
+						var diskon_tipe_ = $('input[name=child-diskon_tipe]:checked').val();
 						var diskon_produk = $('#detilpenjualandiskon').val();
 						var subtotal_produk = $('#detilpenjualansubtotal').val();
 						var grand_total_produk = 0;
 
-						if(diskon_tipe == 'Nominal'){
+						if(diskon_tipe_ == 'Nominal'){
 							grand_total_produk = subtotal_produk - diskon_produk;
 						}else{
 							var diskon_produk_ = (diskon_produk / 100) * subtotal_produk;
@@ -213,6 +224,7 @@
 							total += parseInt($(this).text());
 						})
 						$('#grand_total').val(total);
+
 						var subtotal = 0;
 						subtotal += total;
 						$('#subtotal').val(subtotal); 
@@ -322,8 +334,11 @@
 	    |
 	    */
 	    public function hook_query_index(&$query) {
-	        //Your code here
-
+			//Your code here
+			if(!CRUDBooster::isSuperAdmin()){
+				$query->where('id_cabang',CRUDBooster::myCabang());
+				$query->where('users_id',CRUDBooster::myId());				
+			}
 	    }
 
 	    /*
@@ -344,8 +359,10 @@
 	    |
 	    */
 	    public function hook_before_add(&$postdata) {
-	        //Your code here
-
+			//Your code here
+			$postdata['status'] = 25;
+			$postdata['id_cabang'] = CRUDBooster::myCabang();
+			$postdata['users_id'] = CRUDBooster::myId();
 	    }
 
 	    /*
@@ -392,7 +409,7 @@
 	    */
 	    public function hook_before_edit(&$postdata,$id) {
 	        //Your code here
-
+			// dd($postdata);
 	    }
 
 	    /*
@@ -404,7 +421,6 @@
 	    */
 	    public function hook_after_edit($id) {
 	        //Your code here
-
 	    }
 
 	    /*
@@ -431,9 +447,178 @@
 
 	    }
 
+		//By the way, you can still create your own method in here... :)
+		
+		public function getSetProses($id)
+		{
+			DB::table('tb_penjualan')->where('id',$id)->update(['status' => 26]);
+			CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"Status pesanan berhasil di ubah !","info");
+		}
+		public function getSetKirim($id)
+		{
+			DB::table('tb_penjualan')->where('id',$id)->update(['status' => 27]);
+			CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"Status pesanan berhasil di ubah !","info");
+		}
+		public function getSetTerima($id)
+		{
+			DB::table('tb_penjualan')->where('id',$id)->update(['status' => 28]);
+			CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"Status pesanan berhasil di ubah !","info");
+		}
 
+		public function getSetPrint($id) {
+			$penjualan = DB::table('tb_penjualan as pj')
+							->join('tb_customer as cs','pj.customer_id','=','cs.id')
+							->join('tb_general as gn','pj.metode_pembayaran','=','gn.id')
+							->select('pj.*','cs.name as pelanggan','gn.keterangan as metode_pembayaran')
+							->where('pj.id',$id)
+							->first();
 
-	    //By the way, you can still create your own method in here... :)
+			if($penjualan->diskon_tipe == 'Persen'){
+				$penjualan->diskon = ($penjualan->diskon / 100) * $penjualan->subtotal;
+			}
 
+			$penjualan_detail = DB::table('tb_penjualan_detail')->where('id_penjualan',$id)->get();
 
+			$logo = EscposImage::load("youji_mini.jpg", false);
+
+			try {
+				$connector = new WindowsPrintConnector("GP-5830");
+				$printer = new Printer($connector);
+				
+				$printer->setJustification(Printer::JUSTIFY_CENTER);
+				$printer -> bitImage($logo);
+				$printer -> text("\n");
+				$printer -> selectPrintMode();
+				$printer -> text("Jl. Terusan Yonkav No. 03\nSingosari - Malang Kab.\n");
+				$printer -> feed();		
+				
+				$printer -> text(new format("Faktur",$penjualan->kode));
+				
+				$printer -> setJustification(Printer::JUSTIFY_LEFT);
+				$tanggal = date('H:i d/m/y', strtotime($penjualan->created_at));
+				$printer -> text(new format("Pesanan",$tanggal));
+
+				$tanggal = date('H:i d/m/y', strtotime($penjualan->tanggal));
+				$printer -> text(new format("Pengiriman",$tanggal));
+
+				$printer -> text(new format("Pembayaran",$penjualan->metode_pembayaran));
+
+				$printer -> text("--------------------------------");
+				foreach ($penjualan_detail as $d) {
+					$printer -> text($d->nama_produk."\n");
+
+					if($d->diskon != 0){
+						if($d->diskon_tipe == "Persen"){
+							$d->diskon = ($d->diskon / 100) * $d->subtotal;
+						}
+						$printer -> text(new itemdiscount($d->kuantitas.' x '.$d->harga,$d->grand_total,$d->diskon));
+					}else{
+						$printer -> text(new item($d->kuantitas.' x '.$d->harga,$d->subtotal));
+					}
+				}
+				$printer -> text("--------------------------------");
+
+				// if(strlen($order->discount) < 3){
+				// 	$order->discount = ($order->discount / 100) * $order->total;
+				// }
+				$printer -> text(new item("Sub Total",$penjualan->subtotal));
+				$printer -> text(new item("Pajak",$penjualan->pajak));
+				$printer -> text(new item("Diskon",$penjualan->diskon));
+				$printer -> text(new item("Grand Total",$penjualan->grand_total));
+				$printer -> feed();
+
+				$printer -> setJustification(Printer::JUSTIFY_CENTER);
+				$printer -> text("--------------------------------");
+				$printer -> text($penjualan->pelanggan."\n");
+				$printer -> text("Terima Kasih Atas Pesanan Anda\n");
+				$printer -> text("Selamat Menikmati\n");
+				$printer -> feed(2);
+
+				$printer -> cut();
+				$printer -> close();
+
+				CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"Struk telah berhasil dicetak !","info");
+			} catch (Exception $e) {
+				CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"Gagal, printer error !!!","danger");
+			}			
+			
+			CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"Struk telah berhasil dicetak !","info");
+		 }
 	}
+
+class item
+{
+	private $name;
+	private $price;
+	private $rupiah;
+	public function __construct($name = '', $price = '', $rupiah = false)
+	{
+		$this->name = $name;
+		$this->price = number_format($price,0,',','.');
+		$this->rupiah = $rupiah;
+	}
+	
+	public function __toString()
+	{
+		$rightCols = 8;
+		$leftCols = 24;
+		if ($this->rupiah) {
+			$leftCols = $leftCols / 2 - $rightCols / 2;
+		}
+		$left = str_pad($this->name, $leftCols) ;
+		$sign = ($this->rupiah ? 'Rp ' : '');
+		$right = str_pad($sign . $this->price, $rightCols, ' ', STR_PAD_LEFT);
+		return "$left$right\n";
+	}
+}	
+
+class itemdiscount
+{
+	private $name;
+	private $price;
+	private $discount;
+	private $rupiah;
+	public function __construct($name = '', $price = '', $discount = '', $rupiah = false)
+	{
+		$this->name = $name;
+		$this->discount = number_format($discount,0,',','.');
+		$this->price = number_format($price,0,',','.');
+		$this->rupiah = $rupiah;
+	}
+	
+	public function __toString()
+	{
+		$rightCols = 8;
+		$middleCols = 9;
+		$leftCols = 15;
+		if ($this->rupiah) {
+			$leftCols = $leftCols / 2 - $rightCols / 2;
+		}
+		$left = str_pad($this->name, $leftCols) ;
+		$middle = str_pad($this->discount, $middleCols) ;
+		$sign = ($this->rupiah ? 'Rp ' : '');
+		$right = str_pad($sign . $this->price, $rightCols, ' ', STR_PAD_LEFT);
+		return "$left$middle$right\n";
+	}
+}	
+
+class format
+{
+	private $name;
+	private $text;
+	public function __construct($name = '', $text = '')
+	{
+		$this->name = $name;
+		$this->text = $text;
+	}
+	
+	public function __toString()
+	{
+		$rightCols = 20;
+		$leftCols = 12;
+		
+		$left = str_pad($this->name, $leftCols) ;
+		$right = str_pad($this->text, $rightCols, ' ', STR_PAD_LEFT);
+		return "$left$right\n";
+	}
+}	
