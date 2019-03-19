@@ -257,9 +257,9 @@
 	    */
 	    public function hook_query_index(&$query) {
 	        //Your code here
-			if(!CRUDBooster::isSuperAdmin()){
-				$query->where('cabang',CRUDBooster::myCabang());			
-			}
+			// if(!CRUDBooster::isSuperAdmin() || CRUDBooster::myPrivilegeId() != 2){
+			// 	$query->where('cabang',CRUDBooster::myCabang());			
+			// }
 	    }
 
 	    /*
