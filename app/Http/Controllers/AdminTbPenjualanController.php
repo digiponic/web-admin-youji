@@ -34,11 +34,12 @@
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
+			$this->col[] = ["label"=>"Plt","name"=>"platform"];
 			$this->col[] = ["label"=>"Kode","name"=>"kode"];
 			$this->col[] = ["label"=>"Tanggal","name"=>"created_at","callback_php"=>'date("d-m-Y | H:i", strtotime($row->created_at))'];
-			$this->col[] = ["label"=>"Pengiriman","name"=>"tanggal","callback_php"=>'date("d-m-Y | H:i", strtotime($row->tanggal))'];
-			$this->col[] = ["label"=>"Subtotal","name"=>"subtotal","callback_php"=>'"Rp ".number_format($row->subtotal)'];
 			$this->col[] = ["label"=>"Pelanggan","name"=>"customer_id","join"=>"tb_customer,name"];
+			$this->col[] = ["label"=>"Pengiriman","name"=>"tanggal","callback_php"=>'date("d-m-Y | H:i", strtotime($row->tanggal))'];
+			// $this->col[] = ["label"=>"Subtotal","name"=>"subtotal","callback_php"=>'"Rp ".number_format($row->subtotal)'];
 			$this->col[] = ["label"=>"Grand Total","name"=>"grand_total","callback_php"=>'"Rp ".number_format($row->grand_total)'];
 			$this->col[] = ["label"=>"Status","name"=>"status","join"=>"tb_general,keterangan"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
@@ -179,7 +180,7 @@
 	        |
 	        */
 	        $this->table_row_color = array();
-
+			$this->table_row_color[] = ['condition'=>"[platform] == 'mobile'","color"=>"success"];
 
 	        /*
 	        | ----------------------------------------------------------------------
@@ -189,7 +190,10 @@
 	        |
 	        */
 	        $this->index_statistic = array();
-
+			$this->index_statistic[] = ['label'=>'Penjualan Web','count' => DB::table('tb_penjualan')->where('platform','web')->count(),'icon'=>'fa fa-chrome','color'=>'primary'];
+			$this->index_statistic[] = ['label'=>'Penjualan Mobile','count' => DB::table('tb_penjualan')->where('platform','mobile')->count(),'icon'=>'fa fa-mobile','color'=>'success'];
+			$this->index_statistic[] = ['label'=>'Pesanan belum diproses','count' => DB::table('tb_penjualan')->where('status',25)->count(),'icon'=>'fa fa-refresh','color'=>'danger'];
+			$this->index_statistic[] = ['label'=>'Pesanan belum dikirim','count' => DB::table('tb_penjualan')->where('status',26)->count(),'icon'=>'fa fa-truck','color'=>'info'];
 
 
 	        /*
@@ -348,8 +352,16 @@
 	    |
 	    */
 	    public function hook_row_index($column_index,&$column_value) {
-	    	//Your code here
-	    }
+			//Your code here
+			if($column_index==1){
+				if($column_value == 'mobile') {
+					$class = 'success';
+				}else{
+					$class = 'primary';
+				}
+				$column_value = '<span class="label label-'.$class.'">'.$column_value.'</span>';
+			}			
+	    }	
 
 	    /*
 	    | ----------------------------------------------------------------------
@@ -363,6 +375,7 @@
 			$postdata['status'] = 25;
 			$postdata['id_cabang'] = CRUDBooster::myCabang();
 			$postdata['users_id'] = CRUDBooster::myId();
+			$postdata['platform'] = 'web';
 	    }
 
 	    /*

@@ -11,9 +11,9 @@ use App\SalesOrderDetail;
 class SalesOrders extends Model
 {
     use SoftDeletes;
-    protected $table = 'mst_sales_orders';
-    protected $appends = ['customer','detail'];
-    protected $fillable = ['code','customer_id','datetime_shipping','datetime_order','note','postal_fee','discount','sub_total','total','status','created_user','update_user','deleted_user'];
+    protected $table = 'tb_penjualan';
+    protected $appends = ['customer_id'];
+    protected $fillable = ['kode','keterangan','tanggal','sub_total','pajak','diskon_tipe','diskon','grand_total','users_id','customer_id','status','id_cabang','created_user','update_user','deleted_user'];
     protected $hidden = ['created_user','updated_user','deleted_user','created_at','updated_at','deleted_at'];    
     
     public function SalesOrderDetail()

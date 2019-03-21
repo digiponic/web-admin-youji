@@ -46,6 +46,7 @@ class TransaksiController extends Controller
         $penjualan['kode'] = $kode;
         $penjualan['status'] = 25;
         $penjualan['created_at'] = date('Y-m-d H:i:s');
+        $penjualan['platform'] = 'mobile';
 
         unset($penjualan['penjualan_detil']);
         // $transaksi = 15;

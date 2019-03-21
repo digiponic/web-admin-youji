@@ -55,14 +55,6 @@ $router->group(['prefix' => 'transaksi'], function () use ($router) {
     $router->post('/data/detil', 'TransaksiController@detil');
 });
 
-$router->group(['prefix'=>'pesan'],function()use($router){
-    $router->get('/', 'PesanController@all');
-    $router->get('/show/{id}', 'PesanController@show');
-    $router->post('/store', 'PesanController@store');
-    $router->put('/update/{id}', 'PesanController@update');
-    $router->delete('/delete/{id}', 'PesanController@delete');
-});
-
 //routing customeraddress
 $router->group(['prefix'=>'customeraddress'], function()use ($router){
     $router->get('/', 'customeraddressController@all');
@@ -88,6 +80,14 @@ $router->group(['prefix'=>'generals'],function()use($router){
     $router->post('/store', 'generalsController@store');
     $router->put('/update/{id}', 'generalsController@update');
     $router->delete('/delete/{id}', 'generalsController@delete');
+});
+//routing Pesan
+$router->group(['prefix'=>'pesan'],function()use($router){
+    $router->get('/', 'PesanController@all');
+    $router->get('/show/{id}', 'PesanController@show');
+    $router->post('/store', 'PesanController@store');
+    $router->put('/update/{id}', 'PesanController@update');
+    $router->delete('/delete/{id}', 'PesanController@delete');
 });
 //routing ProductImages
 $router->group(['prefix'=>'productimages'], function()use($router){

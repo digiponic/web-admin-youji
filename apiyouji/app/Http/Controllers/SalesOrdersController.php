@@ -17,8 +17,8 @@ class SalesOrdersController extends Controller
 {
     public function all()
     {
-        // $data = SalesOrders::select('id','code','customer_id','datetime_shipping','datetime_order','note','postal_fee','total','status')->get();
-        $data = SalesOrders::all();
+
+        $data = DB::table('tb_penjualan')->orderBy('kode', 'desc')->get();
         return $data;
     }
     public function show($customer_id)
