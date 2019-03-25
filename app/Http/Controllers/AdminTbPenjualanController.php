@@ -55,7 +55,8 @@
 			$this->form[] = ['label'=>'Tanggal','name'=>'tanggal','type'=>'datetime','validation'=>'required|date_format:Y-m-d H:i:s','width'=>'col-sm-10','value'=>$tanggal];
 			$this->form[] = ['label'=>'Pelanggan','name'=>'customer_id','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_customer,name'];
 			
-			$columns[] = ['label'=>'Produk','name'=>'id_produk','required'=>true,'type'=>'datamodal','datamodal_table'=>'tb_produk','datamodal_columns'=>'keterangan,harga,stok,satuan_keterangan','datamodal_columns_alias'=>'Produk,Harga,Stok,Satuan','datamodal_select_to'=>'harga:harga,satuan_keterangan:satuan_keterangan','datamodal_where'=>'stok != 0','datamodal_size'=>'large'];
+			$columns[] = ['label'=>'Gudang','name'=>'gudang_keterangan','type'=>'text','readonly'=>true];
+			$columns[] = ['label'=>'Produk','name'=>'id_produk','required'=>true,'type'=>'datamodal','datamodal_table'=>'tb_produk','datamodal_columns'=>'keterangan,harga,stok,satuan_keterangan,gudang_keterangan','datamodal_columns_alias'=>'Produk,Harga,Stok,Satuan,Gudang','datamodal_select_to'=>'harga:harga,satuan_keterangan:satuan_keterangan,gudang_keterangan:gudang_keterangan','datamodal_where'=>'stok > 0 and harga > 0 and jenis > 7','datamodal_size'=>'large'];
 			$columns[] = ['label'=>'Harga','name'=>'harga','type'=>'number','required'=>true, 'readonly'=>true];
 			$columns[] = ['label'=>'Satuan','name'=>'satuan_keterangan','type'=>'text','readonly'=>true];
 			$columns[] = ['label'=>'Kuantitas','name'=>'kuantitas','type'=>'number','required'=>true];
@@ -396,7 +397,8 @@
 					'kode_penjualan'	=> $penjualan->kode,
 					'kode_produk'		=> $produk->kode,
 					'nama_produk'		=> $produk->keterangan,
-					'satuan'			=> $produk->satuan
+					'satuan'			=> $produk->satuan,
+					'tanggal_pengiriman'			=> $penjualan->tanggal
 				);
 				$produk_stok = array(
 					'tanggal'		=> $penjualan->tanggal,

@@ -38,9 +38,10 @@
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'Produk','name'=>'kode_produk','type'=>'hidden','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Bahan','name'=>'kode_produk2','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'tb_produk,keterangan','datatable_where'=>'jenis = 6 or jenis = 7'];
+			$this->form[] = ['label'=>'Bahan','name'=>'kode_produk2','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'tb_produk,keterangan','datatable_where'=>'jenis = 6 or jenis = 7',"datatable_format"=>"keterangan,' / ',satuan_keterangan"];
 			$this->form[] = ['label'=>'Takaran','name'=>'takaran','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Satuan','name'=>'satuan','type'=>'select','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 5','value'=>6];
+			// $this->form[] = ['label'=>'Satuan','name'=>'satuan','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 5','value'=>6];
+			// $this->form[] = ['label'=>'Satuan','name'=>'satuan','type'=>'text','width'=>'col-sm-10','readonly'=>true];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
@@ -151,7 +152,7 @@
 	        | $this->script_js = "function() { ... }";
 	        |
 	        */
-	        $this->script_js = NULL;
+			$this->script_js = "";
 
 
             /*
@@ -261,7 +262,7 @@
 	    */
 	    public function hook_before_add(&$postdata) {
 			//Your code here
-			// $postdata['satuan'] = DB::table('tb_produk')->where('id',$postdata['kode_produk2'])->value('satuan');
+			$postdata['satuan'] = DB::table('tb_produk')->where('id',$postdata['kode_produk2'])->value('satuan');
 	    }
 
 	    /*
@@ -286,7 +287,7 @@
 	    */
 	    public function hook_before_edit(&$postdata,$id) {
 	        //Your code here
-
+			$postdata['satuan'] = DB::table('tb_produk')->where('id',$postdata['kode_produk2'])->value('satuan');
 	    }
 
 	    /*

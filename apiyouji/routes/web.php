@@ -46,7 +46,7 @@ $router->group(['prefix' => 'pelanggan'], function () use ($router) {
 });
 
 $router->group(['prefix' => 'area'], function () use ($router) {
-    $router->get('/', 'AreaController@data');
+    $router->post('/', 'AreaController@data');
 });
 
 $router->group(['prefix' => 'transaksi'], function () use ($router) {

@@ -17,6 +17,8 @@ class TipeController extends Controller
 
     public function detil($keterangan)
     {
+        $path_ = DB::table('cms_settings')->where('name','lokasi_penyimpanan')->get();
+        $path = $path_[0]->content;
 
         $tipe = DB::table('tb_tipe')
                     ->where('keterangan', $keterangan)
@@ -25,12 +27,16 @@ class TipeController extends Controller
 
         $data = DB::table('tb_general')
                 ->where('kode_tipe', $tipe->id)
+                ->whereNotIn('keterangan',['Kemasan'])
                 ->whereNull('deleted_at')
                 ->get();
         
         $count = count($data);
         for ($i=0; $i < $count; $i++) { 
-            $data[$i]->gambar = "http://app.digiponic.co.id/youji/storage/app/".$data[$i]->gambar;
+            if($data[$i]->gambar == null)
+                $data[$i]->gambar = null;
+            else
+                $data[$i]->gambar = $path."/".$data[$i]->gambar;
         }
         
         return $data;

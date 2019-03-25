@@ -12,7 +12,7 @@
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
 			$this->title_field = "id";
 			$this->limit = "20";
-			$this->orderby = "id,asc";
+			$this->orderby = "gudang,asc";
 			$this->global_privilege = false;
 			$this->button_table_action = true;
 			$this->button_bulk_action = true;
@@ -30,15 +30,18 @@
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Cabang","name"=>"cabang","join"=>"tb_general,keterangan"];
+			// $this->col[] = ["label"=>"Cabang","name"=>"cabang","join"=>"tb_general,keterangan"];
+			$this->col[] = ["label"=>"Gudang","name"=>"gudang","join"=>"tb_general,keterangan"];
 			$this->col[] = ["label"=>"Gambar","name"=>"gambar","image"=>true];
 			$this->col[] = ["label"=>"Kode","name"=>"kode"];
 			$this->col[] = ["label"=>"Keterangan","name"=>"keterangan"];
 			$this->col[] = ["label"=>"Kategori","name"=>"kategori","join"=>"tb_general,keterangan"];
 			$this->col[] = ["label"=>"Jenis","name"=>"jenis","join"=>"tb_general,keterangan"];
-			$this->col[] = ["label"=>"Stok","name"=>"stok"];
+			$this->col[] = ["label"=>"Stok","name"=>"stok","callback"=>function($row){
+				return number_format($row->stok,0,',','.');
+			}];
 			$this->col[] = ["label"=>"Satuan","name"=>"satuan","join"=>"tb_general,keterangan"];
-			$this->col[] = ["label"=>"Harga","name"=>"harga","callback_php"=>'number_format($row->harga)'];
+			$this->col[] = ["label"=>"Harga","name"=>"harga","callback_php"=>'"Rp ".number_format($row->harga)'];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			$kode = DB::table('tb_produk')->max('id') + 1;
@@ -47,12 +50,13 @@
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'Kode','name'=>'kode','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10','readonly'=>'1','value'=>$kode];
-			$this->form[] = ['label'=>'Cabang','name'=>'cabang','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 2'];
+			// $this->form[] = ['label'=>'Cabang','name'=>'cabang','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 2'];
+			$this->form[] = ['label'=>'Gudang','name'=>'gudang','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 8'];
 			$this->form[] = ['label'=>'Nama Produk','name'=>'keterangan','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Jenis','name'=>'jenis','type'=>'select2','validation'=>'integer|required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 4'];
 			$this->form[] = ['label'=>'Kategori','name'=>'kategori','type'=>'select2','validation'=>'integer','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 3'];
 			$this->form[] = ['label'=>'Satuan','name'=>'satuan','type'=>'select2','validation'=>'integer','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 5'];
-			$this->form[] = ['label'=>'Harga','name'=>'harga','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Harga','name'=>'harga','type'=>'money','validation'=>'min:0','width'=>'col-sm-10','value'=>0];
 			$this->form[] = ['label'=>'Gambar','name'=>'gambar','type'=>'upload','width'=>'col-sm-10','validation'=>'image','upload_encrypt'=>false];
 			$this->form[] = ['label'=>'Deskripsi','name'=>'deskripsi','type'=>'textarea','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
@@ -82,7 +86,7 @@
 	        */
 	        $this->sub_module = array();
 			$this->sub_module[] = ['label'=>'','path'=>'tb_produk_detail','parent_columns'=>'kode,keterangan','foreign_key'=>'kode_produk','button_color'=>'info','button_icon'=>'fa fa-bars','showIf'=>'[jenis] == 22'];
-			$this->sub_module[] = ['label'=>'','path'=>'tb_produk_stok','parent_columns'=>'kode,keterangan','foreign_key'=>'kode_produk','button_color'=>'warning','button_icon'=>'fa fa-exchange'];
+			$this->sub_module[] = ['label'=>'','path'=>'tb_produk_stok','parent_columns'=>'gudang_keterangan,kode,keterangan,satuan_keterangan','parent_columns_alias'=>'Gudang,Kode,Keterangan,Satuan','foreign_key'=>'kode_produk','button_color'=>'warning','button_icon'=>'fa fa-exchange'];
 
 	        /*
 	        | ----------------------------------------------------------------------
@@ -99,7 +103,6 @@
 	        |
 	        */
 	        $this->addaction = array();
-
 
 	        /*
 	        | ----------------------------------------------------------------------
@@ -282,6 +285,7 @@
 	    public function hook_before_add(&$postdata) {
 	        //Your code here
 			$postdata['stok'] = 0;
+			$postdata['gudang_keterangan'] = DB::table('tb_general')->where('id',$postdata['gudang'])->value('keterangan');
 			$postdata['satuan_keterangan'] = DB::table('tb_general')->where('id',$postdata['satuan'])->value('keterangan');
 	    }
 
@@ -296,7 +300,7 @@
 	        //Your code here
 			$stok = array(
 				'kode_produk'	=> $id,
-				'tanggal'		=> date('Y-m-d H:i:d'),
+				'tanggal'		=> date('Y-m-d H:i:s'),
 				'stok_masuk'	=> 0,
 				'stok_keluar'	=> 0,
 				'keterangan'	=> 'Stok produk baru'
@@ -315,6 +319,7 @@
 	    */
 	    public function hook_before_edit(&$postdata,$id) {
 	        //Your code here
+			$postdata['gudang_keterangan'] = DB::table('tb_general')->where('id',$postdata['gudang'])->value('keterangan');
 			$postdata['satuan_keterangan'] = DB::table('tb_general')->where('id',$postdata['satuan'])->value('keterangan');
 	    }
 

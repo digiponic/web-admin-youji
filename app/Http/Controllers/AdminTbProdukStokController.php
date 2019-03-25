@@ -30,9 +30,15 @@
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Tanggal","name"=>"tanggal"];
-			$this->col[] = ["label"=>"Stok Masuk","name"=>"stok_masuk"];
-			$this->col[] = ["label"=>"Stok keluar","name"=>"stok_keluar"];
+			$this->col[] = ["label"=>"Tanggal","name"=>"tanggal","callback"=>function($row){
+				return date('d-m-Y | H:i',strtotime($row->tanggal));
+			}];
+			$this->col[] = ["label"=>"Stok Masuk","name"=>"stok_masuk","callback"=>function($row){
+				return number_format($row->stok_masuk,0,',','.');
+			}];
+			$this->col[] = ["label"=>"Stok keluar","name"=>"stok_keluar","callback"=>function($row){
+				return number_format($row->stok_keluar,0,',','.');
+			}];
 			$this->col[] = ["label"=>"Keterangan","name"=>"keterangan"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
@@ -42,8 +48,8 @@
 			$this->form = [];
 			$this->form[] = ['label'=>'Kode Produk','name'=>'kode_produk','type'=>'hidden'];
 			$this->form[] = ['label'=>'Tanggal','name'=>'tanggal','type'=>'datetime','validation'=>'required','width'=>'col-sm-10','value'=>$tanggal];
-			$this->form[] = ['label'=>'Stok In','name'=>'stok_masuk','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-10','value'=>0];
-			$this->form[] = ['label'=>'Stok Out','name'=>'stok_keluar','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-10','value'=>0];
+			$this->form[] = ['label'=>'Stok Masuk','name'=>'stok_masuk','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-10','value'=>0];
+			$this->form[] = ['label'=>'Stok Keluar','name'=>'stok_keluar','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-10','value'=>0];
 			$this->form[] = ['label'=>'Keterangan','name'=>'keterangan','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
@@ -306,7 +312,10 @@
 	    */
 	    public function hook_after_edit($id) {
 	        //Your code here
-
+			$produk_id = Request::get('kode_produk');
+			$produk = DB::table('tb_produk')->where('id', $produk_id)->get();
+	    	$stok = $produk[0]->stok + Request::get('stok_masuk') - Request::get('stok_keluar');
+	    	DB::table('tb_produk')->where('id', $produk_id)->update(['stok'=>$stok]);
 	    }
 
 	    /*
