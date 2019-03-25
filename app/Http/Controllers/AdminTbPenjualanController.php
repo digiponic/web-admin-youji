@@ -403,8 +403,8 @@
 				$produk_stok = array(
 					'tanggal'		=> $penjualan->tanggal,
 					'kode_produk'	=> $pd->id_produk,
-					'stok_masuk'	=> $pd->kuantitas,
-					'stok_keluar'	=> 0,
+					'stok_masuk'	=> 0,
+					'stok_keluar'	=> $pd->kuantitas,
 					'keterangan'	=> 'Pengurangan stok dari penjualan '.$penjualan->kode
 				);
 

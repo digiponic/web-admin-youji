@@ -53,9 +53,9 @@
 			$this->form[] = ['label'=>'Cabang','name'=>'cabang_id','type'=>'select2','validation'=>'required|min:1|max:255','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 2'];
 			$this->form[] = ['label'=>'Gaji Pokok','name'=>'gaji_pokok','type'=>'number','validation'=>'required','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Alamat','name'=>'alamat','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Tambah Akun','name'=>'buat_akun','value'=>'0','type'=>'radio','dataenum'=>'0|Tidak;1|Ya','validation'=>'required','width'=>'col-sm-10'];			
-			$this->form[] = ['label'=>'Pin','name'=>'pin','type'=>'password','validation'=>'max:6|min:6','width'=>'col-sm-10', 'disabled'=>'true'];			
-			$this->form[] = ['label'=>'Hak Akses','name'=>'privileges_id','type'=>'select','validation'=>'required','width'=>'col-sm-10', 'datatable'=>'cms_privileges,name', 'disabled'=>'true'];			
+			// $this->form[] = ['label'=>'Tambah Akun','name'=>'buat_akun','value'=>'0','type'=>'radio','dataenum'=>'0|Tidak;1|Ya','validation'=>'required','width'=>'col-sm-10'];			
+			// $this->form[] = ['label'=>'Pin','name'=>'pin','type'=>'password','validation'=>'max:6|min:6','width'=>'col-sm-10', 'disabled'=>'true'];			
+			// $this->form[] = ['label'=>'Hak Akses','name'=>'privileges_id','type'=>'select','validation'=>'required','width'=>'col-sm-10', 'datatable'=>'cms_privileges,name', 'disabled'=>'true'];			
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
@@ -344,14 +344,14 @@
 	    */
 	    public function hook_after_edit($id) {
 	    //    Your code here
-			$karyawan = DB::table('tb_karyawan')->where('id',$id)->first();
-			$data = array(
-				'name' 				=> $karyawan->nama,
-				'email' 			=> $karyawan->kode,
-				'password'			=> $karyawan->pin,
-				'id_cms_privileges'	=> $karyawan->privileges_id
-			);
-			DB::table('cms_users')->insert($data);
+			// $karyawan = DB::table('tb_karyawan')->where('id',$id)->first();
+			// $data = array(
+			// 	'name' 				=> $karyawan->nama,
+			// 	'email' 			=> $karyawan->kode,
+			// 	'password'			=> $karyawan->pin,
+			// 	'id_cms_privileges'	=> $karyawan->privileges_id
+			// );
+			// DB::table('cms_users')->insert($data);
 	    }
 
 	    /*
