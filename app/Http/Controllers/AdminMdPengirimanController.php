@@ -5,76 +5,74 @@
 	use DB;
 	use CRUDBooster;
 
-	class AdminTbPenjualanDetailController extends \crocodicstudio\crudbooster\controllers\CBController {
+	class AdminMdPengirimanController extends \crocodicstudio\crudbooster\controllers\CBController {
 
 	    public function cbInit() {
 
 			# START CONFIGURATION DO NOT REMOVE THIS LINE
-			$this->title_field = "nama_produk";
+			$this->title_field = "id";
 			$this->limit = "20";
-			$this->orderby = "kode_penjualan,desc";
+			$this->orderby = "id,desc";
 			$this->global_privilege = false;
-			$this->button_table_action = false;
-			$this->button_bulk_action = false;
+			$this->button_table_action = true;
+			$this->button_bulk_action = true;
 			$this->button_action_style = "button_icon";
-			$this->button_add = false;
-			$this->button_edit = false;
-			$this->button_delete = false;
-			$this->button_detail = false;
+			$this->button_add = true;
+			$this->button_edit = true;
+			$this->button_delete = true;
+			$this->button_detail = true;
 			$this->button_show = true;
 			$this->button_filter = true;
 			$this->button_import = false;
 			$this->button_export = false;
-			$this->table = "tb_penjualan_detail";
+			$this->table = "tb_penjualan";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Pengiriman","name"=>"tanggal_pengiriman","callback"=>function($row){
-				return date('l, d-m-Y | H:i',strtotime($row->tanggal_pengiriman));
-			}];
-			$this->col[] = ["label"=>"Kode Penjualan","name"=>"kode_penjualan"];
-			$this->col[] = ["label"=>"Kategori","name"=>"id_produk","join"=>"tb_produk,kategori","callback"=>function($row){
-				return DB::table('tb_general')->where('id',$row->tb_produk_kategori)->value('keterangan');
-			}];
-			$this->col[] = ["label"=>"Kode Produk","name"=>"kode_produk"];
-			$this->col[] = ["label"=>"Nama Produk","name"=>"nama_produk"];
-			$this->col[] = ["label"=>"Kuatitas","name"=>"kuantitas"];
-			$this->col[] = ["label"=>"Satuan","name"=>"satuan","join"=>"tb_general,keterangan"];
+			$this->col[] = ["label"=>"Kode","name"=>"kode"];
+			$this->col[] = ["label"=>"Keterangan","name"=>"keterangan"];
+			$this->col[] = ["label"=>"Tanggal","name"=>"tanggal"];
+			$this->col[] = ["label"=>"Subtotal","name"=>"subtotal"];
+			$this->col[] = ["label"=>"Pajak","name"=>"pajak"];
+			$this->col[] = ["label"=>"Diskon Tipe","name"=>"diskon_tipe"];
+			$this->col[] = ["label"=>"Diskon","name"=>"diskon"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Penjualan','name'=>'id_penjualan','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'penjualan,id'];
-			$this->form[] = ['label'=>'Kode Penjualan','name'=>'kode_penjualan','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Produk','name'=>'id_produk','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'produk,id'];
-			$this->form[] = ['label'=>'Kode Produk','name'=>'kode_produk','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Nama Produk','name'=>'nama_produk','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Satuan','name'=>'satuan','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Satuan Keterangan','name'=>'satuan_keterangan','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Kuantitas','name'=>'kuantitas','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Harga','name'=>'harga','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Diskon','name'=>'diskon','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Diskon Tipe','name'=>'diskon_tipe','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Kode','name'=>'kode','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Keterangan','name'=>'keterangan','type'=>'textarea','validation'=>'required|string|min:5|max:5000','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Tanggal','name'=>'tanggal','type'=>'datetime','validation'=>'required|date_format:Y-m-d H:i:s','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Subtotal','name'=>'subtotal','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Pajak','name'=>'pajak','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Diskon Tipe','name'=>'diskon_tipe','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Diskon','name'=>'diskon','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Grand Total','name'=>'grand_total','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Users Id','name'=>'users_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'users,id'];
+			$this->form[] = ['label'=>'Customer Id','name'=>'customer_id','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'customer,id'];
+			$this->form[] = ['label'=>'Status','name'=>'status','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Metode Pembayaran','name'=>'metode_pembayaran','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Cabang','name'=>'id_cabang','type'=>'select2','validation'=>'required|integer|min:0','width'=>'col-sm-10','datatable'=>'cabang,id'];
+			$this->form[] = ['label'=>'Platform','name'=>'platform','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ["label"=>"Penjualan","name"=>"id_penjualan","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"penjualan,id"];
-			//$this->form[] = ["label"=>"Kode Penjualan","name"=>"kode_penjualan","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
-			//$this->form[] = ["label"=>"Produk","name"=>"id_produk","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"produk,id"];
-			//$this->form[] = ["label"=>"Kode Produk","name"=>"kode_produk","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
-			//$this->form[] = ["label"=>"Nama Produk","name"=>"nama_produk","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
-			//$this->form[] = ["label"=>"Satuan","name"=>"satuan","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
-			//$this->form[] = ["label"=>"Satuan Keterangan","name"=>"satuan_keterangan","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
-			//$this->form[] = ["label"=>"Kuantitas","name"=>"kuantitas","type"=>"money","required"=>TRUE,"validation"=>"required|integer|min:0"];
-			//$this->form[] = ["label"=>"Harga","name"=>"harga","type"=>"money","required"=>TRUE,"validation"=>"required|integer|min:0"];
-			//$this->form[] = ["label"=>"Diskon","name"=>"diskon","type"=>"money","required"=>TRUE,"validation"=>"required|integer|min:0"];
-			//$this->form[] = ["label"=>"Diskon Tipe","name"=>"diskon_tipe","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Kode","name"=>"kode","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Keterangan","name"=>"keterangan","type"=>"textarea","required"=>TRUE,"validation"=>"required|string|min:5|max:5000"];
+			//$this->form[] = ["label"=>"Tanggal","name"=>"tanggal","type"=>"datetime","required"=>TRUE,"validation"=>"required|date_format:Y-m-d H:i:s"];
 			//$this->form[] = ["label"=>"Subtotal","name"=>"subtotal","type"=>"money","required"=>TRUE,"validation"=>"required|integer|min:0"];
+			//$this->form[] = ["label"=>"Pajak","name"=>"pajak","type"=>"money","required"=>TRUE,"validation"=>"required|integer|min:0"];
+			//$this->form[] = ["label"=>"Diskon Tipe","name"=>"diskon_tipe","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Diskon","name"=>"diskon","type"=>"money","required"=>TRUE,"validation"=>"required|integer|min:0"];
 			//$this->form[] = ["label"=>"Grand Total","name"=>"grand_total","type"=>"money","required"=>TRUE,"validation"=>"required|integer|min:0"];
+			//$this->form[] = ["label"=>"Users Id","name"=>"users_id","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"users,id"];
+			//$this->form[] = ["label"=>"Customer Id","name"=>"customer_id","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"customer,id"];
+			//$this->form[] = ["label"=>"Status","name"=>"status","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Metode Pembayaran","name"=>"metode_pembayaran","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ["label"=>"Cabang","name"=>"id_cabang","type"=>"select2","required"=>TRUE,"validation"=>"required|integer|min:0","datatable"=>"cabang,id"];
+			//$this->form[] = ["label"=>"Platform","name"=>"platform","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
 			# OLD END FORM
 
 			/* 
@@ -152,7 +150,7 @@
 	        | @color = Default is none. You can use bootstrap success,info,warning,danger,primary.        
 	        | 
 	        */
-			$this->table_row_color = array();   	          
+	        $this->table_row_color = array();     	          
 
 	        
 	        /*
@@ -236,7 +234,32 @@
 	        $this->load_css = array();
 	        
 	        
-	    }
+		}
+		
+		public function getIndex()
+		{
+			if(!CRUDBooster::isView()) CRUDBooster::denyAccess();
+			
+			$query = "SELECT
+							tb_penjualan.kode,
+							tb_penjualan.tanggal,
+							tb_customer.`name` AS pelanggan,
+							tb_customer.kode_kota,
+							tb_customer.kode_kecamatan,
+							tb_customer.phone AS telepon,
+							tb_customer.address AS alamat,
+							tb_general.keterangan AS metode_pembayaran 
+						FROM
+							tb_penjualan
+							INNER JOIN tb_customer ON tb_penjualan.customer_id = tb_customer.id
+							INNER JOIN tb_general ON tb_penjualan.metode_pembayaran = tb_general.id
+						";
+			$data = [];
+			$data['page_title'] = 'Pengiriman';
+			$data['result'] = DB::select($query);
+				
+			$this->cbView('index_pengiriman',$data);			
+		}
 
 
 	    /*
@@ -261,8 +284,8 @@
 	    |
 	    */
 	    public function hook_query_index(&$query) {
-			//Your code here
-			// $query->whereDate('tanggal_pengiriman',date('Y-m-d'));
+	        //Your code here
+	            
 	    }
 
 	    /*
@@ -272,7 +295,7 @@
 	    |
 	    */    
 	    public function hook_row_index($column_index,&$column_value) {	        
-			//Your code here
+	    	//Your code here
 	    }
 
 	    /*

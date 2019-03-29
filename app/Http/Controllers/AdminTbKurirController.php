@@ -41,9 +41,9 @@
 			$this->form = [];
 			$this->form[] = ['label'=>'Kode Area Kurir','name'=>'kode','type'=>'text','width'=>'col-sm-10','readonly'=>'true','value'=>$kode];
 			$this->form[] = ['label'=>'Kurir','name'=>'kode_karyawan','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_karyawan,nama','datatable_where'=>'jabatan = 23'];
-			$this->form[] = ['label'=>'Area','name'=>'kode_provinsi','type'=>'select2','width'=>'col-sm-10','datatable'=>'tb_provinsi,keterangan','relationship_table'=>'tb_relasi_kurir_provinsi','datatable_ajax'=>'true'];
-			$this->form[] = ['label'=>'Sub Area 1','name'=>'kode_kota','type'=>'select2','width'=>'col-sm-10','datatable'=>'tb_kota,keterangan','relationship_table'=>'tb_relasi_kurir_kota','datatable_ajax'=>'true'];
-			$this->form[] = ['label'=>'Sub Area 2','name'=>'kode_kecamatan','type'=>'select2','width'=>'col-sm-10','datatable'=>'tb_kecamatan,keterangan','relationship_table'=>'tb_relasi_kurir_kecamatan','datatable_ajax'=>'true'];
+			$this->form[] = ['label'=>'Provinsi','name'=>'kode_provinsi','type'=>'select2','width'=>'col-sm-10','datatable'=>'tb_provinsi,keterangan','relationship_table'=>'tb_relasi_kurir_provinsi','datatable_ajax'=>'true'];
+			$this->form[] = ['label'=>'Kota','name'=>'kode_kota','type'=>'select2','width'=>'col-sm-10','datatable'=>'tb_kota,keterangan','relationship_table'=>'tb_relasi_kurir_kota','datatable_ajax'=>'true'];
+			$this->form[] = ['label'=>'Kecamatan','name'=>'kode_kecamatan','type'=>'select2','width'=>'col-sm-10','datatable'=>'tb_kecamatan,keterangan','relationship_table'=>'tb_relasi_kurir_kecamatan','datatable_ajax'=>'true'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM

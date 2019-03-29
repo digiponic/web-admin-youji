@@ -271,7 +271,8 @@
 	    */
 	    public function hook_before_add(&$postdata) {
 	        //Your code here
-
+			$postdata['stok_masuk'] = (empty($postdata['stok_masuk'])) ? 0 : $postdata['stok_masuk'];
+			$postdata['stok_keluar'] = (empty($postdata['stok_keluar'])) ? 0 : $postdata['stok_keluar'];
 	    }
 
 	    /*

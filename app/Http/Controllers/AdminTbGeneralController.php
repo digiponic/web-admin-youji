@@ -68,7 +68,7 @@
 	        |
 	        */
 	        $this->sub_module = array();
-			$this->sub_module[] = ['label'=>'Invetaris','path'=>'tb_general_detail','parent_columns'=>'kode,keterangan','foreign_key'=>'kode_general','button_color'=>'info'];
+			// $this->sub_module[] = ['label'=>'Invetaris','path'=>'tb_general_detail','parent_columns'=>'kode,keterangan','foreign_key'=>'kode_general','button_color'=>'info'];
 
 	        /*
 	        | ----------------------------------------------------------------------

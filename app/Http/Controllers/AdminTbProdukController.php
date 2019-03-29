@@ -41,7 +41,7 @@
 				return number_format($row->stok,0,',','.');
 			}];
 			$this->col[] = ["label"=>"Satuan","name"=>"satuan","join"=>"tb_general,keterangan"];
-			$this->col[] = ["label"=>"Harga","name"=>"harga","callback_php"=>'"Rp ".number_format($row->harga)'];
+			// $this->col[] = ["label"=>"Harga","name"=>"harga","callback_php"=>'"Rp ".number_format($row->harga)'];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			$kode = DB::table('tb_produk')->max('id') + 1;
@@ -55,9 +55,10 @@
 			$this->form[] = ['label'=>'Nama Produk','name'=>'keterangan','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10'];
 			$this->form[] = ['label'=>'Jenis','name'=>'jenis','type'=>'select2','validation'=>'integer|required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 4'];
 			$this->form[] = ['label'=>'Kategori','name'=>'kategori','type'=>'select2','validation'=>'integer','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 3'];
-			$this->form[] = ['label'=>'Satuan','name'=>'satuan','type'=>'select2','validation'=>'integer','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 5'];
-			$this->form[] = ['label'=>'Harga','name'=>'harga','type'=>'money','validation'=>'min:0','width'=>'col-sm-10','value'=>0];
-			$this->form[] = ['label'=>'Gambar','name'=>'gambar','type'=>'upload','width'=>'col-sm-10','validation'=>'image','upload_encrypt'=>false];
+			$this->form[] = ['label'=>'Satuan','help'=>'*gunakan satuan terkecil','name'=>'satuan','type'=>'select2','validation'=>'integer','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 5'];
+			$this->form[] = ['label'=>'Harga Beli','help'=>'*harga per satuan','name'=>'harga_beli','type'=>'money','validation'=>'min:0','width'=>'col-sm-10','value'=>0];
+			$this->form[] = ['label'=>'Harga Jual','help'=>'*harga per satuan','name'=>'harga_jual','type'=>'money','validation'=>'min:0','width'=>'col-sm-10','value'=>0];
+			$this->form[] = ['label'=>'Gambar','name'=>'gambar','type'=>'upload','width'=>'col-sm-10','validation'=>'image|max:1000','upload_encrypt'=>true];
 			$this->form[] = ['label'=>'Deskripsi','name'=>'deskripsi','type'=>'textarea','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
 
@@ -86,7 +87,7 @@
 	        */
 	        $this->sub_module = array();
 			$this->sub_module[] = ['label'=>'','path'=>'tb_produk_detail','parent_columns'=>'kode,keterangan','foreign_key'=>'kode_produk','button_color'=>'info','button_icon'=>'fa fa-bars','showIf'=>'[jenis] == 22'];
-			$this->sub_module[] = ['label'=>'','path'=>'tb_produk_stok','parent_columns'=>'gudang_keterangan,kode,keterangan,satuan_keterangan','parent_columns_alias'=>'Gudang,Kode,Keterangan,Satuan','foreign_key'=>'kode_produk','button_color'=>'warning','button_icon'=>'fa fa-exchange'];
+			$this->sub_module[] = ['label'=>'','path'=>'tb_produk_stok','parent_columns'=>'gudang_keterangan,kode,keterangan,satuan_keterangan,stok','parent_columns_alias'=>'Gudang,Kode,Keterangan,Satuan,Stok','foreign_key'=>'kode_produk','button_color'=>'warning','button_icon'=>'fa fa-exchange'];
 
 	        /*
 	        | ----------------------------------------------------------------------

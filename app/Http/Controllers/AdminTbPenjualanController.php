@@ -56,8 +56,8 @@
 			$this->form[] = ['label'=>'Pelanggan','name'=>'customer_id','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_customer,name'];
 			
 			$columns[] = ['label'=>'Gudang','name'=>'gudang_keterangan','type'=>'text','readonly'=>true];
-			$columns[] = ['label'=>'Produk','name'=>'id_produk','required'=>true,'type'=>'datamodal','datamodal_table'=>'tb_produk','datamodal_columns'=>'keterangan,harga,stok,satuan_keterangan,gudang_keterangan','datamodal_columns_alias'=>'Produk,Harga,Stok,Satuan,Gudang','datamodal_select_to'=>'harga:harga,satuan_keterangan:satuan_keterangan,gudang_keterangan:gudang_keterangan','datamodal_where'=>'stok > 0 and harga > 0 and jenis > 7','datamodal_size'=>'large'];
-			$columns[] = ['label'=>'Harga','name'=>'harga','type'=>'number','required'=>true, 'readonly'=>true];
+			$columns[] = ['label'=>'Produk','name'=>'id_produk','required'=>true,'type'=>'datamodal','datamodal_table'=>'tb_produk','datamodal_columns'=>'keterangan,harga_jual,stok,satuan_keterangan,gudang_keterangan','datamodal_columns_alias'=>'Produk,Harga,Stok,Satuan,Gudang','datamodal_select_to'=>'harga_jual:harga,satuan_keterangan:satuan_keterangan,gudang_keterangan:gudang_keterangan','datamodal_where'=>'stok > 0 and harga_jual > 0 and jenis > 7','datamodal_size'=>'large'];
+			$columns[] = ['label'=>'Harga','name'=>'harga','type'=>'number','required'=>true];
 			$columns[] = ['label'=>'Satuan','name'=>'satuan_keterangan','type'=>'text','readonly'=>true];
 			$columns[] = ['label'=>'Kuantitas','name'=>'kuantitas','type'=>'number','required'=>true];
 			$columns[] = ['label'=>'Tipe Diskon','name'=>'diskon_tipe','type'=>'radio','dataenum'=>'Nominal;Persen', 'value'=>'Nominal'];
@@ -126,12 +126,15 @@
 	        | @onclick 	   = OnClick JS of action
 	        | @showIf 	   = If condition when action show. Use field alias. e.g : [id] == 1
 	        |
-	        */
+			*/
 			$this->addaction = array();
-			$this->addaction[] = ['label'=>'','icon'=>'fa fa-refresh','color'=>'info','url'=>CRUDBooster::mainpath('set-proses').'/[id]','showIf'=>'[status] == 25'];
-			$this->addaction[] = ['label'=>'','icon'=>'fa fa-truck','color'=>'danger','url'=>CRUDBooster::mainpath('set-kirim').'/[id]','showIf'=>'[status] == 26'];
-			$this->addaction[] = ['label'=>'','icon'=>'fa fa-check','color'=>'success','url'=>CRUDBooster::mainpath('set-terima').'/[id]','showIf'=>'[status] == 27'];
-			$this->addaction[] = ['label'=>'','icon'=>'fa fa-print','color'=>'warning','url'=>CRUDBooster::mainpath('set-print').'/[id]','showIf'=>'[status] != 25'];
+			if(CRUDBooster::myPrivilegeId() != 4){
+				$this->addaction[] = ['title'=>'Proses Pesanan','icon'=>'fa fa-refresh','color'=>'info','url'=>CRUDBooster::mainpath('set-proses').'/[id]','showIf'=>'[status] == 25'];
+				$this->addaction[] = ['title'=>'Kirim Pesanan','icon'=>'fa fa-truck','color'=>'danger','url'=>CRUDBooster::mainpath('set-kirim').'/[id]','showIf'=>'[status] == 26'];
+				$this->addaction[] = ['title'=>'Pesanan Lunas','icon'=>'fa fa-check','color'=>'success','url'=>CRUDBooster::mainpath('set-terima').'/[id]','showIf'=>'[status] == 27 || [status] == 39'];
+				$this->addaction[] = ['title'=>'Pesanan Belum Lunas','icon'=>'fa fa-money','color'=>'danger','url'=>CRUDBooster::mainpath('set-belum-lunas').'/[id]','showIf'=>'[status] == 27'];
+				$this->addaction[] = ['title'=>'Cetak Nota Pesanan','icon'=>'fa fa-print','color'=>'warning','url'=>CRUDBooster::mainpath('set-print').'/[id]','showIf'=>'[status] != 25'];
+			}
 
 
 	        /*
@@ -191,10 +194,12 @@
 	        |
 	        */
 	        $this->index_statistic = array();
-			$this->index_statistic[] = ['label'=>'Penjualan Web','count' => DB::table('tb_penjualan')->where('platform','web')->count(),'icon'=>'fa fa-chrome','color'=>'primary'];
-			$this->index_statistic[] = ['label'=>'Penjualan Mobile','count' => DB::table('tb_penjualan')->where('platform','mobile')->count(),'icon'=>'fa fa-mobile','color'=>'success'];
-			$this->index_statistic[] = ['label'=>'Pesanan belum diproses','count' => DB::table('tb_penjualan')->where('status',25)->count(),'icon'=>'fa fa-refresh','color'=>'danger'];
+			// $this->index_statistic[] = ['label'=>'Penjualan Web','count' => DB::table('tb_penjualan')->where('platform','web')->count(),'icon'=>'fa fa-chrome','color'=>'primary'];
+			// $this->index_statistic[] = ['label'=>'Penjualan Mobile','count' => DB::table('tb_penjualan')->where('platform','mobile')->count(),'icon'=>'fa fa-mobile','color'=>'success'];
+			$this->index_statistic[] = ['label'=>'Pesanan belum diproses','count' => DB::table('tb_penjualan')->where('status',25)->count(),'icon'=>'fa fa-refresh','color'=>'primary'];
 			$this->index_statistic[] = ['label'=>'Pesanan belum dikirim','count' => DB::table('tb_penjualan')->where('status',26)->count(),'icon'=>'fa fa-truck','color'=>'info'];
+			$this->index_statistic[] = ['label'=>'Pesanan belum dibayar','count' => DB::table('tb_penjualan')->where('status',39)->count(),'icon'=>'fa fa-money','color'=>'danger'];
+			$this->index_statistic[] = ['label'=>'Pesanan sudah dibayar','count' => DB::table('tb_penjualan')->where('status',28)->count(),'icon'=>'fa fa-check','color'=>'success'];
 
 
 	        /*
@@ -340,10 +345,10 @@
 	    */
 	    public function hook_query_index(&$query) {
 			//Your code here
-			if(!CRUDBooster::isSuperAdmin()){
-				$query->where('id_cabang',CRUDBooster::myCabang());
-				$query->where('users_id',CRUDBooster::myId());				
-			}
+			// if(!CRUDBooster::isSuperAdmin()){
+			// 	$query->where('id_cabang',CRUDBooster::myCabang());
+			// 	$query->where('users_id',CRUDBooster::myId());				
+			// }
 	    }
 
 	    /*
@@ -477,6 +482,11 @@
 		public function getSetTerima($id)
 		{
 			DB::table('tb_penjualan')->where('id',$id)->update(['status' => 28]);
+			CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"Status pesanan berhasil di ubah !","info");
+		}
+		public function getSetBelumLunas($id)
+		{
+			DB::table('tb_penjualan')->where('id',$id)->update(['status' => 39]);
 			CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"Status pesanan berhasil di ubah !","info");
 		}
 
