@@ -241,24 +241,32 @@
 			if(!CRUDBooster::isView()) CRUDBooster::denyAccess();
 			
 			$query = "SELECT
+							tb_penjualan.id,
 							tb_penjualan.kode,
 							tb_penjualan.tanggal,
 							tb_customer.`name` AS pelanggan,
-							tb_customer.kode_kota,
-							tb_customer.kode_kecamatan,
 							tb_customer.phone AS telepon,
 							tb_customer.address AS alamat,
-							tb_general.keterangan AS metode_pembayaran 
+							tb_general.keterangan AS metode_pembayaran,
+							tb_kecamatan.keterangan AS kecamatan,
+							tb_kota.keterangan AS kota
 						FROM
 							tb_penjualan
-							INNER JOIN tb_customer ON tb_penjualan.customer_id = tb_customer.id
-							INNER JOIN tb_general ON tb_penjualan.metode_pembayaran = tb_general.id
+						INNER JOIN tb_customer ON tb_penjualan.customer_id = tb_customer.id
+						INNER JOIN tb_general ON tb_penjualan.metode_pembayaran = tb_general.id
+						INNER JOIN tb_kota ON tb_customer.kode_kota = tb_kota.id
+						INNER JOIN tb_kecamatan ON tb_customer.kode_kecamatan = tb_kecamatan.id
 						";
 			$data = [];
 			$data['page_title'] = 'Pengiriman';
 			$data['result'] = DB::select($query);
 				
 			$this->cbView('index_pengiriman',$data);			
+		}
+
+		public function getTerkirim($id)
+		{
+			dd($id);
 		}
 
 

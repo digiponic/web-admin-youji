@@ -8,6 +8,7 @@
         <th>Pengiriman</th>
         <th>Kode Penjualan</th>
         <th>Pelanggan</th>
+        <th>Kota/Kecamatan</th>
         <th>Alamat</th>
         <th>Pembayaran</th>
         <th>Aksi</th>
@@ -19,6 +20,7 @@
         <td>{{$row->tanggal}}</td>
         <td>{{$row->kode}}</td>
         <td>{{$row->pelanggan}}</td>
+        <td>{{$row->kota}}<br/>{{$row->kecamatan}}</td>
         <td>{{$row->alamat}}</td>
         <td>{{$row->metode_pembayaran}}</td>
         <td>
