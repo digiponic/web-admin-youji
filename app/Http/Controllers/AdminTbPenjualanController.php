@@ -49,6 +49,8 @@
 
 			$tanggal = date('Y-m-d H:i:s');
 
+			// $num = 1999.9;
+			// $harga = number_format($num, 2);
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
 			$this->form[] = ['label'=>'Kode','name'=>'kode','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10','readonly'=>'true','value'=>$kode];
@@ -57,7 +59,7 @@
 			
 			$columns[] = ['label'=>'Gudang','name'=>'gudang_keterangan','type'=>'text','readonly'=>true];
 			$columns[] = ['label'=>'Produk','name'=>'id_produk','required'=>true,'type'=>'datamodal','datamodal_table'=>'tb_produk','datamodal_columns'=>'keterangan,harga_jual,stok,satuan_keterangan,gudang_keterangan','datamodal_columns_alias'=>'Produk,Harga,Stok,Satuan,Gudang','datamodal_select_to'=>'harga_jual:harga,satuan_keterangan:satuan_keterangan,gudang_keterangan:gudang_keterangan','datamodal_where'=>'stok > 0 and harga_jual > 0 and jenis > 7','datamodal_size'=>'large'];
-			$columns[] = ['label'=>'Harga','name'=>'harga','type'=>'number','required'=>true];
+			$columns[] = ['label'=>'Harga','name'=>'harga','type'=>'number','required'=>'true'];
 			$columns[] = ['label'=>'Satuan','name'=>'satuan_keterangan','type'=>'text','readonly'=>true];
 			$columns[] = ['label'=>'Kuantitas','name'=>'kuantitas','type'=>'number','required'=>true];
 			$columns[] = ['label'=>'Tipe Diskon','name'=>'diskon_tipe','type'=>'radio','dataenum'=>'Nominal;Persen', 'value'=>'Nominal'];
@@ -211,9 +213,17 @@
 	        |
 	        */
 			$this->script_js = "
-				$(function(){
 
+			$(function(){
+			// var bilangan = 23456789;
+			// var reverse = bilangan.toString().split('').reverse().join(''),
+			// ribuan 	= reverse.match(/\d{1,3}/g);
+			// ribuan	= ribuan.join('.').split('').reverse().join('');
+			// document.write(ribuan);
+			});
+				$(function(){
 					setInterval(function() {
+
 						var harga = $('#detilpenjualanharga').val();
 						var diskon_tipe_ = $('input[name=child-diskon_tipe]:checked').val();
 						var diskon_produk = $('#detilpenjualandiskon').val();
@@ -257,7 +267,7 @@
 						$('#grand_total').val(grand_total_keseluruhan_pajak);
 					},500);	
 				});					
-			";
+				";
 
 
             /*
@@ -379,7 +389,7 @@
 	    public function hook_before_add(&$postdata) {
 			//Your code here
 			$postdata['status'] = 25;
-			$postdata['id_cabang'] = CRUDBooster::myCabang();
+			//$postdata['id_cabang'] = CRUDBooster::myCabang();
 			$postdata['users_id'] = CRUDBooster::myId();
 			$postdata['platform'] = 'web';
 	    }
@@ -403,7 +413,7 @@
 					'kode_produk'		=> $produk->kode,
 					'nama_produk'		=> $produk->keterangan,
 					'satuan'			=> $produk->satuan,
-					'tanggal_pengiriman'			=> $penjualan->tanggal
+					'tanggal_pengiriman'=> $penjualan->tanggal
 				);
 				$produk_stok = array(
 					'tanggal'		=> $penjualan->tanggal,
