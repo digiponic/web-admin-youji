@@ -260,7 +260,8 @@
 	    */
 	    public function hook_before_add(&$postdata) {
 	        //Your code here
-
+			$postdata['created_user_id'] = CRUDBooster::myId();
+			$postdata['created_user'] = CRUDBooster::myName();
 	    }
 
 	    /*
@@ -285,7 +286,7 @@
 	    */
 	    public function hook_before_edit(&$postdata,$id) {
 	        //Your code here
-
+			$postdata['updated_user'] = CRUDBooster::myName();
 	    }
 
 	    /*
@@ -309,7 +310,7 @@
 	    */
 	    public function hook_before_delete($id) {
 	        //Your code here
-
+			$postdata['deleted_user'] = CRUDBooster::myName();
 	    }
 
 	    /*

@@ -25,7 +25,7 @@
         <td>{{$row->metode_pembayaran}}</td>
         <td>
           <!-- To make sure we have read access, wee need to validate the privilege -->
-          <a class='btn btn-success btn-sm' href='{{CRUDBooster::mainpath("terkirim/$row->id")}}'><i class="fa fa-check"></i></a>
+          {{-- <a class='btn btn-success btn-sm' href='{{CRUDBooster::mainpath("terkirim/$row->id")}}'><i class="fa fa-check"></i></a> --}}
           {{-- @if(CRUDBooster::isUpdate() && $button_edit)
           <a class='btn btn-success btn-sm' href='{{CRUDBooster::mainpath("edit/$row->id")}}'><i class="fa fa-pencil"></i></a>
           @endif
