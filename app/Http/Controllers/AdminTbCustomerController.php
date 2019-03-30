@@ -23,7 +23,7 @@
 			$this->button_detail = true;
 			$this->button_show = true;
 			$this->button_filter = true;
-			$this->button_import = false;
+			$this->button_import = true;
 			$this->button_export = false;
 			$this->table = "tb_customer";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
@@ -41,7 +41,6 @@
 			$this->form[] = ['label'=>'Email','name'=>'email','type'=>'email','validation'=>'email|unique:tb_customer','width'=>'col-sm-10','placeholder'=>'Mohon input alamat email dengan benar'];
 			$this->form[] = ['label'=>'Nama','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'Anda hanya dapat memasukkan huruf saja'];
 			$this->form[] = ['label'=>'Telepon','name'=>'phone','type'=>'number','validation'=>'required|numeric','width'=>'col-sm-10'];
-			// $this->form[] = ['label'=>'Telepon Alternatif','name'=>'phone_other','type'=>'number','width'=>'col-sm-10','placeholder'=>'Anda hanya dapat memasukkan angka saja'];
 			$this->form[] = ['label'=>'Provinsi','name'=>'kode_provinsi','type'=>'select','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_provinsi,keterangan'];
 			$this->form[] = ['label'=>'Kota','name'=>'kode_kota','type'=>'select','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_kota,keterangan','parent_select'=>'kode_provinsi'];
 			$this->form[] = ['label'=>'Kecamatan','name'=>'kode_kecamatan','type'=>'select','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_kecamatan,keterangan','parent_select'=>'kode_kota'];
@@ -50,11 +49,14 @@
 
 			# OLD START FORM
 			//$this->form = [];
-			//$this->form[] = ["label"=>"Name","name"=>"name","type"=>"text","required"=>TRUE,"validation"=>"required|string|min:3|max:70","placeholder"=>"Anda hanya dapat memasukkan huruf saja"];
-			//$this->form[] = ["label"=>"Email","name"=>"email","type"=>"email","required"=>TRUE,"validation"=>"required|min:1|max:255|email|unique:tb_customer","placeholder"=>"Mohon input alamat email dengan benar"];
-			//$this->form[] = ["label"=>"Address","name"=>"address","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
-			//$this->form[] = ["label"=>"Phone","name"=>"phone","type"=>"number","required"=>TRUE,"validation"=>"required|numeric","placeholder"=>"Anda hanya dapat memasukkan angka saja"];
-			//$this->form[] = ["label"=>"Phone Other","name"=>"phone_other","type"=>"text","required"=>TRUE,"validation"=>"required|min:1|max:255"];
+			//$this->form[] = ['label'=>'Email','name'=>'email','type'=>'email','validation'=>'email|unique:tb_customer','width'=>'col-sm-10','placeholder'=>'Mohon input alamat email dengan benar'];
+			//$this->form[] = ['label'=>'Nama','name'=>'name','type'=>'text','validation'=>'required|string|min:3|max:70','width'=>'col-sm-10','placeholder'=>'Anda hanya dapat memasukkan huruf saja'];
+			//$this->form[] = ['label'=>'Telepon','name'=>'phone','type'=>'number','validation'=>'required|numeric','width'=>'col-sm-10'];
+			//// $this->form[] = ['label'=>'Telepon Alternatif','name'=>'phone_other','type'=>'number','width'=>'col-sm-10','placeholder'=>'Anda hanya dapat memasukkan angka saja'];
+			//$this->form[] = ['label'=>'Provinsi','name'=>'kode_provinsi','type'=>'select','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_provinsi,keterangan'];
+			//$this->form[] = ['label'=>'Kota','name'=>'kode_kota','type'=>'select','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_kota,keterangan','parent_select'=>'kode_provinsi'];
+			//$this->form[] = ['label'=>'Kecamatan','name'=>'kode_kecamatan','type'=>'select','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_kecamatan,keterangan','parent_select'=>'kode_kota'];
+			//$this->form[] = ['label'=>'Alamat','name'=>'address','type'=>'textarea','validation'=>'required','width'=>'col-sm-10'];
 			# OLD END FORM
 
 			/*
