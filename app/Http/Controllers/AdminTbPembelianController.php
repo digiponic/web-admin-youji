@@ -46,12 +46,13 @@
 			$this->form = [];
 			$this->form[] = ['label'=>'Kode','name'=>'kode','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10','readonly'=>'true','value'=>$kode];
 			$this->form[] = ['label'=>'Tanggal','name'=>'tanggal','type'=>'datetime','validation'=>'required|date_format:Y-m-d H:i:s','width'=>'col-sm-10','value'=>$tanggal];
+			$this->form[] = ['label'=>'Supplier','name'=>'supplier','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_supplier,nama','datatable_where'=>'deleted_at is null'];
 			
 			$columns[] = ['label'=>'Gudang','name'=>'gudang_keterangan','type'=>'text','readonly'=>true];
-			$columns[] = ['label'=>'Produk','name'=>'id_produk','required'=>true,'type'=>'datamodal','datamodal_table'=>'tb_produk','datamodal_columns'=>'keterangan,harga,stok,satuan_keterangan,gudang_keterangan','datamodal_columns_alias'=>'Produk,Harga,Stok,Satuan,Gudang','datamodal_select_to'=>'satuan_keterangan:satuan_keterangan,gudang_keterangan:gudang_keterangan','datamodal_size'=>'large'];
-			$columns[] = ['label'=>'Satuan','name'=>'satuan_keterangan','type'=>'text','readonly'=>true];
+			$columns[] = ['label'=>'Produk','name'=>'id_produk','required'=>true,'type'=>'datamodal','datamodal_table'=>'tb_produk','datamodal_columns'=>'keterangan,stok,satuan_keterangan,gudang_keterangan','datamodal_columns_alias'=>'Produk,Stok,Satuan,Gudang','datamodal_select_to'=>'satuan_keterangan:satuan_keterangan,gudang_keterangan:gudang_keterangan','datamodal_size'=>'large'];
 			$columns[] = ['label'=>'Harga','name'=>'harga','type'=>'number','required'=>true,];
 			$columns[] = ['label'=>'Kuantitas','name'=>'kuantitas','type'=>'number','required'=>true];
+			$columns[] = ['label'=>'Satuan','name'=>'satuan_keterangan','type'=>'text','readonly'=>true];
 			$columns[] = ['label'=>'Tipe Diskon','name'=>'diskon_tipe','type'=>'radio','dataenum'=>'Nominal;Persen', 'value'=>'Nominal'];
 			$columns[] = ['label'=>'Diskon','name'=>'diskon','type'=>'number'];
 			$columns[] = ['label'=>'Sub Total','name'=>'subtotal','type'=>'number','formula'=>"[kuantitas] * [harga]","readonly"=>true];
@@ -61,7 +62,7 @@
 			$this->form[] = ['label'=>'Subtotal','name'=>'subtotal','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','readonly'=>'true'];
 			$this->form[] = ['label'=>'Pajak (%)','name'=>'pajak','type'=>'number','width'=>'col-sm-10','value'=>'0'];
 			$this->form[] = ['label'=>'Tipe Diskon','name'=>'diskon_tipe','type'=>'radio','dataenum'=>'Nominal;Persen', 'value'=>'Nominal'];
-			$this->form[] = ['label'=>'Diskon','name'=>'diskon','type'=>'number','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Diskon','name'=>'diskon','type'=>'number','width'=>'col-sm-10','value'=>0];
 			$this->form[] = ['label'=>'Grand Total','name'=>'grand_total','type'=>'money','validation'=>'required|integer|min:0','width'=>'col-sm-10','readonly'=>'true'];
 			$this->form[] = ['label'=>'Keterangan','name'=>'keterangan','type'=>'text','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
@@ -179,53 +180,105 @@
 	        | $this->script_js = "function() { ... }";
 	        |
 	        */
-			$this->script_js = "
-			$(function(){
+					$this->script_js = "
 
-				setInterval(function() {
-					var harga = $('#detilpembelianharga').val();
-					var diskon_tipe = $('input[name=diskon_tipe]:checked').val();
-					var diskon_produk = $('#detilpembeliandiskon').val();
-					var subtotal_produk = $('#detilpembeliansubtotal').val();
-					var grand_total_produk = 0;
+						function formatRupiah(angka, prefix){
+							var number_string = angka.replace(/[^,\d]/g, '').toString(),
+							split   		= number_string.split(','),
+							sisa     		= split[0].length % 3,
+							rupiah     		= split[0].substr(0, sisa),
+							ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
 
-					if(diskon_tipe == 'Nominal'){
-						grand_total_produk = subtotal_produk - diskon_produk;
-					}else{
-						var diskon_produk_ = (diskon_produk / 100) * subtotal_produk;
-						grand_total_produk = subtotal_produk - diskon_produk_;
-					}
+							// tambahkan titik jika yang di input sudah menjadi angka ribuan
+							if(ribuan){
+								separator = sisa ? '.' : '';
+								rupiah += separator + ribuan.join('.');
+							}
 
-					$('#detilpembeliangrand_total').val(grand_total_produk);
-				
-					var total = 0;
-					$('#table-detilpembelian tbody .grand_total').each(function() {
-						total += parseInt($(this).text());
-					})
-					$('#grand_total').val(total);
-					var subtotal = 0;
-					subtotal += total;
-					$('#subtotal').val(subtotal); 
+							rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+							return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+						}
 
-					var pajak = $('#pajak').val()
-					var diskon_tipe = $('input[name=diskon_tipe]:checked').val();
-					var diskon_keseluruhan = $('#diskon').val();
-					var subtotal = 	$('#subtotal').val();
-					var grand_total_keseluruhan = 0;
+						function resetForm(){
+							$('input[name=child-diskon_tipe][value=\"Nominal\"]').prop('checked',true);
+							$('#detilpembelianharga, #detilpembeliankuantitas, #detilpembeliandiskon, #detilpembeliansubtotal').val(0);							
+						}
 
-					if(diskon_tipe =='Nominal'){
-						grand_total_keseluruhan = subtotal - diskon_keseluruhan;
-					}else{
-						var diskon_keseluruhan_ = (diskon_keseluruhan/100) * subtotal;
-						grand_total_keseluruhan = subtotal - diskon_keseluruhan_;
-						
-					}	
-					var pajak_ = (pajak/100) * subtotal;
-					grand_total_keseluruhan_pajak = grand_total_keseluruhan + pajak_;		
-					$('#grand_total').val(grand_total_keseluruhan_pajak);
-				},500);	
-			});					
-		";
+						$(function(){
+							resetForm();
+							$('#btn-add-table-detilpembelian').click(function(){
+								resetForm();
+							});
+
+							setInterval(function() {
+								var harga = $('#detilpembelianharga').val();
+								var diskon_tipe = $('input[name=diskon_tipe]:checked').val();
+								var diskon_produk = $('#detilpembeliandiskon').val();
+								var subtotal_produk = $('#detilpembeliansubtotal').val();
+								var grand_total_produk = 0;
+
+								if(diskon_tipe == 'Nominal'){
+									grand_total_produk = subtotal_produk - diskon_produk;
+								}else{
+									var diskon_produk_ = (diskon_produk / 100) * subtotal_produk;
+									grand_total_produk = subtotal_produk - diskon_produk_;
+								}
+
+								$('#detilpembeliangrand_total').val(grand_total_produk);
+							
+								var total = 0;
+								$('#table-detilpembelian tbody .grand_total').each(function() {
+									// var formated = formatRupiah($(this).text());
+									// $(this).text(formated);
+
+									// var original = ($(this).text()).replace('.','');
+									// total += parseInt(original);
+									total += parseInt($(this).text());
+								});
+
+								// $('#table-detilpembelian tbody tr').each(function() {
+								// 	var harga = formatRupiah($(this).find('td').eq(2).text());
+								// 	$(this).find('td').eq(3).text(harga);
+
+								// 	var kuantitas = formatRupiah($(this).find('td').eq(3).text());
+								// 	$(this).find('td').eq(4).text(kuantitas);
+
+								// 	var subtotal = formatRupiah($(this).find('td').eq(7).text());
+								// 	$(this).find('td').eq(7).text(subtotal);
+
+								// 	var grand_total = formatRupiah($(this).find('td').eq(8).text());
+								// 	$(this).find('td').eq(8).text(grand_total);
+
+								// 	var grand_total_ = (grand_total).replace('.','');
+								// 	if(grand_total_ == '')
+								// 		grand_total_ = 0;
+								// 	total += parseInt(grand_total_);
+								// });
+
+								$('#grand_total').val(total);
+								var subtotal = 0;
+								subtotal += total;
+								$('#subtotal').val(subtotal); 
+
+								var pajak = $('#pajak').val()
+								var diskon_tipe = $('input[name=diskon_tipe]:checked').val();
+								var diskon_keseluruhan = $('#diskon').val();
+								var subtotal = 	$('#subtotal').val();
+								var grand_total_keseluruhan = 0;
+
+								if(diskon_tipe =='Nominal'){
+									grand_total_keseluruhan = subtotal - diskon_keseluruhan;
+								}else{
+									var diskon_keseluruhan_ = (diskon_keseluruhan/100) * subtotal;
+									grand_total_keseluruhan = subtotal - diskon_keseluruhan_;
+									
+								}	
+								var pajak_ = (pajak/100) * subtotal;
+								grand_total_keseluruhan_pajak = grand_total_keseluruhan + pajak_;		
+								$('#grand_total').val(grand_total_keseluruhan_pajak);
+							},500);	
+						});					
+					";
 
 
             /*
@@ -339,6 +392,7 @@
 	    public function hook_before_add(&$postdata) {
 				//Your code here
 				$postdata['id_cabang'] = CRUDBooster::myCabang();
+				$postdata['created_user'] = CRUDBooster::myName();
 				$postdata['users_id'] = CRUDBooster::myId();			
 	    }
 
@@ -385,8 +439,8 @@
 	    |
 	    */
 	    public function hook_before_edit(&$postdata,$id) {
-			//Your code here
-
+				//Your code here
+				$postdata['updated_user'] = CRUDBooster::myName();
 	    }
 
 	    /*
@@ -410,7 +464,7 @@
 	    */
 	    public function hook_before_delete($id) {
 	        //Your code here
-
+					DB::table('tb_pembelian')->where('id',$id)->update(['deleted_at'=>CRUDBooster::myName()]);
 	    }
 
 	    /*

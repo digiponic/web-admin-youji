@@ -56,8 +56,10 @@
 			$this->form[] = ['label'=>'Jenis','name'=>'jenis','type'=>'select2','validation'=>'integer|required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 4'];
 			$this->form[] = ['label'=>'Kategori','name'=>'kategori','type'=>'select2','validation'=>'integer','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 3'];
 			$this->form[] = ['label'=>'Satuan','help'=>'*gunakan satuan terkecil','name'=>'satuan','type'=>'select2','validation'=>'integer','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 5'];
-			$this->form[] = ['label'=>'Harga Beli','help'=>'*harga per satuan','name'=>'harga_beli','type'=>'money','validation'=>'min:0','width'=>'col-sm-10','value'=>0];
-			$this->form[] = ['label'=>'Harga Jual','help'=>'*harga per satuan','name'=>'harga_jual','type'=>'money','validation'=>'min:0','width'=>'col-sm-10','value'=>0];
+			if(CRUDBooster::myPrivilegeId() != 4)
+				$this->form[] = ['label'=>'Harga Beli','help'=>'*harga per satuan','name'=>'harga_beli','type'=>'money','validation'=>'min:0','width'=>'col-sm-10','value'=>0];
+			if(CRUDBooster::myPrivilegeId() != 6)
+				$this->form[] = ['label'=>'Harga Jual','help'=>'*harga per satuan','name'=>'harga_jual','type'=>'money','validation'=>'min:0','width'=>'col-sm-10','value'=>0];
 			$this->form[] = ['label'=>'Gambar','name'=>'gambar','type'=>'upload','width'=>'col-sm-10','validation'=>'image|max:1000','upload_encrypt'=>true];
 			$this->form[] = ['label'=>'Deskripsi','name'=>'deskripsi','type'=>'textarea','width'=>'col-sm-10'];
 			# END FORM DO NOT REMOVE THIS LINE
