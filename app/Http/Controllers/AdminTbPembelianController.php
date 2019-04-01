@@ -46,7 +46,7 @@
 			$this->form = [];
 			$this->form[] = ['label'=>'Kode','name'=>'kode','type'=>'text','validation'=>'required|min:1|max:255','width'=>'col-sm-10','readonly'=>'true','value'=>$kode];
 			$this->form[] = ['label'=>'Tanggal','name'=>'tanggal','type'=>'datetime','validation'=>'required|date_format:Y-m-d H:i:s','width'=>'col-sm-10','value'=>$tanggal];
-			$this->form[] = ['label'=>'Supplier','name'=>'supplier','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_supplier,nama','datatable_where'=>'deleted_at is null'];
+		//	$this->form[] = ['label'=>'Supplier','name'=>'supplier','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_supplier,nama','datatable_where'=>'deleted_at is null'];
 			
 			$columns[] = ['label'=>'Gudang','name'=>'gudang_keterangan','type'=>'text','readonly'=>true];
 			$columns[] = ['label'=>'Produk','name'=>'id_produk','required'=>true,'type'=>'datamodal','datamodal_table'=>'tb_produk','datamodal_columns'=>'keterangan,stok,satuan_keterangan,gudang_keterangan','datamodal_columns_alias'=>'Produk,Stok,Satuan,Gudang','datamodal_select_to'=>'satuan_keterangan:satuan_keterangan,gudang_keterangan:gudang_keterangan','datamodal_size'=>'large'];
@@ -110,7 +110,10 @@
 	        |
 	        */
 	        $this->addaction = array();
-
+					if(CRUDBooster::myPrivilegeId() != 4){
+						$this->addaction[] = ['title'=>'Pesanan Lunas','icon'=>'fa fa-check','color'=>'success','url'=>CRUDBooster::mainpath('set-terima').'/[id]','showIf'=>'[status] == 27 || [status] == 39'];
+						$this->addaction[] = ['title'=>'Pesanan Belum Lunas','icon'=>'fa fa-money','color'=>'danger','url'=>CRUDBooster::mainpath('set-belum-lunas').'/[id]','showIf'=>'[status] == 27'];
+					}
 
 	        /*
 	        | ----------------------------------------------------------------------
@@ -391,9 +394,9 @@
 	    */
 	    public function hook_before_add(&$postdata) {
 				//Your code here
-				$postdata['id_cabang'] = CRUDBooster::myCabang();
-				$postdata['created_user'] = CRUDBooster::myName();
-				$postdata['users_id'] = CRUDBooster::myId();			
+			//	$postdata['id_cabang'] = CRUDBooster::myCabang();
+			//	$postdata['created_user'] = CRUDBooster::myName();
+				//$postdata['users_id'] = CRUDBooster::myId();			
 	    }
 
 	    /*

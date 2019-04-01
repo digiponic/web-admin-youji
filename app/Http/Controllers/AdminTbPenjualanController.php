@@ -58,13 +58,8 @@
 			$this->form[] = ['label'=>'Pelanggan','name'=>'customer_id','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_customer,name'];
 			
 			$columns[] = ['label'=>'Gudang','name'=>'gudang_keterangan','type'=>'text','readonly'=>true];
-<<<<<<< HEAD
-			$columns[] = ['label'=>'Produk','name'=>'id_produk','required'=>true,'type'=>'datamodal','datamodal_table'=>'tb_produk','datamodal_columns'=>'keterangan,harga_jual,stok,satuan_keterangan,gudang_keterangan','datamodal_columns_alias'=>'Produk,Harga,Stok,Satuan,Gudang','datamodal_select_to'=>'harga_jual:harga,satuan_keterangan:satuan_keterangan,gudang_keterangan:gudang_keterangan','datamodal_where'=>'stok > 0 and harga_jual > 0 and jenis > 7','datamodal_size'=>'large'];
-			$columns[] = ['label'=>'Harga','name'=>'harga','type'=>'number','required'=>'true'];
-=======
 			$columns[] = ['label'=>'Produk','name'=>'id_produk','required'=>true,'type'=>'datamodal','datamodal_table'=>'tb_produk','datamodal_columns'=>'keterangan,harga_jual,stok,satuan_keterangan,gudang_keterangan','datamodal_columns_alias'=>'Produk,Harga,Stok,Satuan,Gudang','datamodal_select_to'=>'harga_jual:harga,satuan_keterangan:satuan_keterangan,gudang_keterangan:gudang_keterangan','datamodal_where'=>'stok > 0 and harga_jual > 0 and jenis > 7 and deleted_at is null','datamodal_size'=>'large'];
 			$columns[] = ['label'=>'Harga','name'=>'harga','type'=>'number','required'=>true];
->>>>>>> f8081009d0aa735cfb109e197aedd1653eac0d3e
 			$columns[] = ['label'=>'Satuan','name'=>'satuan_keterangan','type'=>'text','readonly'=>true];
 			$columns[] = ['label'=>'Kuantitas','name'=>'kuantitas','type'=>'number','required'=>true];
 			$columns[] = ['label'=>'Tipe Diskon','name'=>'diskon_tipe','type'=>'radio','dataenum'=>'Nominal;Persen', 'value'=>'Nominal'];
@@ -479,7 +474,6 @@
 	    */
 	    public function hook_after_delete($id) {
 	        //Your code here
-
 	    }
 
 		//By the way, you can still create your own method in here... :)
@@ -515,8 +509,7 @@
 
 			if($penjualan->diskon_tipe == 'Persen'){
 				$penjualan->diskon = ($penjualan->diskon / 100) * $penjualan->subtotal;
-			}
-
+		}
 			$penjualan_detail = DB::table('tb_penjualan_detail')->where('id_penjualan',$id)->get();
 
 			$logo = EscposImage::load("youji_mini.jpg", false);
