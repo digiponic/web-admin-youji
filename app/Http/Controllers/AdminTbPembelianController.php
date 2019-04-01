@@ -110,10 +110,7 @@
 	        |
 	        */
 	        $this->addaction = array();
-					if(CRUDBooster::myPrivilegeId() != 4){
-						$this->addaction[] = ['title'=>'Pesanan Lunas','icon'=>'fa fa-check','color'=>'success','url'=>CRUDBooster::mainpath('set-terima').'/[id]','showIf'=>'[status] == 27 || [status] == 39'];
-						$this->addaction[] = ['title'=>'Pesanan Belum Lunas','icon'=>'fa fa-money','color'=>'danger','url'=>CRUDBooster::mainpath('set-belum-lunas').'/[id]','showIf'=>'[status] == 27'];
-					}
+					$this->addaction[] = ['title'=>'Pesanan Belum Lunas','icon'=>'fa fa-money','color'=>'danger','url'=>CRUDBooster::mainpath('set-belum-lunas').'/[id]','showIf'=>'[status] == 27'];
 
 	        /*
 	        | ----------------------------------------------------------------------
@@ -394,6 +391,7 @@
 	    */
 	    public function hook_before_add(&$postdata) {
 				//Your code here
+				$postdata['status'] = 25;
 			//	$postdata['id_cabang'] = CRUDBooster::myCabang();
 			//	$postdata['created_user'] = CRUDBooster::myName();
 				//$postdata['users_id'] = CRUDBooster::myId();			
@@ -480,11 +478,12 @@
 	    public function hook_after_delete($id) {
 	        //Your code here
 
-	    }
-
-
-
+			}
+			public function getSetBelumLunas($id)
+		{
+		
+			DB::table('tb_pembelian')->where('id',$id)->update(['status' => 39]);
+			CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"Status pesanan berhasil di ubah !","info");
+		}
 	    //By the way, you can still create your own method in here... :)
-
-
 	}
