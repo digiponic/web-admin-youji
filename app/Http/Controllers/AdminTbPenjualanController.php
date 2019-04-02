@@ -133,8 +133,8 @@
 			if(CRUDBooster::myPrivilegeId() != 4){
 				$this->addaction[] = ['title'=>'Proses Pesanan','icon'=>'fa fa-refresh','color'=>'info','url'=>CRUDBooster::mainpath('set-proses').'/[id]','showIf'=>'[status] == 25'];
 				$this->addaction[] = ['title'=>'Kirim Pesanan','icon'=>'fa fa-truck','color'=>'danger','url'=>CRUDBooster::mainpath('set-kirim').'/[id]','showIf'=>'[status] == 26'];
-				$this->addaction[] = ['title'=>'Pesanan Lunas','icon'=>'fa fa-check','color'=>'success','url'=>CRUDBooster::mainpath('set-terima').'/[id]','showIf'=>'[status] == 27 || [status] == 39'];
-				$this->addaction[] = ['title'=>'Pesanan Belum Lunas','icon'=>'fa fa-money','color'=>'danger','url'=>CRUDBooster::mainpath('set-belum-lunas').'/[id]','showIf'=>'[status] == 27'];
+				$this->addaction[] = ['title'=>'Pesanan Lunas','icon'=>'fa fa-check','color'=>'success','url'=>CRUDBooster::mainpath('set-terima').'/[id]','showIf'=>'[status] == 28 || [status] == 39'];
+				$this->addaction[] = ['title'=>'Pesanan Belum Lunas','icon'=>'fa fa-money','color'=>'danger','url'=>CRUDBooster::mainpath('set-belum-lunas').'/[id]','showIf'=>'[status] == 28'];
 				$this->addaction[] = ['title'=>'Cetak Nota Pesanan','icon'=>'fa fa-print','color'=>'warning','url'=>CRUDBooster::mainpath('set-print').'/[id]','showIf'=>'[status] != 25'];
 			}
 

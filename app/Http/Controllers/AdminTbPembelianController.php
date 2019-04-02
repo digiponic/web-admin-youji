@@ -35,6 +35,7 @@
 			$this->col[] = ["label"=>"Subtotal","name"=>"subtotal","callback_php"=>'number_format($row->subtotal)'];
 			$this->col[] = ["label"=>"Grand Total","name"=>"grand_total","callback_php"=>'number_format($row->grand_total)'];
 			$this->col[] = ["label"=>"Keterangan","name"=>"keterangan"];
+			$this->col[] = ["label"=>"Status","name"=>"status", "join"=>"tb_general,keterangan"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			$kode = DB::table('tb_pembelian')->max('id') + 1;
@@ -109,12 +110,16 @@
 	        | @showIf 	   = If condition when action show. Use field alias. e.g : [id] == 1
 	        |
 	        */
-	        $this->addaction = array();
-					$this->addaction[] = ['title'=>'Pesanan Belum Lunas','icon'=>'fa fa-money','color'=>'danger','url'=>CRUDBooster::mainpath('set-belum-lunas').'/[id]','showIf'=>'[status] == 27'];
+					$this->addaction = array();
+					$this->addaction[] = ['title'=>'Pembelian Dibatalkan','icon'=>'fa fa-ban','color'=>'danger','url'=>CRUDBooster::mainpath('set-batal').'/[id]','showIf'=>'[status] == 40 || [status] == 39'];
+					$this->addaction[] = ['title'=>'Pembelian Lunas','icon'=>'fa fa-check','color'=>'success','url'=>CRUDBooster::mainpath('set-terima').'/[id]','showIf'=>'[status] == 39 || [status] == 28'];
+					$this->addaction[] = ['title'=>'Pembelian Belum Lunas','icon'=>'fa fa-money','color'=>'warning','url'=>CRUDBooster::mainpath('set-belum-lunas').'/[id]','showIf'=>'[status] == 39'];
+					
 
 	        /*
 	        | ----------------------------------------------------------------------
 	        | Add More Button Selected
+	        | ----------------------------------------------------------------------
 	        | ----------------------------------------------------------------------
 	        | @label       = Label of action
 	        | @icon 	   = Icon from fontawesome
@@ -169,7 +174,10 @@
 	        |
 	        */
 	        $this->index_statistic = array();
-
+					$this->index_statistic[] = ['label'=>'Pembelian dibatalkan','count' => DB::table('tb_pembelian')->where('status',40)->count(),'icon'=>'fa fa-ban','color'=>'primary'];
+					$this->index_statistic[] = ['label'=>'Pembelian belum lunas','count' => DB::table('tb_pembelian')->where('status',39)->count(),'icon'=>'fa fa-close','color'=>'danger'];
+					$this->index_statistic[] = ['label'=>'Pembelian sudah lunas','count' => DB::table('tb_pembelian')->where('status',28)->count(),'icon'=>'fa fa-check','color'=>'success'];
+					$this->index_statistic[] = ['label'=>'Jumlah Pembelian','count' => DB::table('tb_pembelian')->count(),'icon'=>'fa fa-shopping-bag','color'=>'warning'];
 
 
 	        /*
@@ -391,7 +399,8 @@
 	    */
 	    public function hook_before_add(&$postdata) {
 				//Your code here
-				$postdata['status'] = 25;
+				$postdata['status'] = 39;
+		
 			//	$postdata['id_cabang'] = CRUDBooster::myCabang();
 			//	$postdata['created_user'] = CRUDBooster::myName();
 				//$postdata['users_id'] = CRUDBooster::myId();			
@@ -480,10 +489,41 @@
 
 			}
 			public function getSetBelumLunas($id)
-		{
-		
-			DB::table('tb_pembelian')->where('id',$id)->update(['status' => 39]);
-			CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"Status pesanan berhasil di ubah !","info");
-		}
+				{
+					DB::table('tb_pembelian')->where('id',$id)->update(['status' => 39]);
+					CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"Status pesanan belum lunas !","info");
+				}
+				public function getSetTerima($id)
+				{
+					DB::table('tb_pembelian')->where('id', $id)->update(['status'=> 28]);
+					CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"Status pesanan telah lunas !","info");
+				}
+				public function getSetBatal($id)
+				{
+					$pembelian = DB::table('tb_pembelian')->where('id',$id)->first();
+					$pembelian_detail = DB::table('tb_pembelian_detail')->where('id_pembelian', $id)->get();
+
+					foreach($pembelian_detail as $pd) {
+						$produk = DB::table('tb_produk')->where('id',$pd->id_produk)->first();
+						$array = array(
+							'kode_pembelian'	=> $pembelian->kode,
+							'kode_produk'			=> $produk->kode,
+							'nama_produk'			=> $produk->keterangan,
+							'satuan'					=> $produk->satuan
+						);
+						$produk_stok = array(
+							'tanggal'		=> $penjualan->tanggal,
+							'kode_produk'	=> $pd->id_produk,
+							'stok_masuk'	=> 0,
+							'stok_keluar'	=> $pd->kuantitas,
+							'keterangan'	=> 'Pembatalan Transaksi '.$penjualan->kode
+						);
+						DB::table('tb_pembelian_detail')->where('id',$pd->id)->update($array);
+						DB::table('tb_produk_stok')->insert($produk_stok);
+						DB::table('tb_produk')->where('id',$pd->id_produk)->update(['stok'=> abs($produk->stok - $pd->kuantitas)]);
+					}
+					DB::table('tb_pembelian')->where('id', $id)->update(['status'=> 40]);
+					CRUDBooster::redirect($_SERVER['HTTP_REFERER'],"Status pesanan telah di Batalkan !","info");
+				}
 	    //By the way, you can still create your own method in here... :)
 	}

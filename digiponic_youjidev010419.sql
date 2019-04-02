@@ -11,7 +11,7 @@
  Target Server Version : 50719
  File Encoding         : 65001
 
- Date: 29/03/2019 10:20:48
+ Date: 01/04/2019 14:31:20
 */
 
 SET NAMES utf8mb4;
@@ -134,7 +134,7 @@ CREATE TABLE `cms_logs`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 2802 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 2840 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_logs
@@ -2940,6 +2940,44 @@ INSERT INTO `cms_logs` VALUES (2798, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64
 INSERT INTO `cms_logs` VALUES (2799, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/tb_penjualan/add-save', 'Tambah data baru  pada Penjualan', '', 1, '2019-03-29 07:13:12', NULL);
 INSERT INTO `cms_logs` VALUES (2800, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/tb_penjualan/add-save', 'Tambah data baru  pada Penjualan', '', 1, '2019-03-29 07:14:09', NULL);
 INSERT INTO `cms_logs` VALUES (2801, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/login', 'superadmin login dengan IP Address ::1', '', 1, '2019-03-29 09:46:33', NULL);
+INSERT INTO `cms_logs` VALUES (2802, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/tb_customer/edit-save/9', 'Memperbaharui data Pagita pada Pelanggan', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>phone_other</td><td></td><td></td></tr><tr><td>fullname</td><td></td><td></td></tr><tr><td>kode_provinsi</td><td></td><td>1</td></tr><tr><td>kode_kota</td><td></td><td>1</td></tr><tr><td>kode_kecamatan</td><td></td><td>2</td></tr></tbody></table>', 1, '2019-03-29 10:22:56', NULL);
+INSERT INTO `cms_logs` VALUES (2803, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/tb_customer/edit-save/3', 'Memperbaharui data Renaldy pada Pelanggan', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>email</td><td>re@gmail.com</td><td>renaldy@digiponic.co.id</td></tr><tr><td>phone_other</td><td>08643244344</td><td></td></tr><tr><td>fullname</td><td></td><td></td></tr><tr><td>kode_provinsi</td><td></td><td>1</td></tr><tr><td>kode_kota</td><td></td><td>1</td></tr><tr><td>kode_kecamatan</td><td></td><td>1</td></tr></tbody></table>', 1, '2019-03-29 10:23:13', NULL);
+INSERT INTO `cms_logs` VALUES (2804, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/tb_customer/edit-save/2', 'Memperbaharui data Ryan Charies pada Pelanggan', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>email</td><td>ri@riyan.com</td><td>ryancharies@digiponic.co.id</td></tr><tr><td>phone_other</td><td>08644677</td><td></td></tr><tr><td>fullname</td><td></td><td></td></tr><tr><td>kode_provinsi</td><td></td><td>1</td></tr><tr><td>kode_kota</td><td></td><td>1</td></tr><tr><td>kode_kecamatan</td><td></td><td>1</td></tr></tbody></table>', 1, '2019-03-29 10:23:25', NULL);
+INSERT INTO `cms_logs` VALUES (2805, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/tb_customer/edit-save/1', 'Memperbaharui data Ervina Aprilia Saputri pada Pelanggan', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>fullname</td><td></td><td></td></tr><tr><td>kode_provinsi</td><td></td><td>1</td></tr><tr><td>kode_kota</td><td></td><td>1</td></tr><tr><td>kode_kecamatan</td><td></td><td>1</td></tr></tbody></table>', 1, '2019-03-29 10:23:38', NULL);
+INSERT INTO `cms_logs` VALUES (2806, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/tb_customer/edit-save/1', 'Memperbaharui data Ervina Aprilia Saputri pada Pelanggan', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>address</td><td>Jalan Srigading Dalam No.56, Lowokwaru, Kota Malang</td><td>Jalan Raya Perusahaan No 27</td></tr><tr><td>fullname</td><td></td><td></td></tr></tbody></table>', 1, '2019-03-29 10:23:58', NULL);
+INSERT INTO `cms_logs` VALUES (2807, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/tb_customer/edit-save/1', 'Memperbaharui data Ervina Aprilia Saputri pada Pelanggan', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>fullname</td><td></td><td></td></tr></tbody></table>', 1, '2019-03-29 10:24:03', NULL);
+INSERT INTO `cms_logs` VALUES (2808, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/tb_customer/edit-save/2', 'Memperbaharui data Ryan Charies pada Pelanggan', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>address</td><td>Jalan Singosari</td><td>Jalan Raya Perusahaan No 27</td></tr><tr><td>phone_other</td><td>08644677</td><td></td></tr><tr><td>fullname</td><td></td><td></td></tr></tbody></table>', 1, '2019-03-29 10:24:07', NULL);
+INSERT INTO `cms_logs` VALUES (2809, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/tb_customer/edit-save/3', 'Memperbaharui data Renaldy pada Pelanggan', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>address</td><td>Jalan Magetan Nomor 56</td><td>Jalan Raya Perusahaan No 27</td></tr><tr><td>phone_other</td><td>08643244344</td><td></td></tr><tr><td>fullname</td><td></td><td></td></tr></tbody></table>', 1, '2019-03-29 10:24:13', NULL);
+INSERT INTO `cms_logs` VALUES (2810, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/tb_customer/edit-save/1', 'Memperbaharui data Ervina Aprilia Saputri pada Pelanggan', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>email</td><td>vina@digiponic.co.id</td><td>ervina@digiponic.co.id</td></tr><tr><td>fullname</td><td></td><td></td></tr></tbody></table>', 1, '2019-03-29 10:24:22', NULL);
+INSERT INTO `cms_logs` VALUES (2811, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/logout', 'superadmin keluar', '', 1, '2019-03-29 14:16:30', NULL);
+INSERT INTO `cms_logs` VALUES (2812, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/login', 'pagita login dengan IP Address ::1', '', 21, '2019-03-29 14:16:39', NULL);
+INSERT INTO `cms_logs` VALUES (2813, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:65.0) Gecko/20100101 Firefox/65.0', 'http://localhost/digiponic/youji/public/admin/login', 'bayu login dengan IP Address ::1', '', 22, '2019-03-29 14:19:08', NULL);
+INSERT INTO `cms_logs` VALUES (2814, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:65.0) Gecko/20100101 Firefox/65.0', 'http://localhost/digiponic/youji/public/admin/logout', 'bayu keluar', '', 22, '2019-03-29 14:19:47', NULL);
+INSERT INTO `cms_logs` VALUES (2815, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:65.0) Gecko/20100101 Firefox/65.0', 'http://localhost/digiponic/youji/public/admin/login', 'fidia login dengan IP Address ::1', '', 20, '2019-03-29 14:19:54', NULL);
+INSERT INTO `cms_logs` VALUES (2816, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/logout', 'pagita keluar', '', 21, '2019-03-29 14:35:06', NULL);
+INSERT INTO `cms_logs` VALUES (2817, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/login', 'superadmin login dengan IP Address ::1', '', 1, '2019-03-29 14:35:20', NULL);
+INSERT INTO `cms_logs` VALUES (2818, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/menu_management/add-save', 'Tambah data baru Provinsi pada Menu Management', '', 1, '2019-03-29 14:36:25', NULL);
+INSERT INTO `cms_logs` VALUES (2819, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/menu_management/add-save', 'Tambah data baru Kota pada Menu Management', '', 1, '2019-03-29 14:36:50', NULL);
+INSERT INTO `cms_logs` VALUES (2820, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/menu_management/delete/86', 'Menghapus data Kota pada Menu Management', '', 1, '2019-03-29 14:37:33', NULL);
+INSERT INTO `cms_logs` VALUES (2821, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/menu_management/edit-save/85', 'Memperbaharui data Area pada Menu Management', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>name</td><td>Provinsi</td><td>Area</td></tr><tr><td>sorting</td><td></td><td></td></tr><tr><td>deleted_at</td><td></td><td></td></tr></tbody></table>', 1, '2019-03-29 14:37:42', NULL);
+INSERT INTO `cms_logs` VALUES (2822, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:65.0) Gecko/20100101 Firefox/65.0', 'http://localhost/digiponic/youji/public/admin/logout', 'fidia keluar', '', 20, '2019-03-29 14:40:15', NULL);
+INSERT INTO `cms_logs` VALUES (2823, '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:65.0) Gecko/20100101 Firefox/65.0', 'http://localhost/digiponic/youji/public/admin/login', 'pagita login dengan IP Address ::1', '', 21, '2019-03-29 14:40:21', NULL);
+INSERT INTO `cms_logs` VALUES (2824, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/login', 'superadmin login dengan IP Address ::1', '', 1, '2019-03-29 19:27:29', NULL);
+INSERT INTO `cms_logs` VALUES (2825, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/menu_management/add-save', 'Tambah data baru Supplier pada Menu Management', '', 1, '2019-03-29 19:29:41', NULL);
+INSERT INTO `cms_logs` VALUES (2826, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/login', 'superadmin login dengan IP Address ::1', '', 1, '2019-03-30 08:17:52', NULL);
+INSERT INTO `cms_logs` VALUES (2827, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/menu_management/delete/87', 'Menghapus data Supplier pada Menu Management', '', 1, '2019-03-30 08:19:01', NULL);
+INSERT INTO `cms_logs` VALUES (2828, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/menu_management/edit-save/88', 'Memperbaharui data Supplier pada Menu Management', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>color</td><td></td><td>normal</td></tr><tr><td>icon</td><td>fa fa-glass</td><td>fa fa-home</td></tr><tr><td>sorting</td><td>20</td><td></td></tr><tr><td>deleted_at</td><td></td><td></td></tr></tbody></table>', 1, '2019-03-30 08:19:12', NULL);
+INSERT INTO `cms_logs` VALUES (2829, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/menu_management/edit-save/88', 'Memperbaharui data Supplier pada Menu Management', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>parent_id</td><td>42</td><td></td></tr><tr><td>sorting</td><td>7</td><td></td></tr><tr><td>deleted_at</td><td></td><td></td></tr></tbody></table>', 1, '2019-03-30 08:19:36', NULL);
+INSERT INTO `cms_logs` VALUES (2830, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/logout', 'superadmin keluar', '', 1, '2019-03-30 08:19:49', NULL);
+INSERT INTO `cms_logs` VALUES (2831, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/login', 'superadmin login dengan IP Address ::1', '', 1, '2019-03-30 08:19:53', NULL);
+INSERT INTO `cms_logs` VALUES (2832, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/tb_pembelian/add-save', 'Tambah data baru  pada Pembelian', '', 1, '2019-03-30 08:41:28', NULL);
+INSERT INTO `cms_logs` VALUES (2833, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/tb_pembelian/add-save', 'Tambah data baru  pada Pembelian', '', 1, '2019-03-30 09:36:56', NULL);
+INSERT INTO `cms_logs` VALUES (2834, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/tb_pembelian/edit-save/3', 'Memperbaharui data  pada Pembelian', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>users_id</td><td>1</td><td></td></tr><tr><td>id_cabang</td><td></td><td></td></tr><tr><td>deleted_user</td><td></td><td></td></tr></tbody></table>', 1, '2019-03-30 09:38:08', NULL);
+INSERT INTO `cms_logs` VALUES (2835, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/tb_pembelian/add-save', 'Tambah data baru  pada Pembelian', '', 1, '2019-03-30 09:40:27', NULL);
+INSERT INTO `cms_logs` VALUES (2836, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/tb_pembelian/edit-save/4', 'Memperbaharui data  pada Pembelian', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>subtotal</td><td>600000</td><td>0</td></tr><tr><td>grand_total</td><td>600000</td><td>0</td></tr><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>id_cabang</td><td></td><td></td></tr><tr><td>updated_user</td><td></td><td>Super Admin</td></tr><tr><td>deleted_user</td><td></td><td></td></tr></tbody></table>', 1, '2019-03-30 09:45:30', NULL);
+INSERT INTO `cms_logs` VALUES (2837, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/tb_pembelian/add-save', 'Tambah data baru  pada Pembelian', '', 1, '2019-03-30 09:56:37', NULL);
+INSERT INTO `cms_logs` VALUES (2838, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/tb_pembelian/add-save', 'Tambah data baru  pada Pembelian', '', 1, '2019-03-30 10:15:43', NULL);
+INSERT INTO `cms_logs` VALUES (2839, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36', 'http://localhost/digiponic/youji/public/admin/tb_penjualan/edit-save/5', 'Memperbaharui data  pada Penjualan', '<table class=\"table table-striped\"><thead><tr><th>Key</th><th>Old Value</th><th>New Value</th></thead><tbody><tr><td>keterangan</td><td></td><td></td></tr><tr><td>subtotal</td><td>63750</td><td>89250</td></tr><tr><td>grand_total</td><td>63750</td><td>89250</td></tr><tr><td>deleted_at</td><td></td><td></td></tr><tr><td>users_id</td><td>1</td><td></td></tr><tr><td>status</td><td>25</td><td></td></tr><tr><td>id_cabang</td><td></td><td></td></tr><tr><td>platform</td><td>web</td><td></td></tr></tbody></table>', 1, '2019-03-30 10:19:09', NULL);
 
 -- ----------------------------
 -- Table structure for cms_menus
@@ -2961,7 +2999,7 @@ CREATE TABLE `cms_menus`  (
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 85 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 89 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_menus
@@ -2988,21 +3026,21 @@ INSERT INTO `cms_menus` VALUES (29, 'Harga Air', 'Route', 'AdminTbHargaair18Cont
 INSERT INTO `cms_menus` VALUES (30, 'Pembayaran', 'Route', 'AdminTbPembayaranControllerGetIndex', 'normal', 'fa fa-list', 0, 1, 0, 2, 8, '2018-04-02 22:22:12', NULL, '2019-02-25 16:36:26');
 INSERT INTO `cms_menus` VALUES (57, 'Pelanggan', 'Route', 'AdminTbPelangganControllerGetIndex', 'normal', 'fa fa-user', 0, 0, 0, 3, 3, '2019-02-13 11:15:18', '2019-02-25 16:29:27', NULL);
 INSERT INTO `cms_menus` VALUES (58, 'Pembelian', 'Route', 'AdminTbPembelianControllerGetIndex', 'normal', 'fa fa-money', 0, 0, 0, 3, 3, '2019-02-13 11:15:18', '2019-02-25 16:28:39', '2019-02-25 16:34:27');
-INSERT INTO `cms_menus` VALUES (36, 'Karyawan', 'Module', 'tb_karyawan', 'normal', 'fa fa-users', 42, 1, 0, 1, 4, '2019-02-09 12:47:43', '2019-03-29 06:27:27', NULL);
-INSERT INTO `cms_menus` VALUES (37, 'Tipe', 'Module', 'tb_tipe', 'normal', 'fa fa-gear', 42, 1, 0, 1, 1, '2019-02-09 13:05:59', '2019-03-29 06:26:48', NULL);
+INSERT INTO `cms_menus` VALUES (36, 'Karyawan', 'Module', 'tb_karyawan', 'normal', 'fa fa-users', 42, 1, 0, 1, 5, '2019-02-09 12:47:43', '2019-03-29 06:27:27', NULL);
+INSERT INTO `cms_menus` VALUES (37, 'Tipe', 'Module', 'tb_tipe', 'normal', 'fa fa-gear', 42, 1, 0, 1, 2, '2019-02-09 13:05:59', '2019-03-29 06:26:48', NULL);
 INSERT INTO `cms_menus` VALUES (38, 'General', 'Route', 'AdminTbGeneralControllerGetIndex', 'normal', 'fa fa-users', 42, 0, 0, 1, 2, '2019-02-09 13:06:27', '2019-02-10 16:45:59', NULL);
 INSERT INTO `cms_menus` VALUES (39, 'absensi', 'Route', 'AdminTbAbsensiControllerGetIndex', 'normal', 'fa fa-users', 0, 0, 0, 1, 12, '2019-02-09 13:21:47', '2019-02-10 02:57:44', NULL);
-INSERT INTO `cms_menus` VALUES (40, 'Produk', 'Module', 'tb_produk', 'normal', 'fa fa-th-large', 42, 1, 0, 1, 3, '2019-02-09 13:59:05', '2019-03-29 06:27:12', NULL);
+INSERT INTO `cms_menus` VALUES (40, 'Produk', 'Module', 'tb_produk', 'normal', 'fa fa-th-large', 42, 1, 0, 1, 4, '2019-02-09 13:59:05', '2019-03-29 06:27:12', NULL);
 INSERT INTO `cms_menus` VALUES (41, 'Produk Detail', 'Route', 'AdminTbProdukDetailControllerGetIndex', 'normal', 'fa fa-users', 0, 0, 0, 1, 14, '2019-02-10 02:22:07', '2019-02-10 02:57:28', '2019-02-10 02:57:13');
 INSERT INTO `cms_menus` VALUES (42, 'Master', 'URL', '#', 'normal', 'fa fa-th', 0, 1, 0, 1, 4, '2019-02-10 02:59:30', '2019-03-29 06:26:35', NULL);
 INSERT INTO `cms_menus` VALUES (43, 'Produk Stok', 'Route', 'AdminTbProdukStokControllerGetIndex', 'normal', 'fa fa-list', 0, 0, 0, 1, 15, '2019-02-10 03:30:39', '2019-02-10 11:00:14', NULL);
 INSERT INTO `cms_menus` VALUES (44, 'Pembelian', 'Module', 'tb_pembelian', 'normal', 'fa fa-money', 46, 1, 0, 1, 3, '2019-02-10 11:17:50', '2019-03-29 06:26:18', NULL);
 INSERT INTO `cms_menus` VALUES (45, 'Penjualan', 'Module', 'tb_penjualan', 'normal', 'fa fa-shopping-cart', 46, 1, 0, 1, 1, '2019-02-10 16:28:18', '2019-03-29 06:25:43', NULL);
 INSERT INTO `cms_menus` VALUES (46, 'Transaksi', 'URL', '#', 'normal', 'fa fa-tags', 0, 1, 0, 1, 3, '2019-02-10 16:38:47', '2019-03-29 06:25:22', NULL);
-INSERT INTO `cms_menus` VALUES (47, 'Area', 'Route', 'AdminTbProvinsiControllerGetIndex', 'normal', 'fa fa-flag', 42, 1, 0, 1, 2, '2019-02-10 16:59:53', '2019-03-29 06:26:58', NULL);
+INSERT INTO `cms_menus` VALUES (47, 'Area', 'Route', 'AdminTbProvinsiControllerGetIndex', 'normal', 'fa fa-flag', 42, 1, 0, 1, 3, '2019-02-10 16:59:53', '2019-03-29 06:26:58', NULL);
 INSERT INTO `cms_menus` VALUES (48, 'Sub Area Satu', 'Route', 'AdminTbKotaControllerGetIndex', 'normal', 'fa fa-flag-o', 0, 0, 0, 1, 17, '2019-02-10 17:04:38', '2019-02-10 17:13:48', NULL);
 INSERT INTO `cms_menus` VALUES (49, 'Sub Area Dua', 'Route', 'AdminTbKecamatanControllerGetIndex', 'normal', 'fa fa-flag-o', 0, 0, 0, 1, 18, '2019-02-10 17:05:33', '2019-02-10 17:13:40', NULL);
-INSERT INTO `cms_menus` VALUES (50, 'Kurir', 'Module', 'tb_kurir', 'normal', 'fa fa-user-secret', 42, 1, 0, 1, 5, '2019-02-10 17:27:46', '2019-03-29 06:27:45', NULL);
+INSERT INTO `cms_menus` VALUES (50, 'Kurir', 'Module', 'tb_kurir', 'normal', 'fa fa-user-secret', 42, 1, 0, 1, 6, '2019-02-10 17:27:46', '2019-03-29 06:27:45', NULL);
 INSERT INTO `cms_menus` VALUES (51, 'General Detail', 'Route', 'AdminTbGeneralDetailControllerGetIndex', 'normal', 'fa fa-users', 0, 0, 0, 1, 19, '2019-02-10 20:22:13', '2019-02-10 20:43:14', NULL);
 INSERT INTO `cms_menus` VALUES (52, 'Promosi', 'Route', 'AdminTbPromosiControllerGetIndex', NULL, 'fa fa-shopping-bag', 0, 1, 0, 1, 5, '2019-02-10 20:53:41', NULL, NULL);
 INSERT INTO `cms_menus` VALUES (53, 'Proses', 'Module', 'tb_penjualan', 'normal', 'fa fa-envelope-o', 0, 0, 0, 1, 2, '2019-02-12 12:37:03', '2019-02-12 13:13:53', '2019-02-12 13:13:25');
@@ -3014,7 +3052,11 @@ INSERT INTO `cms_menus` VALUES (80, 'Supplier', 'Module', 'tb_supplier', 'normal
 INSERT INTO `cms_menus` VALUES (81, 'Produk', 'Module', 'tb_produk', 'normal', 'fa fa-th-large', 0, 0, 0, 1, NULL, '2019-02-25 16:25:43', NULL, '2019-02-25 16:34:06');
 INSERT INTO `cms_menus` VALUES (82, 'Penjualan Detail', 'Module', 'tb_produk_detail', 'normal', 'fa fa-file-text-o', 46, 0, 0, 1, 2, '2019-03-25 10:27:36', NULL, '2019-03-25 10:28:33');
 INSERT INTO `cms_menus` VALUES (83, 'Penjualan Detail', 'Route', 'AdminTbPenjualanDetailControllerGetIndex', 'normal', 'fa fa-file-o', 46, 1, 0, 1, 2, '2019-03-25 10:28:44', '2019-03-29 06:26:05', NULL);
-INSERT INTO `cms_menus` VALUES (84, 'Pengiriman', 'Route', 'AdminMdPengirimanControllerGetIndex', NULL, 'fa fa-truck', 0, 1, 0, 1, 20, '2019-03-29 09:49:05', NULL, NULL);
+INSERT INTO `cms_menus` VALUES (84, 'Pengiriman', 'Route', 'AdminMdPengirimanControllerGetIndex', NULL, 'fa fa-truck', 0, 1, 0, 1, 6, '2019-03-29 09:49:05', NULL, NULL);
+INSERT INTO `cms_menus` VALUES (85, 'Area', 'Module', 'tb_provinsi', 'normal', 'fa fa-flag', 42, 1, 0, 1, 1, '2019-03-29 14:36:25', '2019-03-29 14:37:42', NULL);
+INSERT INTO `cms_menus` VALUES (86, 'Kota', 'Module', 'tb_kota', 'normal', 'fa fa-flag-o', 0, 1, 0, 1, NULL, '2019-03-29 14:36:50', NULL, '2019-03-29 14:37:33');
+INSERT INTO `cms_menus` VALUES (87, 'Supplier', 'Module', 'tb_supplier', 'normal', 'fa fa-home', 0, 0, 0, 1, NULL, '2019-03-29 19:29:41', NULL, '2019-03-30 08:19:01');
+INSERT INTO `cms_menus` VALUES (88, 'Supplier', 'Route', 'AdminTbSupplier2ControllerGetIndex', 'normal', 'fa fa-home', 42, 1, 0, 1, 7, '2019-03-30 08:18:47', '2019-03-30 08:19:36', NULL);
 
 -- ----------------------------
 -- Table structure for cms_menus_privileges
@@ -3025,7 +3067,7 @@ CREATE TABLE `cms_menus_privileges`  (
   `id_cms_menus` int(11) NULL DEFAULT NULL,
   `id_cms_privileges` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 95 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Fixed;
+) ENGINE = MyISAM AUTO_INCREMENT = 106 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Fixed;
 
 -- ----------------------------
 -- Records of cms_menus_privileges
@@ -3078,6 +3120,14 @@ INSERT INTO `cms_menus_privileges` VALUES (87, 40, 3);
 INSERT INTO `cms_menus_privileges` VALUES (88, 40, 4);
 INSERT INTO `cms_menus_privileges` VALUES (89, 40, 1);
 INSERT INTO `cms_menus_privileges` VALUES (94, 84, 1);
+INSERT INTO `cms_menus_privileges` VALUES (97, 85, 4);
+INSERT INTO `cms_menus_privileges` VALUES (96, 86, 4);
+INSERT INTO `cms_menus_privileges` VALUES (98, 87, 5);
+INSERT INTO `cms_menus_privileges` VALUES (99, 87, 3);
+INSERT INTO `cms_menus_privileges` VALUES (100, 87, 1);
+INSERT INTO `cms_menus_privileges` VALUES (103, 88, 5);
+INSERT INTO `cms_menus_privileges` VALUES (104, 88, 3);
+INSERT INTO `cms_menus_privileges` VALUES (105, 88, 1);
 
 -- ----------------------------
 -- Table structure for cms_moduls
@@ -3096,7 +3146,7 @@ CREATE TABLE `cms_moduls`  (
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 40 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 41 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cms_moduls
@@ -3138,6 +3188,7 @@ INSERT INTO `cms_moduls` VALUES (36, 'Pelanggan', 'fa fa-user-plus', 'tb_custome
 INSERT INTO `cms_moduls` VALUES (37, 'Supplier', 'fa fa-user-secret', 'tb_supplier', 'tb_supplier', 'AdminTbSupplierController', 0, 1, '2019-02-14 10:36:16', NULL, NULL);
 INSERT INTO `cms_moduls` VALUES (38, 'Penjualan Detail', 'fa fa-file-o', 'tb_penjualan_detail', 'tb_penjualan_detail', 'AdminTbPenjualanDetailController', 0, 0, '2019-03-25 10:28:44', NULL, NULL);
 INSERT INTO `cms_moduls` VALUES (39, 'Pengiriman', 'fa fa-truck', 'md_pengiriman', 'tb_penjualan', 'AdminMdPengirimanController', 0, 0, '2019-03-29 09:49:05', NULL, NULL);
+INSERT INTO `cms_moduls` VALUES (40, 'Supplier', 'fa fa-glass', 'tb_supplier2', 'tb_supplier', 'AdminTbSupplier2Controller', 0, 0, '2019-03-30 08:18:46', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for cms_notifications
@@ -3194,7 +3245,7 @@ CREATE TABLE `cms_privileges_roles`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 141 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Fixed;
+) ENGINE = MyISAM AUTO_INCREMENT = 148 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Fixed;
 
 -- ----------------------------
 -- Records of cms_privileges_roles
@@ -3242,7 +3293,7 @@ INSERT INTO `cms_privileges_roles` VALUES (113, 1, 1, 1, 1, 0, 3, 26, NULL, NULL
 INSERT INTO `cms_privileges_roles` VALUES (112, 1, 1, 1, 1, 0, 3, 25, NULL, NULL);
 INSERT INTO `cms_privileges_roles` VALUES (111, 1, 1, 1, 1, 0, 3, 24, NULL, NULL);
 INSERT INTO `cms_privileges_roles` VALUES (110, 1, 1, 1, 1, 0, 3, 28, NULL, NULL);
-INSERT INTO `cms_privileges_roles` VALUES (107, 1, 1, 1, 1, 0, 4, 24, NULL, NULL);
+INSERT INTO `cms_privileges_roles` VALUES (143, 1, 1, 1, 1, 0, 4, 24, NULL, NULL);
 INSERT INTO `cms_privileges_roles` VALUES (54, 1, 1, 1, 1, 1, 1, 20, NULL, NULL);
 INSERT INTO `cms_privileges_roles` VALUES (55, 1, 1, 1, 1, 1, 1, 21, NULL, NULL);
 INSERT INTO `cms_privileges_roles` VALUES (56, 1, 1, 1, 1, 1, 1, 22, NULL, NULL);
@@ -3260,9 +3311,9 @@ INSERT INTO `cms_privileges_roles` VALUES (67, 1, 1, 1, 1, 1, 1, 33, NULL, NULL)
 INSERT INTO `cms_privileges_roles` VALUES (68, 1, 1, 1, 1, 1, 1, 34, NULL, NULL);
 INSERT INTO `cms_privileges_roles` VALUES (69, 1, 1, 1, 1, 1, 1, 35, NULL, NULL);
 INSERT INTO `cms_privileges_roles` VALUES (70, 1, 1, 1, 1, 1, 1, 36, NULL, NULL);
-INSERT INTO `cms_privileges_roles` VALUES (106, 1, 1, 1, 1, 0, 4, 28, NULL, NULL);
+INSERT INTO `cms_privileges_roles` VALUES (142, 1, 1, 1, 1, 0, 4, 28, NULL, NULL);
 INSERT INTO `cms_privileges_roles` VALUES (83, 1, 1, 1, 1, 1, 1, 37, NULL, NULL);
-INSERT INTO `cms_privileges_roles` VALUES (105, 1, 1, 1, 1, 0, 4, 36, NULL, NULL);
+INSERT INTO `cms_privileges_roles` VALUES (141, 1, 1, 1, 1, 0, 4, 36, NULL, NULL);
 INSERT INTO `cms_privileges_roles` VALUES (109, 1, 1, 1, 1, 0, 3, 27, NULL, NULL);
 INSERT INTO `cms_privileges_roles` VALUES (108, 1, 1, 1, 1, 0, 3, 36, NULL, NULL);
 INSERT INTO `cms_privileges_roles` VALUES (104, 1, 1, 1, 1, 1, 1, 38, NULL, NULL);
@@ -3282,6 +3333,10 @@ INSERT INTO `cms_privileges_roles` VALUES (137, 1, 0, 1, 0, 0, 6, 38, NULL, NULL
 INSERT INTO `cms_privileges_roles` VALUES (138, 1, 1, 1, 1, 0, 6, 24, NULL, NULL);
 INSERT INTO `cms_privileges_roles` VALUES (139, 1, 1, 1, 1, 0, 6, 26, NULL, NULL);
 INSERT INTO `cms_privileges_roles` VALUES (140, 1, 1, 1, 1, 1, 1, 39, NULL, NULL);
+INSERT INTO `cms_privileges_roles` VALUES (144, 1, 1, 1, 1, 0, 4, 29, NULL, NULL);
+INSERT INTO `cms_privileges_roles` VALUES (145, 1, 1, 1, 1, 0, 4, 30, NULL, NULL);
+INSERT INTO `cms_privileges_roles` VALUES (146, 1, 1, 1, 1, 0, 4, 31, NULL, NULL);
+INSERT INTO `cms_privileges_roles` VALUES (147, 1, 1, 1, 1, 1, 1, 40, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for cms_settings
@@ -3520,20 +3575,20 @@ CREATE TABLE `tb_customer`  (
   `kode_kota` int(3) NULL DEFAULT NULL,
   `kode_kecamatan` int(3) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 10 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 15 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_customer
 -- ----------------------------
-INSERT INTO `tb_customer` VALUES (1, '2019-02-13 09:47:40', NULL, NULL, 'Ervina Aprilia Saputri', 'vina@digiponic.co.id', 'Jalan Srigading Dalam No.56, Lowokwaru, Kota Malang', '08575262728', '08575262728', NULL, NULL, NULL, NULL);
-INSERT INTO `tb_customer` VALUES (2, '2019-02-14 10:26:10', NULL, NULL, 'Ryan Charies', 'ri@riyan.com', 'Jalan Singosari', '08754675252', '08644677', NULL, NULL, NULL, NULL);
-INSERT INTO `tb_customer` VALUES (3, '2019-02-14 10:26:44', NULL, NULL, 'Renaldy', 're@gmail.com', 'Jalan Magetan Nomor 56', '08754675252', '08643244344', NULL, NULL, NULL, NULL);
-INSERT INTO `tb_customer` VALUES (4, NULL, NULL, '2019-03-15 10:02:18', 'Ryan Charies', 'ryancharies@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `tb_customer` VALUES (5, NULL, NULL, '2019-03-15 10:02:18', 'Ryan Chariess', 'ryancharies@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `tb_customer` VALUES (6, NULL, NULL, '2019-03-15 10:02:18', 'Ryan Charies', 'ryanchariess@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `tb_customer` VALUES (7, NULL, NULL, '2019-03-15 10:02:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `tb_customer` VALUES (8, NULL, '2019-03-13 14:38:08', '2019-03-15 10:02:18', 'Coba', 'renalraion@gmail.com', 'Jln. Raya Karanglo No 27, Karanglo - Singosari Malang', '087654321123', NULL, 'Coba update profile', NULL, NULL, NULL);
-INSERT INTO `tb_customer` VALUES (9, '2019-03-23 11:14:12', NULL, NULL, 'Pagita', 'pagita@galaksiorganik.com', 'Lawang', '08765431235', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_customer` VALUES (1, '2019-02-13 09:47:40', '2019-03-29 10:24:22', NULL, 'Ervina Aprilia Saputri', 'ervina@digiponic.co.id', 'Jalan Raya Perusahaan No 27', '08575262728', '08575262728', NULL, 1, 1, 1);
+INSERT INTO `tb_customer` VALUES (2, '2019-02-14 10:26:10', '2019-03-29 10:24:07', NULL, 'Ryan Charies', 'ryancharies@digiponic.co.id', 'Jalan Raya Perusahaan No 27', '08754675252', '08644677', NULL, 1, 1, 1);
+INSERT INTO `tb_customer` VALUES (3, '2019-02-14 10:26:44', '2019-03-29 10:24:13', NULL, 'Renaldy', 'renaldy@digiponic.co.id', 'Jalan Raya Perusahaan No 27', '08754675252', '08643244344', NULL, 1, 1, 1);
+INSERT INTO `tb_customer` VALUES (9, '2019-03-23 11:14:12', '2019-03-29 10:22:56', NULL, 'Pagita', 'pagita@galaksiorganik.com', 'Lawang', '08765431235', NULL, NULL, 1, 1, 2);
+INSERT INTO `tb_customer` VALUES (10, '2019-03-29 14:49:48', NULL, NULL, 'ANGELA PACIS', NULL, 'Jl. Istana Dieng utara II/F2 (rmh - pagi) atau RUBELAN Jl Bukit Dieng E7 (toko) setelah pk 14:00', '0818380951', NULL, NULL, 1, 4, 11);
+INSERT INTO `tb_customer` VALUES (11, '2019-03-29 14:54:35', NULL, NULL, 'AYU PURI BALI', NULL, 'Jl. Raya Blimbing Indah blok B8 No. 2A', '081233705432', NULL, NULL, 1, 4, 14);
+INSERT INTO `tb_customer` VALUES (12, '2019-03-29 14:56:44', NULL, NULL, 'ARION', NULL, 'Bukit Dieng Permai G 15A', '081230989937', NULL, NULL, 1, 4, 9);
+INSERT INTO `tb_customer` VALUES (13, '2019-03-29 15:01:31', NULL, NULL, 'ANDHI ASTRA', NULL, 'Astra Daihatsu Jl. A. Yani No. 175 Blimbing\r\n', '08118680133', NULL, NULL, 1, 4, 10);
+INSERT INTO `tb_customer` VALUES (14, '2019-03-29 15:04:59', NULL, NULL, 'BING-BING', NULL, 'Apartment Puncak Kertajaya Tower A Selatan, Surabaya 60111\r\n', '085733929223', NULL, NULL, 1, 2, 15);
 
 -- ----------------------------
 -- Table structure for tb_general
@@ -3688,20 +3743,31 @@ CREATE TABLE `tb_kecamatan`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `created_user_id` int(3) NULL DEFAULT NULL,
+  `created_user` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `updated_user` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `deleted_user` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 9 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 16 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_kecamatan
 -- ----------------------------
-INSERT INTO `tb_kecamatan` VALUES (1, 1, 'SUBAREA2/001', 'Singosari', '2019-02-10 17:11:06', NULL, NULL);
-INSERT INTO `tb_kecamatan` VALUES (2, 1, 'SUBAREA2/002', 'Lawang', '2019-02-10 17:11:16', NULL, NULL);
-INSERT INTO `tb_kecamatan` VALUES (3, 2, 'SUBAREA2/003', 'Gubeng', '2019-02-10 17:12:20', NULL, NULL);
-INSERT INTO `tb_kecamatan` VALUES (4, 2, 'SUBAREA2/004', 'Wonokromo', '2019-02-10 17:12:26', NULL, NULL);
-INSERT INTO `tb_kecamatan` VALUES (5, 2, 'SUBAREA2/005', 'Rungkut', '2019-02-10 17:12:29', NULL, NULL);
-INSERT INTO `tb_kecamatan` VALUES (6, 3, 'SUBAREA2/006', 'Denpasar', '2019-02-10 17:12:53', NULL, NULL);
-INSERT INTO `tb_kecamatan` VALUES (7, 1, 'SUBAREA2/007', 'Karangploso', '2019-02-11 09:45:09', NULL, NULL);
-INSERT INTO `tb_kecamatan` VALUES (8, 1, 'SUBAREA2/008', 'Kepanjen', '2019-02-11 09:45:15', NULL, NULL);
+INSERT INTO `tb_kecamatan` VALUES (1, 1, 'SUBAREA2/001', 'Singosari', '2019-02-10 17:11:06', NULL, NULL, NULL, 'Pagita', NULL, NULL);
+INSERT INTO `tb_kecamatan` VALUES (2, 1, 'SUBAREA2/002', 'Lawang', '2019-02-10 17:11:16', NULL, NULL, NULL, 'Pagita', NULL, NULL);
+INSERT INTO `tb_kecamatan` VALUES (3, 2, 'SUBAREA2/003', 'Gubeng', '2019-02-10 17:12:20', NULL, NULL, NULL, 'Pagita', NULL, NULL);
+INSERT INTO `tb_kecamatan` VALUES (4, 2, 'SUBAREA2/004', 'Wonokromo', '2019-02-10 17:12:26', NULL, NULL, NULL, 'Pagita', NULL, NULL);
+INSERT INTO `tb_kecamatan` VALUES (5, 2, 'SUBAREA2/005', 'Rungkut', '2019-02-10 17:12:29', NULL, NULL, NULL, 'Pagita', NULL, NULL);
+INSERT INTO `tb_kecamatan` VALUES (6, 3, 'SUBAREA2/006', 'Denpasar', '2019-02-10 17:12:53', NULL, NULL, NULL, 'Pagita', NULL, NULL);
+INSERT INTO `tb_kecamatan` VALUES (7, 1, 'SUBAREA2/007', 'Karangploso', '2019-02-11 09:45:09', NULL, NULL, NULL, 'Pagita', NULL, NULL);
+INSERT INTO `tb_kecamatan` VALUES (8, 1, 'SUBAREA2/008', 'Kepanjen', '2019-02-11 09:45:15', NULL, NULL, NULL, 'Pagita', NULL, NULL);
+INSERT INTO `tb_kecamatan` VALUES (9, 4, 'SUBAREA2/009', 'KLOJEN', '2019-03-29 14:44:59', NULL, NULL, NULL, 'Pagita', NULL, NULL);
+INSERT INTO `tb_kecamatan` VALUES (10, 4, 'SUBAREA2/010', 'BLIMBING', '2019-03-29 14:45:06', NULL, NULL, NULL, 'Pagita', NULL, NULL);
+INSERT INTO `tb_kecamatan` VALUES (11, 4, 'SUBAREA2/011', 'SUKUN', '2019-03-29 14:45:10', NULL, NULL, NULL, 'Pagita', NULL, NULL);
+INSERT INTO `tb_kecamatan` VALUES (12, 4, 'SUBAREA2/012', 'LOWOKWARU', '2019-03-29 14:45:17', NULL, NULL, NULL, 'Pagita', NULL, NULL);
+INSERT INTO `tb_kecamatan` VALUES (13, 4, 'SUBAREA2/013', 'KEDUNGKANDANG', '2019-03-29 14:45:46', NULL, NULL, NULL, 'Pagita', NULL, NULL);
+INSERT INTO `tb_kecamatan` VALUES (14, 4, 'SUBAREA2/014', 'ARAYA', '2019-03-29 14:53:40', NULL, NULL, NULL, 'Pagita', NULL, NULL);
+INSERT INTO `tb_kecamatan` VALUES (15, 2, 'SUBAREA2/015', 'SUKOLILO', '2019-03-29 15:03:40', NULL, NULL, NULL, 'Pagita', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tb_kota
@@ -3715,15 +3781,22 @@ CREATE TABLE `tb_kota`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `created_user_id` int(3) NULL DEFAULT NULL,
+  `created_user` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `updated_user` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `deleted_user` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 7 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_kota
 -- ----------------------------
-INSERT INTO `tb_kota` VALUES (1, 1, 'SUBAREA1/001', 'Kabupaten Malang', '2019-02-10 17:10:49', '2019-02-11 10:11:20', NULL);
-INSERT INTO `tb_kota` VALUES (2, 1, 'SUBAREA1/002', 'Surabaya', '2019-02-10 17:10:54', NULL, NULL);
-INSERT INTO `tb_kota` VALUES (3, 2, 'SUBAREA2/003', 'Denpasar', '2019-02-10 17:12:45', NULL, NULL);
+INSERT INTO `tb_kota` VALUES (1, 1, 'SUBAREA1/001', 'KAB MALANG', '2019-02-10 17:10:49', '2019-02-11 10:11:20', NULL, NULL, 'Pagita', NULL, NULL);
+INSERT INTO `tb_kota` VALUES (2, 1, 'SUBAREA1/002', 'SURABAYA', '2019-02-10 17:10:54', NULL, NULL, NULL, 'Pagita', NULL, NULL);
+INSERT INTO `tb_kota` VALUES (3, 2, 'SUBAREA2/003', 'DENPASAR', '2019-02-10 17:12:45', NULL, NULL, NULL, 'Pagita', NULL, NULL);
+INSERT INTO `tb_kota` VALUES (4, 1, 'SUBAREA1/004', 'KOTA MALANG', '2019-03-29 14:43:42', NULL, NULL, NULL, 'Pagita', NULL, NULL);
+INSERT INTO `tb_kota` VALUES (5, 1, 'SUBAREA1/005', 'KOTA BATU', '2019-03-29 14:43:56', NULL, NULL, NULL, 'Pagita', NULL, NULL);
+INSERT INTO `tb_kota` VALUES (6, 1, 'SUBAREA1/006', 'PANDAAN', '2019-03-29 14:52:34', NULL, NULL, NULL, 'Pagita', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tb_kurir
@@ -4136,7 +4209,7 @@ CREATE TABLE `tb_pembelian`  (
   `kode` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `keterangan` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL,
   `tanggal` datetime(0) NULL DEFAULT NULL,
-  `kode_supplier` int(3) NULL DEFAULT NULL,
+  `supplier` int(3) NULL DEFAULT NULL,
   `subtotal` double NULL DEFAULT NULL,
   `pajak` double NULL DEFAULT NULL,
   `diskon_tipe` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
@@ -4147,13 +4220,21 @@ CREATE TABLE `tb_pembelian`  (
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   `users_id` int(5) NULL DEFAULT NULL,
   `id_cabang` int(3) NULL DEFAULT NULL,
+  `created_user` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `updated_user` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `deleted_user` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 7 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_pembelian
 -- ----------------------------
-INSERT INTO `tb_pembelian` VALUES (1, 'PMB/280319/00001', NULL, '2019-03-28 10:55:55', NULL, 300000, 0, 'Nominal', 0, 300000, '2019-03-28 10:57:18', NULL, NULL, 1, NULL);
+INSERT INTO `tb_pembelian` VALUES (1, 'PMB/280319/00001', NULL, '2019-03-28 10:55:55', NULL, 300000, 0, 'Nominal', 0, 300000, '2019-03-28 10:57:18', NULL, NULL, 1, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_pembelian` VALUES (2, 'PMB/300319/00002', 'Hasil panen', '2019-03-30 08:32:41', 3, 0, 0, 'Nominal', 0, 0, '2019-03-30 08:41:27', NULL, NULL, 1, NULL, 'Super Admin', NULL, NULL);
+INSERT INTO `tb_pembelian` VALUES (3, 'PMB/300319/00003', 'Hasil panen', '2019-03-30 09:35:42', 2, 0, 0, 'Nominal', 0, 0, '2019-03-30 09:36:56', '2019-03-30 09:38:08', NULL, 1, NULL, 'Super Admin', 'Super Admin', NULL);
+INSERT INTO `tb_pembelian` VALUES (4, 'PMB/300319/00004', 'Beli dari petani', '2019-03-30 09:39:33', 1, 0, 0, 'Nominal', 0, 0, '2019-03-30 09:40:27', '2019-03-30 09:45:30', NULL, 1, NULL, 'Super Admin', 'Super Admin', NULL);
+INSERT INTO `tb_pembelian` VALUES (5, 'PMB/300319/00005', 'Hasil panen', '2019-03-30 09:55:58', 3, 10000, 0, 'Nominal', 0, 10000, '2019-03-30 09:56:37', NULL, NULL, 1, NULL, 'Super Admin', NULL, NULL);
+INSERT INTO `tb_pembelian` VALUES (6, 'PMB/300319/00006', 'Hasil panen', '2019-03-30 10:14:58', 3, 11000, 0, 'Nominal', 0, 11000, '2019-03-30 10:15:43', NULL, NULL, 1, NULL, 'Super Admin', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tb_pembelian_copy1
@@ -4217,12 +4298,18 @@ CREATE TABLE `tb_pembelian_detail`  (
   `gudang_keterangan` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `satuan_keterangan` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 8 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_pembelian_detail
 -- ----------------------------
 INSERT INTO `tb_pembelian_detail` VALUES (1, 1, 'PMB/280319/00001', 59, 'PRD/00059', 'Butterhead', 9, 1000, 300, 0, 'Nominal', 300000, 300000, NULL, NULL, NULL, 'Gudang Sayur', 'Gram');
+INSERT INTO `tb_pembelian_detail` VALUES (2, 2, 'PMB/300319/00002', 56, 'PRD/00056', 'Kentang Merah', 9, 10000, 0, 0, 'Nominal', 0, 0, NULL, NULL, NULL, 'Gudang Sayur', 'Gram');
+INSERT INTO `tb_pembelian_detail` VALUES (3, 3, NULL, 54, NULL, NULL, NULL, NULL, 0, 0, 'Nominal', NULL, NULL, NULL, NULL, NULL, 'Gudang Sayur', NULL);
+INSERT INTO `tb_pembelian_detail` VALUES (4, 4, NULL, 52, NULL, NULL, NULL, NULL, 120, 0, 'Nominal', NULL, NULL, NULL, NULL, NULL, 'Gudang Sayur', NULL);
+INSERT INTO `tb_pembelian_detail` VALUES (5, 5, 'PMB/300319/00005', 58, 'PRD/00058', 'Baby Corn', 9, NULL, 10, 0, 'Nominal', NULL, NULL, NULL, NULL, NULL, 'Gudang Sayur', NULL);
+INSERT INTO `tb_pembelian_detail` VALUES (6, 6, 'PMB/300319/00006', 57, 'PRD/00057', 'Kailan', 9, 1000, 10, 0, 'Nominal', 10000, 10000, NULL, NULL, NULL, 'Gudang Sayur', 'Gram');
+INSERT INTO `tb_pembelian_detail` VALUES (7, 6, 'PMB/300319/00006', 58, 'PRD/00058', 'Baby Corn', 9, 100, 10, 0, 'Nominal', 1000, 1000, NULL, NULL, NULL, 'Gudang Sayur', 'Gram');
 
 -- ----------------------------
 -- Table structure for tb_pembelian_detail_copy1
@@ -4325,7 +4412,7 @@ INSERT INTO `tb_penjualan` VALUES (1, 'PNJ/250319/00001', NULL, '2019-03-25 10:5
 INSERT INTO `tb_penjualan` VALUES (2, 'PNJ/250319/00002', NULL, '2019-03-25 14:10:02', 25000, 0, 'Nominal', 0, 25000, '2019-03-25 14:10:19', NULL, NULL, 1, 9, 39, 33, NULL, 'web');
 INSERT INTO `tb_penjualan` VALUES (3, 'PNJ/280319/00003', NULL, '2019-03-28 11:04:31', 900000, 0, 'Nominal', 0, 900000, '2019-03-28 11:05:03', NULL, NULL, 1, 9, 27, 33, NULL, 'web');
 INSERT INTO `tb_penjualan` VALUES (4, 'PNJ/290319/00004', NULL, '2019-03-29 07:12:33', 4000, 0, 'Nominal', 0, 4000, '2019-03-29 07:13:12', NULL, NULL, 1, 1, 26, 33, NULL, 'web');
-INSERT INTO `tb_penjualan` VALUES (5, 'PNJ/290319/00005', NULL, '2019-03-29 07:13:41', 63750, 0, 'Nominal', 0, 63750, '2019-03-29 07:14:09', NULL, NULL, 1, 2, 25, 33, NULL, 'web');
+INSERT INTO `tb_penjualan` VALUES (5, 'PNJ/290319/00005', NULL, '2019-03-29 07:13:41', 89250, 0, 'Nominal', 0, 89250, '2019-03-29 07:14:09', '2019-03-30 10:19:09', NULL, 1, 2, 25, 33, NULL, 'web');
 
 -- ----------------------------
 -- Table structure for tb_penjualan_copy1
@@ -4470,7 +4557,7 @@ INSERT INTO `tb_penjualan_detail` VALUES (2, 1, 'PNJ/250319/00001', 1, 'PRD/0000
 INSERT INTO `tb_penjualan_detail` VALUES (3, 2, 'PNJ/250319/00002', 2, 'PRD/00002', 'Ikan Dori', 12, 'Ekor', 5, 5000, 0, 'Nominal', 25000, 25000, 'Gudang Sayur', NULL, NULL, NULL, '2019-03-25 14:10:02');
 INSERT INTO `tb_penjualan_detail` VALUES (4, 3, 'PNJ/280319/00003', 1, 'PRD/00001', 'Worte', 9, 'Gram', 1000, 900, 0, 'Nominal', 900000, 900000, 'Gudang Sayur', NULL, NULL, NULL, '2019-03-28 11:04:31');
 INSERT INTO `tb_penjualan_detail` VALUES (5, 4, 'PNJ/290319/00004', 2, 'PRD/00002', 'Ikan Dori', 12, 'Ekor', 2, 2000, 0, 'Nominal', 4000, 4000, 'Gudang Sayur', NULL, NULL, NULL, '2019-03-29 07:12:33');
-INSERT INTO `tb_penjualan_detail` VALUES (6, 5, 'PNJ/290319/00005', 1, 'PRD/00001', 'Wortel', 9, 'Gram', 500, 150, 15, 'Persen', 75000, 63750, 'Gudang Sayur', NULL, NULL, NULL, '2019-03-29 07:13:41');
+INSERT INTO `tb_penjualan_detail` VALUES (6, 5, NULL, 1, NULL, NULL, NULL, 'Gram', 700, 150, 15, 'Persen', 105000, 89250, 'Gudang Sayur', NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tb_penjualan_detail_copy1
@@ -4759,9 +4846,9 @@ INSERT INTO `tb_produk` VALUES (52, '2019-03-26 15:31:28', NULL, NULL, NULL, 34,
 INSERT INTO `tb_produk` VALUES (53, '2019-03-26 15:32:19', NULL, NULL, NULL, 34, 'Gudang Sayur', 'PRD/00053', 'Asparagus Putih', 15, 8, 9, 'Gram', 0, 0, NULL, NULL, NULL);
 INSERT INTO `tb_produk` VALUES (54, '2019-03-26 15:32:59', NULL, NULL, NULL, 34, 'Gudang Sayur', 'PRD/00054', 'Lemon Lokal', 20, 8, 9, 'Gram', 0, 0, NULL, NULL, NULL);
 INSERT INTO `tb_produk` VALUES (55, '2019-03-26 15:35:32', NULL, NULL, NULL, 34, 'Gudang Sayur', 'PRD/00055', 'Thyme', 15, 8, 9, 'Gram', 0, 0, NULL, NULL, NULL);
-INSERT INTO `tb_produk` VALUES (56, '2019-03-26 15:36:52', NULL, NULL, NULL, 34, 'Gudang Sayur', 'PRD/00056', 'Kentang Merah', 15, 8, 9, 'Gram', 0, 0, NULL, NULL, NULL);
-INSERT INTO `tb_produk` VALUES (57, '2019-03-26 15:37:27', NULL, NULL, NULL, 34, 'Gudang Sayur', 'PRD/00057', 'Kailan', 15, 8, 9, 'Gram', 0, 0, NULL, NULL, NULL);
-INSERT INTO `tb_produk` VALUES (58, '2019-03-26 15:38:02', NULL, NULL, NULL, 34, 'Gudang Sayur', 'PRD/00058', 'Baby Corn', 15, 8, 9, 'Gram', 0, 0, NULL, NULL, NULL);
+INSERT INTO `tb_produk` VALUES (56, '2019-03-26 15:36:52', NULL, NULL, NULL, 34, 'Gudang Sayur', 'PRD/00056', 'Kentang Merah', 15, 8, 9, 'Gram', 10000, 0, NULL, NULL, NULL);
+INSERT INTO `tb_produk` VALUES (57, '2019-03-26 15:37:27', NULL, NULL, NULL, 34, 'Gudang Sayur', 'PRD/00057', 'Kailan', 15, 8, 9, 'Gram', 1000, 0, NULL, NULL, NULL);
+INSERT INTO `tb_produk` VALUES (58, '2019-03-26 15:38:02', NULL, NULL, NULL, 34, 'Gudang Sayur', 'PRD/00058', 'Baby Corn', 15, 8, 9, 'Gram', 100, 0, NULL, NULL, NULL);
 INSERT INTO `tb_produk` VALUES (59, '2019-03-26 15:38:33', NULL, NULL, NULL, 34, 'Gudang Sayur', 'PRD/00059', 'Butterhead', 15, 8, 9, 'Gram', 1000, 0, NULL, NULL, NULL);
 
 -- ----------------------------
@@ -4912,7 +4999,7 @@ CREATE TABLE `tb_produk_stok`  (
   `stok_keluar` int(5) NULL DEFAULT NULL,
   `keterangan` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 26 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 32 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_produk_stok
@@ -4942,6 +5029,12 @@ INSERT INTO `tb_produk_stok` VALUES (22, 59, '2019-03-28 10:55:55', 1000, 0, 'Pe
 INSERT INTO `tb_produk_stok` VALUES (23, 1, '2019-03-28 11:04:31', 0, 1000, 'Pengurangan stok dari penjualan PNJ/280319/00003');
 INSERT INTO `tb_produk_stok` VALUES (24, 2, '2019-03-29 07:12:33', 0, 2, 'Pengurangan stok dari penjualan PNJ/290319/00004');
 INSERT INTO `tb_produk_stok` VALUES (25, 1, '2019-03-29 07:13:41', 0, 500, 'Pengurangan stok dari penjualan PNJ/290319/00005');
+INSERT INTO `tb_produk_stok` VALUES (26, 56, '2019-03-30 08:32:41', 10000, 0, 'Penambahan stok dari pembelian PMB/300319/00002');
+INSERT INTO `tb_produk_stok` VALUES (27, 54, '2019-03-30 09:35:42', NULL, 0, 'Penambahan stok dari pembelian PMB/300319/00003');
+INSERT INTO `tb_produk_stok` VALUES (28, 52, '2019-03-30 09:39:33', NULL, 0, 'Penambahan stok dari pembelian PMB/300319/00004');
+INSERT INTO `tb_produk_stok` VALUES (29, 58, '2019-03-30 09:55:58', NULL, 0, 'Penambahan stok dari pembelian PMB/300319/00005');
+INSERT INTO `tb_produk_stok` VALUES (30, 57, '2019-03-30 10:14:58', 1000, 0, 'Penambahan stok dari pembelian PMB/300319/00006');
+INSERT INTO `tb_produk_stok` VALUES (31, 58, '2019-03-30 10:14:58', 100, 0, 'Penambahan stok dari pembelian PMB/300319/00006');
 
 -- ----------------------------
 -- Table structure for tb_produk_stok_copy1
@@ -5204,15 +5297,19 @@ CREATE TABLE `tb_provinsi`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `created_user_id` int(3) NULL DEFAULT NULL,
+  `created_user` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `updated_user` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `deleted_user` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 4 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_provinsi
 -- ----------------------------
-INSERT INTO `tb_provinsi` VALUES (1, 'AREA/001', 'Jawa Timur', '2019-02-10 17:02:44', NULL, NULL);
-INSERT INTO `tb_provinsi` VALUES (2, 'AREA/002', 'Bali', '2019-02-10 17:02:49', NULL, NULL);
-INSERT INTO `tb_provinsi` VALUES (3, 'AREA/003', 'Jakarta', '2019-02-10 17:02:53', NULL, NULL);
+INSERT INTO `tb_provinsi` VALUES (1, 'AREA/001', 'JAWA TIMUR', '2019-02-10 17:02:44', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_provinsi` VALUES (2, 'AREA/002', 'BALI', '2019-02-10 17:02:49', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `tb_provinsi` VALUES (3, 'AREA/003', 'JAKARTA', '2019-02-10 17:02:53', NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for tb_relasi_kurir_kecamatan
