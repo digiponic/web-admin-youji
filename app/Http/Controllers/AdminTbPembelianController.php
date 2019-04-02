@@ -111,9 +111,9 @@
 	        |
 	        */
 					$this->addaction = array();
-					$this->addaction[] = ['title'=>'Pembelian Dibatalkan','icon'=>'fa fa-ban','color'=>'danger','url'=>CRUDBooster::mainpath('set-batal').'/[id]','showIf'=>'[status] == 40 || [status] == 39'];
-					$this->addaction[] = ['title'=>'Pembelian Lunas','icon'=>'fa fa-check','color'=>'success','url'=>CRUDBooster::mainpath('set-terima').'/[id]','showIf'=>'[status] == 39 || [status] == 28'];
-					$this->addaction[] = ['title'=>'Pembelian Belum Lunas','icon'=>'fa fa-money','color'=>'warning','url'=>CRUDBooster::mainpath('set-belum-lunas').'/[id]','showIf'=>'[status] == 39'];
+					$this->addaction[] = ['title'=>'Pembelian Dibatalkan','icon'=>'fa fa-ban','color'=>'danger','url'=>CRUDBooster::mainpath('set-batal').'/[id]','showIf'=>'[status] == 39'];
+					$this->addaction[] = ['title'=>'Pembelian Lunas','icon'=>'fa fa-check','color'=>'success','url'=>CRUDBooster::mainpath('set-terima').'/[id]','showIf'=>'[status] == 39 || [status] == 40'];
+				//	$this->addaction[] = ['title'=>'Pembelian Belum Lunas','icon'=>'fa fa-money','color'=>'warning','url'=>CRUDBooster::mainpath('set-belum-lunas').'/[id]','showIf'=>'[status] == 39'];
 					
 
 	        /*
@@ -421,11 +421,12 @@
 				foreach($pembelian_detail as $pd) {
 					$produk = DB::table('tb_produk')->where('id',$pd->id_produk)->first();
 					$array = array(
-						'kode_pembelian'	=> $pembelian->kode,
-						'kode_produk'			=> $produk->kode,
-						'nama_produk'			=> $produk->keterangan,
-						'satuan'					=> $produk->satuan
-					);
+						'kode_pembelian'		=> $pembelian->kode,
+						'kode_produk'				=> $produk->kode,
+						'nama_produk'				=> $produk->keterangan,
+						'satuan'						=> $produk->satuan,
+						'tanggal'						=> $pembelian->tanggal
+						);
 					$produk_stok = array(
 						'tanggal'				=> $pembelian->tanggal,
 						'kode_produk'		=> $pd->id_produk,
