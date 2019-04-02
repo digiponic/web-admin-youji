@@ -422,18 +422,17 @@
 					$produk = DB::table('tb_produk')->where('id',$pd->id_produk)->first();
 					$array = array(
 						'kode_pembelian'	=> $pembelian->kode,
-						'kode_produk'		=> $produk->kode,
-						'nama_produk'		=> $produk->keterangan,
-						'satuan'			=> $produk->satuan
+						'kode_produk'			=> $produk->kode,
+						'nama_produk'			=> $produk->keterangan,
+						'satuan'					=> $produk->satuan
 					);
 					$produk_stok = array(
-						'tanggal'		=> $pembelian->tanggal,
-						'kode_produk'	=> $pd->id_produk,
-						'stok_masuk'	=> $pd->kuantitas,
-						'stok_keluar'	=> 0,
-						'keterangan'	=> 'Penambahan stok dari pembelian '.$pembelian->kode
+						'tanggal'				=> $pembelian->tanggal,
+						'kode_produk'		=> $pd->id_produk,
+						'stok_masuk'		=> $pd->kuantitas,
+						'stok_keluar'		=> 0,
+						'keterangan'		=> 'Penambahan stok dari pembelian '.$pembelian->kode
 					);
-
 					DB::table('tb_pembelian_detail')->where('id',$pd->id)->update($array);
 					DB::table('tb_produk_stok')->insert($produk_stok);
 					DB::table('tb_produk')->where('id',$pd->id_produk)->update(['stok'=> abs($produk->stok + $pd->kuantitas)]);
