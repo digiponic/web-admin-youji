@@ -27,24 +27,24 @@
 			$this->button_export = false;
 			$this->table = "tb_produk_stok";
 			# END CONFIGURATION DO NOT REMOVE THIS LINE
-
+			$tanggal = date('Y-m-d H:i:s');
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
 			$this->col[] = ["label"=>"Kode Produk","name"=>"kode_produk","join"=>"tb_produk,kode"];
 			$this->col[] = ["label"=>"Tanggal","name"=>"tanggal"];
-			$this->col[] = ["label"=>"Jumlah Transfer Stock","name"=>"stok_masuk"];
+			$this->col[] = ["label"=>"Jumlah Transfer Stock","name"=>"stok_keluar"];
 			$this->col[] = ["label"=>"Keterangan","name"=>"keterangan"];
 			
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Tanggal','name'=>'tanggal','type'=>'datetime','validation'=>'required|date_format:Y-m-d H:i:s','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Gudang Awal','name'=>'cabang','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 2'];
-			$this->form[] = ['label'=>'Pindah Ke-','name'=>'cabang','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 2'];
+			$this->form[] = ['label'=>'Tanggal','name'=>'tanggal','value'=>$tanggal,'type'=>'datetime','validation'=>'required|date_format:Y-m-d H:i:s','width'=>'col-sm-10'];
+			$this->form[] = ['label'=>'Gudang Awal','name'=>'gudang','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 8'];
+			$this->form[] = ['label'=>'Pindah Ke-','name'=>'gudang_tujuan','type'=>'select2','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 8'];
 			$columns[] = ['label'=>'Produk','name'=>'kode_produk','required'=>true,'type'=>'datamodal','datamodal_table'=>'tb_produk','datamodal_columns'=>'keterangan,harga,stok,satuan_keterangan','datamodal_columns_alias'=>'Produk,Harga,Stok,Satuan','datamodal_select_to'=>'harga:harga,satuan_keterangan:satuan_keterangan','datamodal_where'=>'stok != 0','datamodal_size'=>'large'];
 			$columns[] = ['label'=>'Jumlah Transfer','name'=>'satuan','required'=>true,'type'=>'text'];
 			$this->form[] = ['label'=>'Detil Produk','name'=>'produk_detail','type'=>'child','columns'=>$columns,'table'=>'tb_produk_detail','foreign_key'=>'kode_produk'];
-
+			//$this->form[] = ['label'=>'Jumlah Transfer Keseluruhan','name'=>'jumlah_transfer_keseluruhan','type'=>'text','width'=>'col-sm-8', 'readonly'=>true];
 			# OLD START FORM
 			//$this->form = [];
 			//$this->form[] = ["label"=>"Kode Produk","name"=>"kode_produk","type"=>"number","required"=>TRUE,"validation"=>"required|integer|min:0"];
@@ -151,9 +151,20 @@
 	        | $this->script_js = "function() { ... }";
 	        |
 	        */
-	        $this->script_js = NULL;
+			$this->script_js = "
+			$(function(){
+					setInterval(function() {
+						var jumlah_transfer = 0;
+						$('#table-detilproduk tbody .satuan').each(function() {
+							jumlah_transfer += parseInt($(this).text());
+						})
+						$('#detilproduksatuan').val(jumlah_transfer);
 
-
+						var jumlah_transfer_keseluruhan = 0;
+						jumlah_transfer_keseluruhan += jumlah_transfer;
+						$('#jumlah_transfer_keseluruhan').val(subtotal); 
+				},500);
+				";
             /*
 	        | ---------------------------------------------------------------------- 
 	        | Include HTML Code before index table 
@@ -273,6 +284,28 @@
 	    */
 	    public function hook_after_add($id) {        
 	        //Your code here
+			$produk = DB::table('tb_produk')->where('id',$id)->first();
+			$produk_stok = DB::table('tb_produk_stok')->where('kode_produk',$id)->get();
+
+			foreach($produk_stok as $pd) {
+				$produk = DB::table('tb_produk')->where('id',$pd->id_produk)->first();
+				$array = array(
+					'kode_produk'		=> $produk->kode,
+					'nama_produk'		=> $produk->keterangan,
+					'satuan'			=> $produk->satuan,
+				);
+				$produk_stok = array(
+					'kode_produk'	=> $pd->id_produk,
+					'stok_masuk'	=> 0,
+					'stok_keluar'	=> $pd->kuantitas,
+					'keterangan'	=> 'Transfer stok dari gudang'
+				);
+				//DB::table('tb_produk_stok')->where('id',$pd->id)->update($array);
+				DB::table('tb_produk_stok')->insert($produk_stok);
+				DB::table('tb_produk')->where('id',$pd->id_produk)->update(['stok'=> abs($produk->stok - $pd->kuantitas)]);
+			}
+	
+			
 
 	    }
 
