@@ -512,11 +512,11 @@
 							'satuan'					=> $produk->satuan
 						);
 						$produk_stok = array(
-							'tanggal'		=> $penjualan->tanggal,
-							'kode_produk'	=> $pd->id_produk,
-							'stok_masuk'	=> 0,
-							'stok_keluar'	=> $pd->kuantitas,
-							'keterangan'	=> 'Pembatalan Transaksi '.$penjualan->kode
+							'tanggal'				=> $pembelian->tanggal,
+							'kode_produk'		=> $pd->id_produk,
+							'stok_masuk'		=> $pd->kuantitas,
+							'stok_keluar'		=> 0,
+							'keterangan'		=> 'Pembatalan stok dari pembelian '.$pembelian->kode
 						);
 						DB::table('tb_pembelian_detail')->where('id',$pd->id)->update($array);
 						DB::table('tb_produk_stok')->insert($produk_stok);
