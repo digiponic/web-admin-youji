@@ -42,9 +42,10 @@
 			$this->form[] = ['label'=>'Tanggal','name'=>'tanggal','value'=>$tanggal,'type'=>'datetime','validation'=>'required|date_format:Y-m-d H:i:s','width'=>'col-sm-5'];
 			$this->form[] = ['label'=>'Gudang Asal','name'=>'gudang_asal','type'=>'select2','validation'=>'min:1|max:255','width'=>'col-sm-5','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 8'];
 			$this->form[] = ['label'=>'Gudang Tujuan','name'=>'gudang_tujuan','type'=>'select2','validation'=>'min:1|max:255','width'=>'col-sm-5','datatable'=>'tb_general,keterangan','datatable_where'=>'kode_tipe = 8'];
-			$columns[] = ['label'=>'Produk','name'=>'kode_produk','required'=>true,'type'=>'datamodal','datamodal_table'=>'tb_produk','datamodal_columns'=>'keterangan,harga,stok,satuan_keterangan','datamodal_columns_alias'=>'Produk,Harga,Stok,Satuan','datamodal_select_to'=>'harga:harga,satuan_keterangan:satuan_keterangan','datamodal_where'=>'stok != 0','datamodal_size'=>'large'];
+			$columns[] = ['label'=>'Produk','name'=>'kode_produk','required'=>true,'type'=>'datamodal','datamodal_table'=>'tb_produk','datamodal_columns'=>'keterangan,harga,stok,satuan_keterangan','datamodal_columns_alias'=>'Produk,Harga,Stok,Satuan','datamodal_select_to'=>'harga:harga,satuan_keterangan:satuan_keterangan','datamodal_where'=>'stok != 0', 'datamodal_size'=>'large'];
 			$columns[] = ['label'=>'Jumlah Transfer','name'=>'satuan','required'=>true,'type'=>'text'];
 			$this->form[] = ['label'=>'Detil Produk','name'=>'produk_detail','type'=>'child','columns'=>$columns,'table'=>'tb_produk_detail','foreign_key'=>'kode_produk'];
+			
 			//$this->form[] = ['label'=>'Jumlah Transfer','name'=>'jumlah_transfer','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-5','readonly'=>true];
 			//$this->form[] = ['label'=>'Keterangan','name'=>'keterangan','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-5'];
 			# END FORM DO NOT REMOVE THIS LINE
