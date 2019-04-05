@@ -46,7 +46,7 @@
 			$columns[] = ['label'=>'Jumlah Transfer','name'=>'satuan','required'=>true,'type'=>'text'];
 			$this->form[] = ['label'=>'Detil Produk','name'=>'produk_detail','type'=>'child','columns'=>$columns,'table'=>'tb_produk_detail','foreign_key'=>'kode_produk'];
 			//$this->form[] = ['label'=>'Jumlah Transfer','name'=>'jumlah_transfer','type'=>'number','validation'=>'integer|min:0','width'=>'col-sm-5','readonly'=>true];
-			$this->form[] = ['label'=>'Keterangan','name'=>'keterangan','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-5'];
+			//$this->form[] = ['label'=>'Keterangan','name'=>'keterangan','type'=>'text','validation'=>'min:1|max:255','width'=>'col-sm-5'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
@@ -261,27 +261,28 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
-			$transfer = DB::table('tb_produk_transfer')->where('id',$id)->first();
-			$produk_transfer = DB::table('tb_produk')->where('id_penjualan',$id)->get();
+			$produk_transfer = DB::table('tb_produk_transfer')->where('id',$id)->first();
+			$produk_transfer_detail = DB::table('tb_produk_transfer_detail')->where('id_transfer',$id)->get();
 
-			foreach($penjualan_detail as $pd) {
+			foreach($produk_transfer_detail as $pd) {
 				$produk = DB::table('tb_produk')->where('id',$pd->id_produk)->first();
 				$array = array(
-					'kode_penjualan'	=> $penjualan->kode,
+					'id_transfer'		=> $produk_transfer->id,
 					'kode_produk'		=> $produk->kode,
 					'nama_produk'		=> $produk->keterangan,
 					'satuan'			=> $produk->satuan,
-					'tanggal_pengiriman'=> $penjualan->tanggal
-				);
+					//'jumlah_transfer'	=> $produk_transfer->$jumlah_transfer,
+					// 'gudang_asal'		=> $produk_transfer->$gudang_asal,					
+					// 'gudang_tujuan'		=> $produk_transfer->$gudang_tujuan,					
+					);
 				$produk_stok = array(
-					'tanggal'		=> $penjualan->tanggal,
 					'kode_produk'	=> $pd->id_produk,
 					'stok_masuk'	=> 0,
 					'stok_keluar'	=> $pd->kuantitas,
-					'keterangan'	=> 'Pengurangan stok dari penjualan '.$penjualan->kode
+					'keterangan'	=> 'Produk telah di transfer dari gudang'.$produk_transfer->gudang_asal.'ke'.$produk_transfer->gudang_tujuan
 				);
 
-				DB::table('tb_penjualan_detail')->where('id',$pd->id)->update($array);
+				DB::table('tb_produk_transfer_detail')->where('id',$pd->id)->update($array);
 				DB::table('tb_produk_stok')->insert($produk_stok);
 				DB::table('tb_produk')->where('id',$pd->id_produk)->update(['stok'=> abs($produk->stok - $pd->kuantitas)]);
 			}	

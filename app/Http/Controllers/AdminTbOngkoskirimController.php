@@ -30,18 +30,20 @@
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			$this->col[] = ["label"=>"Kode Kecamatan","name"=>"kode_kecamatan"];
-			$this->col[] = ["label"=>"Kode Kota","name"=>"kode_kota"];
-			$this->col[] = ["label"=>"Kode Provinsi","name"=>"kode_provinsi"];
-			$this->col[] = ["label"=>"Harga Ongkos","name"=>"harga_ongkos"];
+			// $this->col[] = ["label"=>"Kode Kecamatan","name"=>"kode_kecamatan"];
+			// $this->col[] = ["label"=>"Kode Kota","name"=>"kode_kota"];
+			// $this->col[] = ["label"=>"Kode Provinsi","name"=>"kode_provinsi"];
+			$this->col[] = ["label"=>"Harga Ongkos","name"=>"harga_ongkos","callback_php"=>'number_format($row->harga_ongkos)'];
+			$this->col[] = ["label"=>"Status","name"=>"status"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Kode Kecamatan','name'=>'kode_kecamatan','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Kode Kota','name'=>'kode_kota','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Kode Provinsi','name'=>'kode_provinsi','type'=>'number','validation'=>'required|integer|min:0','width'=>'col-sm-10'];
-			$this->form[] = ['label'=>'Harga Ongkos Kirim','name'=>'harga_ongkos','validation'=>'required','width'=>'col-sm-9'];
+			$this->form[] = ['label'=>'Provinsi','name'=>'kode_provinsi','type'=>'select','width'=>'col-sm-10','datatable'=>'tb_provinsi,keterangan','relationship_table'=>'tb_relasi_ongkos_provinsi','datatable_ajax'=>'true'];
+			$this->form[] = ['label'=>'Kota','name'=>'kode_kota','type'=>'select','width'=>'col-sm-10','datatable'=>'tb_kota,keterangan','relationship_table'=>'tb_relasi_ongkos_kota','datatable_ajax'=>'true'];
+			$this->form[] = ['label'=>'Kecamatan','name'=>'kode_kecamatan','type'=>'select','width'=>'col-sm-10','datatable'=>'tb_kecamatan,keterangan','relationship_table'=>'tb_relasi_ongkos_kecamatan','datatable_ajax'=>'true'];
+			$this->form[] = ['label'=>'Harga Ongkos Kirim','name'=>'harga_ongkos','type'=>'money','validation'=>'required','width'=>'col-sm-9'];
+			//$this->form[] = ['label'=>'Status','name'=>'status','validation'=>'required','width'=>'col-sm-9'];
 			# END FORM DO NOT REMOVE THIS LINE
 
 			# OLD START FORM
