@@ -49,6 +49,11 @@ $router->group(['prefix' => 'area'], function () use ($router) {
     $router->post('/', 'AreaController@data');
 });
 
+$router->group(['prefix' => 'cekongkir'], function () use ($router) {
+    $router->get('/data/{id}', 'ApiCekOngkir@data');
+});
+
+
 $router->group(['prefix' => 'transaksi'], function () use ($router) {
     $router->post('/', 'TransaksiController@simpan');
     $router->post('/data', 'TransaksiController@data');

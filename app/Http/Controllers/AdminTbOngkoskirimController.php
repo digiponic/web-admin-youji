@@ -30,11 +30,11 @@
 
 			# START COLUMNS DO NOT REMOVE THIS LINE
 			$this->col = [];
-			// $this->col[] = ["label"=>"Kode Kecamatan","name"=>"kode_kecamatan"];
+			$this->col[] = ["label"=>"Kode Kecamatan","name"=>"kode_kecamatan", "join"=>"tb_kecamatan,keterangan"];
 			// $this->col[] = ["label"=>"Kode Kota","name"=>"kode_kota"];
 			// $this->col[] = ["label"=>"Kode Provinsi","name"=>"kode_provinsi"];
 			$this->col[] = ["label"=>"Harga Ongkos","name"=>"harga_ongkos","callback_php"=>'number_format($row->harga_ongkos)'];
-			$this->col[] = ["label"=>"Status","name"=>"status"];
+		//	$this->col[] = ["label"=>"Status","name"=>"status"];
 			# END COLUMNS DO NOT REMOVE THIS LINE
 
 			# START FORM DO NOT REMOVE THIS LINE
@@ -150,7 +150,7 @@
 	        | $this->script_js = "function() { ... }";
 	        |
 	        */
-	        $this->script_js = NULL;
+			$this->script_js =NULL;
 
 
             /*
