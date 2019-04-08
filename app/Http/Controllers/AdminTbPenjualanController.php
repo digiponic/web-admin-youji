@@ -277,8 +277,7 @@
 						var pajak_ = (pajak/100) * subtotal;
 						grand_total_keseluruhan_pajak = grand_total_keseluruhan + pajak_;		
 						$('#grand_total').val(grand_total_keseluruhan_pajak);
-					
-
+				
 						var xx = ".CRUDBooster::getSetting('minimal_belanja').";
 						if(grand_total_keseluruhan_pajak > xx){
 							$('#ongkos_kirim').val('GRATIS');
@@ -412,6 +411,10 @@
 			//$postdata['id_cabang'] = CRUDBooster::myCabang();
 			$postdata['users_id'] = CRUDBooster::myId();
 			$postdata['platform'] = 'web';
+			
+			if($postdata['ongkos_kirim'] = 'GRATIS'){
+				$postdata['ongkos_kirim'] = 0;
+			}
 	    }
 
 	    /*
