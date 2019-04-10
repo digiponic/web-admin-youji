@@ -39,10 +39,10 @@
 
 			# START FORM DO NOT REMOVE THIS LINE
 			$this->form = [];
-			$this->form[] = ['label'=>'Provinsi','name'=>'kode_provinsi','type'=>'select','width'=>'col-sm-10','datatable'=>'tb_provinsi,keterangan','relationship_table'=>'tb_relasi_ongkos_provinsi','datatable_ajax'=>'true'];
-			$this->form[] = ['label'=>'Kota','name'=>'kode_kota','type'=>'select','width'=>'col-sm-10','datatable'=>'tb_kota,keterangan','relationship_table'=>'tb_relasi_ongkos_kota','datatable_ajax'=>'true'];
-			$this->form[] = ['label'=>'Kecamatan','name'=>'kode_kecamatan','type'=>'select','width'=>'col-sm-10','datatable'=>'tb_kecamatan,keterangan','relationship_table'=>'tb_relasi_ongkos_kecamatan','datatable_ajax'=>'true'];
-			$this->form[] = ['label'=>'Harga Ongkos Kirim','name'=>'harga_ongkos','type'=>'money','validation'=>'required','width'=>'col-sm-9'];
+			$this->form[] = ['label'=>'Provinsi','name'=>'kode_provinsi','type'=>'select','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_provinsi,keterangan'];
+			$this->form[] = ['label'=>'Kota','name'=>'kode_kota','type'=>'select','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_kota,keterangan','parent_select'=>'kode_provinsi'];
+			$this->form[] = ['label'=>'Kecamatan','name'=>'kode_kecamatan','type'=>'select','validation'=>'required','width'=>'col-sm-10','datatable'=>'tb_kecamatan,keterangan','parent_select'=>'kode_kota'];
+			$this->form[] = ['label'=>'Biaya','name'=>'harga_ongkos','type'=>'money','validation'=>'required','width'=>'col-sm-9'];
 			//$this->form[] = ['label'=>'Status','name'=>'status','validation'=>'required','width'=>'col-sm-9'];
 			# END FORM DO NOT REMOVE THIS LINE
 
