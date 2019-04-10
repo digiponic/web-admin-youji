@@ -266,6 +266,18 @@
 	    */
 	    public function hook_before_add(&$postdata) {        
 	        //Your code here
+
+	    }
+
+	    /* 
+	    | ---------------------------------------------------------------------- 
+	    | Hook for execute command after add public static function called 
+	    | ---------------------------------------------------------------------- 
+	    | @id = last insert id
+	    | 
+	    */
+	    public function hook_after_add($id) {        
+			//Your code here
 			$produk_transfer = DB::table('tb_produk_transfer')->where('id',$id)->first();
 			$produk_transfer_detail = DB::table('tb_produk_transfer_detail')->where('id_transfer',$id)->get();
 
@@ -290,20 +302,7 @@
 				DB::table('tb_produk_transfer_detail')->where('id',$pd->id)->update($array);
 				DB::table('tb_produk_stok')->insert($produk_stok);
 				DB::table('tb_produk')->where('id',$pd->id_produk)->update(['stok'=> abs($produk->stok - $pd->kuantitas)]);
-			}	
-
-	    }
-
-	    /* 
-	    | ---------------------------------------------------------------------- 
-	    | Hook for execute command after add public static function called 
-	    | ---------------------------------------------------------------------- 
-	    | @id = last insert id
-	    | 
-	    */
-	    public function hook_after_add($id) {        
-			//Your code here
-			
+			}				
 
 
 	    }
