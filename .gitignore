@@ -1,0 +1,16 @@
+/node_modules
+/public/storage
+/storage/*.key
+/vendor
+/.idea
+Homestead.json
+Homestead.yaml
+.env
+gitlab_ssh
+gitlab_ssh.pub
+
+youji\.zip
+
+digiponic_youjidev\.sql
+
+storage/app\.zip

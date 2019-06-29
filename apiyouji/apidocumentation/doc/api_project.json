@@ -1,0 +1,14 @@
+{
+  "name": "REST API Mobile Apps Galaksi Organik",
+  "version": "0.1.0",
+  "description": "This is API Documentation for Apps Galaksi Organik",
+  "apidoc": "0.3.0",
+  "sampleUrl": false,
+  "defaultVersion": "0.0.0",
+  "generator": {
+    "name": "apidoc",
+    "time": "2018-12-20T03:28:40.820Z",
+    "url": "http://apidocjs.com",
+    "version": "0.17.7"
+  }
+}

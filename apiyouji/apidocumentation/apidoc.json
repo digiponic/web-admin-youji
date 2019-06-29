@@ -1,0 +1,9 @@
+{
+    "name": "REST API Mobile Apps Galaksi Organik",
+    "version": "0.1.0",
+    "description": "This is API Documentation for Apps Galaksi Organik",
+    "apidoc": {
+      "title": "",
+      "url" : "http://localhost/digiponic-apiservice-go/public/salesorders/store"
+    }
+  }
